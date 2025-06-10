@@ -1,102 +1,113 @@
+#ifndef HF_GPIO_CONFIG_HPP
+#define HF_GPIO_CONFIG_HPP
 
-#ifndef GPIO_CONFIG_ESP32C6_HPP
-#define GPIO_CONFIG_ESP32C6_HPP
+/**
+ * @file hf_gpio_config.hpp
+ * @brief GPIO assignments for the HardFOC controller on ESP32-C6.
+ *
+ * This header lists all pin numbers used by the controller and provides
+ * a helper to configure them using the ESP-IDF gpio_config API.
+ */
 
-// GPIO configuration for ESP32-C6
-// This file defines the GPIO pin mappings for various peripherals on the ESP32-C6
 #include "driver/gpio.h"
 
-// ================= SPI0 Pins ===================
-#define SPI0_MISO_PIN         GPIO_NUM_2     // SPI0 Master In Slave Out
-#define SPI0_MOSI_PIN         GPIO_NUM_7     // SPI0 Master Out Slave In
-#define SPI0_CLK_PIN          GPIO_NUM_6     // SPI0 Serial Clock
-#define SPI0_CS_TMC_PIN       GPIO_NUM_18    // SPI0 Chip Select for the TMC9660
-#define SPI0_CS_AS5047_PIN    GPIO_NUM_20    // SPI0 Chip Select for the AS5047P
-#define SPI0_CS_EXT_1_PIN       GPIO_NUM_19  // SPI0 Chip Select for the external device (1)
-#define SPI0_CS_EXT_2_PIN       GPIO_NUM_8   // SPI0 Chip Select for the external device (2)
+/**
+ * @name SPI0 pins
+ * Data lines are labelled by their direction with respect to the controller.
+ */
+///@{
+#define SPI0_MISO_PIN      GPIO_NUM_2  ///< Data from device to controller
+#define SPI0_MOSI_PIN      GPIO_NUM_7  ///< Data from controller to device
+#define SPI0_CLK_PIN       GPIO_NUM_6  ///< Serial clock
+#define SPI0_CS_TMC_PIN    GPIO_NUM_18 ///< Chip select for the TMC9660 driver
+#define SPI0_CS_AS5047_PIN GPIO_NUM_20 ///< Chip select for the AS5047P encoder
+#define SPI0_CS_EXT1_PIN   GPIO_NUM_19 ///< Additional SPI device 1
+#define SPI0_CS_EXT2_PIN   GPIO_NUM_8  ///< Additional SPI device 2
+///@}
 
-// ================ UART Pins ==================
-#define UART_RXD_PIN       GPIO_NUM_4    // UART Receive
-#define UART_TXD_PIN       GPIO_NUM_5    // UART Transmit
+/** @name Primary UART pins */
+///@{
+#define UART_RXD_PIN       GPIO_NUM_4  ///< UART receive
+#define UART_TXD_PIN       GPIO_NUM_5  ///< UART transmit
+///@}
 
-// ============ Debug UART Pins ================
-#define DEBUG_UART_TX_PIN GPIO_NUM_0    // Debug UART Transmit
-#define DEBUG_UART_RX_PIN GPIO_NUM_1    // Debug UART Receive
+/** @name Debug UART pins */
+///@{
+#define DEBUG_UART_TX_PIN  GPIO_NUM_0  ///< Debug UART transmit
+#define DEBUG_UART_RX_PIN  GPIO_NUM_1  ///< Debug UART receive
+///@}
 
-// ================ I2C Pins ===================
-#define I2C_SDA_PIN       GPIO_NUM_22   // I2C Data
-#define I2C_SCL_PIN       GPIO_NUM_23   // I2C Clock
+/** @name I2C pins */
+///@{
+#define I2C_SDA_PIN        GPIO_NUM_22 ///< I2C data
+#define I2C_SCL_PIN        GPIO_NUM_23 ///< I2C clock
+///@}
 
-// ============= TWAI (CAN) Pins ===============
-#define TWAI_TX_PIN       GPIO_NUM_19   // CAN Transmit
-#define TWAI_RX_PIN       GPIO_NUM_15   // CAN Receive
+/** @name TWAI (CAN) pins */
+///@{
+#define TWAI_TX_PIN        GPIO_NUM_19 ///< CAN transmit
+#define TWAI_RX_PIN        GPIO_NUM_15 ///< CAN receive
+///@}
 
-// ================ USB-JTAG Pins ===============
-#define USB_JTAG_D_P_PIN   GPIO_NUM_13   // USB D+
-#define USB_JTAG_D_N_PIN   GPIO_NUM_12   // USB D-
+/** @name USB/JTAG pins */
+///@{
+#define USB_JTAG_D_PLUS_PIN  GPIO_NUM_13 ///< USB D+
+#define USB_JTAG_D_MINUS_PIN GPIO_NUM_12 ///< USB D-
+///@}
 
-// ============ WS2812 LED Pin =================
-#define WS2812_LED_PIN    GPIO_NUM_3    // WS2812 Data
+/** @name WS2812 LED pin */
+#define WS2812_LED_PIN     GPIO_NUM_3  ///< WS2812 data
+///@}
 
-// Function to configure GPIOs
-void configure_gpio() {
-    gpio_config_t io_conf;
-
-    // SPI Pins Configuration
-    io_conf.pin_bit_mask = (1ULL << SPI_MISO_PIN) | (1ULL << SPI_MOSI_PIN) | (1ULL << SPI_CLK_PIN) | (1ULL << SPI_CS_PIN) | (1ULL << SPI_IO4_PIN) | (1ULL << SPI_IO5_PIN);
-    io_conf.mode = GPIO_MODE_OUTPUT;
+/**
+ * @brief Configure all GPIOs defined above.
+ *
+ * Each pin is set as a general output with pulls disabled. Adapt
+ * the configuration in your project if you require different modes.
+ */
+static inline void configure_gpio(void)
+{
+    gpio_config_t io_conf = {};
     io_conf.pull_up_en = GPIO_PULLUP_DISABLE;
     io_conf.pull_down_en = GPIO_PULLDOWN_DISABLE;
     io_conf.intr_type = GPIO_INTR_DISABLE;
-    gpio_config(&io_conf);
 
-    // UART Pins Configuration
-    io_conf.pin_bit_mask = (1ULL << UART_TX_PIN) | (1ULL << UART_RX_PIN);
+    // Configure SPI pins
+    io_conf.pin_bit_mask = (1ULL << SPI0_MISO_PIN) |
+                           (1ULL << SPI0_MOSI_PIN) |
+                           (1ULL << SPI0_CLK_PIN)  |
+                           (1ULL << SPI0_CS_TMC_PIN) |
+                           (1ULL << SPI0_CS_AS5047_PIN) |
+                           (1ULL << SPI0_CS_EXT1_PIN) |
+                           (1ULL << SPI0_CS_EXT2_PIN);
     io_conf.mode = GPIO_MODE_OUTPUT;
-    io_conf.pull_up_en = GPIO_PULLUP_DISABLE;
-    io_conf.pull_down_en = GPIO_PULLDOWN_DISABLE;
-    io_conf.intr_type = GPIO_INTR_DISABLE;
     gpio_config(&io_conf);
 
-    // Debug UART Pins Configuration
-    io_conf.pin_bit_mask = (1ULL << DEBUG_UART_TX_PIN) | (1ULL << DEBUG_UART_RX_PIN);
-    io_conf.mode = GPIO_MODE_OUTPUT;
-    io_conf.pull_up_en = GPIO_PULLUP_DISABLE;
-    io_conf.pull_down_en = GPIO_PULLDOWN_DISABLE;
-    io_conf.intr_type = GPIO_INTR_DISABLE;
+    // Configure primary UART pins
+    io_conf.pin_bit_mask = (1ULL << UART_RXD_PIN) | (1ULL << UART_TXD_PIN);
     gpio_config(&io_conf);
 
-    // I2C Pins Configuration
+    // Configure debug UART pins
+    io_conf.pin_bit_mask = (1ULL << DEBUG_UART_TX_PIN) |
+                           (1ULL << DEBUG_UART_RX_PIN);
+    gpio_config(&io_conf);
+
+    // Configure I2C pins
     io_conf.pin_bit_mask = (1ULL << I2C_SDA_PIN) | (1ULL << I2C_SCL_PIN);
-    io_conf.mode = GPIO_MODE_OUTPUT;
-    io_conf.pull_up_en = GPIO_PULLUP_DISABLE;
-    io_conf.pull_down_en = GPIO_PULLDOWN_DISABLE;
-    io_conf.intr_type = GPIO_INTR_DISABLE;
     gpio_config(&io_conf);
 
-    // TWAI (CAN) Pins Configuration
+    // Configure TWAI (CAN) pins
     io_conf.pin_bit_mask = (1ULL << TWAI_TX_PIN) | (1ULL << TWAI_RX_PIN);
-    io_conf.mode = GPIO_MODE_OUTPUT;
-    io_conf.pull_up_en = GPIO_PULLUP_DISABLE;
-    io_conf.pull_down_en = GPIO_PULLDOWN_DISABLE;
-    io_conf.intr_type = GPIO_INTR_DISABLE;
     gpio_config(&io_conf);
 
-    // USB Pins Configuration
-    io_conf.pin_bit_mask = (1ULL << USB_D_PLUS_PIN) | (1ULL << USB_D_MINUS_PIN);
-    io_conf.mode = GPIO_MODE_OUTPUT;
-    io_conf.pull_up_en = GPIO_PULLUP_DISABLE;
-    io_conf.pull_down_en = GPIO_PULLDOWN_DISABLE;
-    io_conf.intr_type = GPIO_INTR_DISABLE;
+    // Configure USB/JTAG pins
+    io_conf.pin_bit_mask = (1ULL << USB_JTAG_D_PLUS_PIN) |
+                           (1ULL << USB_JTAG_D_MINUS_PIN);
     gpio_config(&io_conf);
 
-    // WS2812 LED Pin Configuration
+    // Configure WS2812 pin
     io_conf.pin_bit_mask = (1ULL << WS2812_LED_PIN);
-    io_conf.mode = GPIO_MODE_OUTPUT;
-    io_conf.pull_up_en = GPIO_PULLUP_DISABLE;
-    io_conf.pull_down_en = GPIO_PULLDOWN_DISABLE;
-    io_conf.intr_type = GPIO_INTR_DISABLE;
     gpio_config(&io_conf);
 }
 
-#endif // GPIO_CONFIG_ESP32C6_HPP
+#endif // HF_GPIO_CONFIG_HPP
