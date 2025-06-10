@@ -12,37 +12,41 @@ It exposes pin assignments and an initialization function that can be used by yo
 
 ## Pin Mapping
 
-The header `include/hf_gpio_config.hpp` maps each peripheral to a specific pin on the ESP32-C6. Here is a quick reference:
+The header `include/hf_gpio_config.hpp` lists every pin used on the ESP32‑C6. The mappings are grouped by peripheral for quick reference.
 
-| Peripheral | Pin | Notes |
-|-----------|-----|-------|
-| **SPI0** |||
-| MISO | `GPIO_NUM_2` | Data from device to controller |
-| MOSI | `GPIO_NUM_7` | Data from controller to device |
-| CLK  | `GPIO_NUM_6` | Serial Clock |
-| CS (TMC9660) | `GPIO_NUM_18` | Chip select for the TMC9660 driver |
-| CS (AS5047P) | `GPIO_NUM_20` | Chip select for the AS5047P encoder |
-| CS (Ext1)    | `GPIO_NUM_19` | Extra SPI device 1 |
-| CS (Ext2)    | `GPIO_NUM_8`  | Extra SPI device 2 |
-| **UART** |||
-| RXD | `GPIO_NUM_4` |
-| TXD | `GPIO_NUM_5` |
-| **Debug UART** |||
-| TX | `GPIO_NUM_0` |
-| RX | `GPIO_NUM_1` |
-| **I2C** |||
-| SDA | `GPIO_NUM_22` |
-| SCL | `GPIO_NUM_23` |
-| **CAN (TWAI)** |||
-| TX | `GPIO_NUM_19` |
-| RX | `GPIO_NUM_15` |
-| **USB-JTAG** |||
-| D+ | `GPIO_NUM_13` |
-| D- | `GPIO_NUM_12` |
-| **LED** |||
-| WS2812 | `GPIO_NUM_3` | Addressable RGB LED |
+### SPI0
+- **MISO** – `GPIO_NUM_2` (data from device to controller)
+- **MOSI** – `GPIO_NUM_7` (data from controller to device)
+- **CLK** – `GPIO_NUM_6`
+- **CS (TMC9660)** – `GPIO_NUM_18`
+- **CS (AS5047P)** – `GPIO_NUM_20`
+- **CS (Ext1)** – `GPIO_NUM_19`
+- **CS (Ext2)** – `GPIO_NUM_8`
 
-See the header file for the exact definitions.
+### UART
+- **RXD** – `GPIO_NUM_4`
+- **TXD** – `GPIO_NUM_5`
+
+### Debug UART
+- **TX** – `GPIO_NUM_0`
+- **RX** – `GPIO_NUM_1`
+
+### I2C
+- **SDA** – `GPIO_NUM_22`
+- **SCL** – `GPIO_NUM_23`
+
+### CAN (TWAI)
+- **TX** – `GPIO_NUM_19`
+- **RX** – `GPIO_NUM_15`
+
+### USB‑JTAG
+- **D+** – `GPIO_NUM_13`
+- **D-** – `GPIO_NUM_12`
+
+### LED
+- **WS2812** – `GPIO_NUM_3`
+
+See the header file for detailed definitions.
 
 ## Connecting External Peripherals
 
@@ -57,13 +61,13 @@ See the header file for the exact definitions.
 
 ## Usage
 
-Include the header and call `configure_gpio()` early in your application:
+Include the header and call `init_mcu_pinconfig()` early in your application:
 
 ```cpp
 #include "hf_gpio_config.hpp"
 
 void app_main() {
-    configure_gpio();
+    init_mcu_pinconfig();
     // rest of your initialization
 }
 ```

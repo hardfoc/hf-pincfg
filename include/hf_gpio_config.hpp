@@ -110,4 +110,15 @@ static inline void configure_gpio(void)
     gpio_config(&io_conf);
 }
 
+/**
+ * @brief Initialize MCU pin configuration.
+ *
+ * This wrapper simply calls ::configure_gpio so that applications
+ * can use a more descriptive entry point when setting up pins.
+ */
+static inline void init_mcu_pinconfig(void)
+{
+    configure_gpio();
+}
+
 #endif // HF_GPIO_CONFIG_HPP
