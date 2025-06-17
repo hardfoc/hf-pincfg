@@ -56,7 +56,7 @@
 ///@}
 
 /** @name WS2812 LED pin */
-#define WS2812_LED_PIN     GPIO_NUM_3  ///< WS2812 data
+#define WS2812_LED_PIN     GPIO_NUM_2  ///< WS2812 data
 ///@}
 
 /**
