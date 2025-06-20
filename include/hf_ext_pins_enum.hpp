@@ -18,32 +18,40 @@
 ///@{
 
 /**
- * @brief PCAL95555 Chip 1 pin assignments
+ * @brief PCAL95555 Chip 1 pin assignments - Actual HardFOC pinout
  */
 enum class Pcal95555Chip1Pin : uint8_t {
-    // Motor control related pins
-    MOTOR_ENABLE_1      = 0,  ///< Motor 1 enable signal
-    MOTOR_ENABLE_2      = 1,  ///< Motor 2 enable signal
-    MOTOR_BRAKE_1       = 2,  ///< Motor 1 brake signal
-    MOTOR_BRAKE_2       = 3,  ///< Motor 2 brake signal
-    MOTOR_FAULT_1       = 4,  ///< Motor 1 fault input
-    MOTOR_FAULT_2       = 5,  ///< Motor 2 fault input
+    // TMC9660 GPIO pins
+    TMC_GPIO17          = 0,  ///< P0_0: TMC9660 GPIO17 pin
+    TMC_GPIO18          = 1,  ///< P0_1: TMC9660 GPIO18 pin
+    PCAL_GND_1          = 2,  ///< P0_2: Ground connection (not usable)
     
-    // Status LEDs
-    LED_STATUS_GREEN    = 6,  ///< Green status LED
-    LED_STATUS_RED      = 7,  ///< Red status LED
-    LED_ERROR           = 8,  ///< Error indicator LED
-    LED_COMM            = 9,  ///< Communication activity LED
+    // TMC9660 control and status pins
+    TMC_nFAULT_STATUS   = 3,  ///< P0_3: TMC9660 fault status (active low)
+    TMC_DRV_EN          = 4,  ///< P0_4: TMC9660 driver enable
+    TMC_RST_CTRL        = 5,  ///< P0_5: TMC9660 reset control
     
-    // External control signals
-    EXT_RELAY_1         = 10, ///< External relay 1
-    EXT_RELAY_2         = 11, ///< External relay 2
-    EXT_OUTPUT_1        = 12, ///< General purpose output 1
-    EXT_OUTPUT_2        = 13, ///< General purpose output 2
+    // Power monitoring
+    PG_3V3_SWR_FLAG     = 6,  ///< P0_6: 3.3V switcher power good flag
+    PCAL_GND_2          = 7,  ///< P0_7: Ground connection (not usable)
     
-    // Input signals
-    EXT_INPUT_1         = 14, ///< General purpose input 1
-    EXT_INPUT_2         = 15, ///< General purpose input 2
+    // More ground pins
+    PCAL_GND_3          = 8,  ///< P1_0: Ground connection (not usable)
+    PCAL_GND_4          = 9,  ///< P1_1: Ground connection (not usable)
+    
+    // CAN bus control
+    CAN_HS_STB_OP       = 10, ///< P1_2: CAN high-speed standby output
+    
+    // IMU control pins
+    IMU_nBOOT           = 11, ///< P1_3: IMU boot pin (active low)
+    IMU_nINT            = 12, ///< P1_4: IMU interrupt (active low)
+    
+    // TMC9660 communication control
+    TMC_SPI_COMM_nEN    = 13, ///< P1_5: TMC9660 SPI communication enable (active low)
+    TMC_nWAKE_CTRL      = 14, ///< P1_6: TMC9660 wake control (active low)
+    
+    // IMU flow control
+    IMU_nRTS            = 15, ///< P1_7: IMU ready to send (active low)
 };
 
 /**
@@ -126,22 +134,22 @@ namespace Pcal95555Config {
  */
 constexpr const char* Pcal95555Chip1PinToString(Pcal95555Chip1Pin pin) {
     switch (pin) {
-        case Pcal95555Chip1Pin::MOTOR_ENABLE_1: return "MOTOR_ENABLE_1";
-        case Pcal95555Chip1Pin::MOTOR_ENABLE_2: return "MOTOR_ENABLE_2";
-        case Pcal95555Chip1Pin::MOTOR_BRAKE_1: return "MOTOR_BRAKE_1";
-        case Pcal95555Chip1Pin::MOTOR_BRAKE_2: return "MOTOR_BRAKE_2";
-        case Pcal95555Chip1Pin::MOTOR_FAULT_1: return "MOTOR_FAULT_1";
-        case Pcal95555Chip1Pin::MOTOR_FAULT_2: return "MOTOR_FAULT_2";
-        case Pcal95555Chip1Pin::LED_STATUS_GREEN: return "LED_STATUS_GREEN";
-        case Pcal95555Chip1Pin::LED_STATUS_RED: return "LED_STATUS_RED";
-        case Pcal95555Chip1Pin::LED_ERROR: return "LED_ERROR";
-        case Pcal95555Chip1Pin::LED_COMM: return "LED_COMM";
-        case Pcal95555Chip1Pin::EXT_RELAY_1: return "EXT_RELAY_1";
-        case Pcal95555Chip1Pin::EXT_RELAY_2: return "EXT_RELAY_2";
-        case Pcal95555Chip1Pin::EXT_OUTPUT_1: return "EXT_OUTPUT_1";
-        case Pcal95555Chip1Pin::EXT_OUTPUT_2: return "EXT_OUTPUT_2";
-        case Pcal95555Chip1Pin::EXT_INPUT_1: return "EXT_INPUT_1";
-        case Pcal95555Chip1Pin::EXT_INPUT_2: return "EXT_INPUT_2";
+        case Pcal95555Chip1Pin::TMC_GPIO17: return "TMC_GPIO17";
+        case Pcal95555Chip1Pin::TMC_GPIO18: return "TMC_GPIO18";
+        case Pcal95555Chip1Pin::PCAL_GND_1: return "PCAL_GND_1";
+        case Pcal95555Chip1Pin::TMC_nFAULT_STATUS: return "TMC_nFAULT_STATUS";
+        case Pcal95555Chip1Pin::TMC_DRV_EN: return "TMC_DRV_EN";
+        case Pcal95555Chip1Pin::TMC_RST_CTRL: return "TMC_RST_CTRL";
+        case Pcal95555Chip1Pin::PG_3V3_SWR_FLAG: return "PG_3V3_SWR_FLAG";
+        case Pcal95555Chip1Pin::PCAL_GND_2: return "PCAL_GND_2";
+        case Pcal95555Chip1Pin::PCAL_GND_3: return "PCAL_GND_3";
+        case Pcal95555Chip1Pin::PCAL_GND_4: return "PCAL_GND_4";
+        case Pcal95555Chip1Pin::CAN_HS_STB_OP: return "CAN_HS_STB_OP";
+        case Pcal95555Chip1Pin::IMU_nBOOT: return "IMU_nBOOT";
+        case Pcal95555Chip1Pin::IMU_nINT: return "IMU_nINT";
+        case Pcal95555Chip1Pin::TMC_SPI_COMM_nEN: return "TMC_SPI_COMM_nEN";
+        case Pcal95555Chip1Pin::TMC_nWAKE_CTRL: return "TMC_nWAKE_CTRL";
+        case Pcal95555Chip1Pin::IMU_nRTS: return "IMU_nRTS";
         default: return "UNKNOWN_CHIP1_PIN";
     }
 }
