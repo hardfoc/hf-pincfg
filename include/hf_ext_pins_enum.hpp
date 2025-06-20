@@ -18,7 +18,7 @@
 ///@{
 
 /**
- * @brief PCAL95555 Chip 1 pin assignments - Actual HardFOC pinout
+ * @brief PCAL95555 GPIO expander pin assignments (single chip at I2C address 0x20)
  */
 enum class Pcal95555Chip1Pin : uint8_t {
     // TMC9660 GPIO pins
@@ -31,13 +31,11 @@ enum class Pcal95555Chip1Pin : uint8_t {
     TMC_DRV_EN          = 4,  ///< P0_4: TMC9660 driver enable
     TMC_RST_CTRL        = 5,  ///< P0_5: TMC9660 reset control
     
-    // Power monitoring
-    PG_3V3_SWR_FLAG     = 6,  ///< P0_6: 3.3V switcher power good flag
-    PCAL_GND_2          = 7,  ///< P0_7: Ground connection (not usable)
-    
-    // More ground pins
-    PCAL_GND_3          = 8,  ///< P1_0: Ground connection (not usable)
-    PCAL_GND_4          = 9,  ///< P1_1: Ground connection (not usable)
+    // Status LEDs
+    LED_STATUS_GREEN    = 6,  ///< Green status LED
+    LED_STATUS_RED      = 7,  ///< Red status LED
+    LED_ERROR           = 8,  ///< Error indicator LED
+    LED_COMM            = 9,  ///< Communication activity LED
     
     // CAN bus control
     CAN_HS_STB_OP       = 10, ///< P1_2: CAN high-speed standby output
@@ -55,84 +53,49 @@ enum class Pcal95555Chip1Pin : uint8_t {
 };
 
 /**
- * @brief PCAL95555 Chip 2 pin assignments (if used)
- */
-enum class Pcal95555Chip2Pin : uint8_t {
-    // Additional motor control
-    MOTOR_DIR_1         = 0,  ///< Motor 1 direction
-    MOTOR_DIR_2         = 1,  ///< Motor 2 direction
-    MOTOR_STEP_1        = 2,  ///< Motor 1 step signal
-    MOTOR_STEP_2        = 3,  ///< Motor 2 step signal
-    
-    // Fan control
-    FAN_ENABLE_1        = 4,  ///< Fan 1 enable
-    FAN_ENABLE_2        = 5,  ///< Fan 2 enable
-    FAN_PWM_1           = 6,  ///< Fan 1 PWM control
-    FAN_PWM_2           = 7,  ///< Fan 2 PWM control
-    
-    // Heater control
-    HEATER_ENABLE       = 8,  ///< Heater enable signal
-    HEATER_PWM          = 9,  ///< Heater PWM control
-    
-    // Valve control
-    VALVE_1_OPEN        = 10, ///< Valve 1 open signal
-    VALVE_1_CLOSE       = 11, ///< Valve 1 close signal
-    VALVE_2_OPEN        = 12, ///< Valve 2 open signal
-    VALVE_2_CLOSE       = 13, ///< Valve 2 close signal
-    
-    // Additional I/O
-    AUX_OUTPUT_1        = 14, ///< Auxiliary output 1
-    AUX_OUTPUT_2        = 15, ///< Auxiliary output 2
-};
-
-/**
  * @brief Functional mapping of external pins to logical names
  */
 namespace ExtPinMap {
     // Motor control pin mappings
-    constexpr auto MOTOR_ENABLE = Pcal95555Chip1Pin::MOTOR_ENABLE_1;
-    constexpr auto MOTOR_FAULT = Pcal95555Chip1Pin::MOTOR_FAULT_1;
-    constexpr auto MOTOR_BRAKE = Pcal95555Chip1Pin::MOTOR_BRAKE_1;
+    constexpr auto MOTOR_ENABLE = Pcal95555Pin::MOTOR_ENABLE_1;
+    constexpr auto MOTOR_FAULT = Pcal95555Pin::MOTOR_FAULT_1;
+    constexpr auto MOTOR_BRAKE = Pcal95555Pin::MOTOR_BRAKE_1;
     
     // LED pin mappings
-    constexpr auto LED_STATUS = Pcal95555Chip1Pin::LED_STATUS_GREEN;
-    constexpr auto LED_ERROR = Pcal95555Chip1Pin::LED_ERROR;
-    constexpr auto LED_COMM = Pcal95555Chip1Pin::LED_COMM;
+    constexpr auto LED_STATUS = Pcal95555Pin::LED_STATUS_GREEN;
+    constexpr auto LED_ERROR = Pcal95555Pin::LED_ERROR;
+    constexpr auto LED_COMM = Pcal95555Pin::LED_COMM;
     
     // External I/O mappings
-    constexpr auto USER_OUTPUT_1 = Pcal95555Chip1Pin::EXT_OUTPUT_1;
-    constexpr auto USER_OUTPUT_2 = Pcal95555Chip1Pin::EXT_OUTPUT_2;
-    constexpr auto USER_INPUT_1 = Pcal95555Chip1Pin::EXT_INPUT_1;
-    constexpr auto USER_INPUT_2 = Pcal95555Chip1Pin::EXT_INPUT_2;
+    constexpr auto USER_OUTPUT_1 = Pcal95555Pin::EXT_OUTPUT_1;
+    constexpr auto USER_OUTPUT_2 = Pcal95555Pin::EXT_OUTPUT_2;
+    constexpr auto USER_INPUT_1 = Pcal95555Pin::EXT_INPUT_1;
+    constexpr auto USER_INPUT_2 = Pcal95555Pin::EXT_INPUT_2;
 }
 
 /**
- * @brief I2C addresses for PCAL95555 chips
+ * @brief I2C address for PCAL95555 chip
  */
 namespace Pcal95555Addresses {
-    constexpr uint8_t CHIP_1_ADDR = 0x20; ///< I2C address for first PCAL95555
-    constexpr uint8_t CHIP_2_ADDR = 0x21; ///< I2C address for second PCAL95555
+    constexpr uint8_t CHIP_ADDR = 0x20; ///< I2C address for PCAL95555
 }
 
 /**
- * @brief Pin direction configurations for PCAL95555 pins
+ * @brief Pin direction configuration for PCAL95555 pins
  */
 namespace Pcal95555Config {
-    // Chip 1 configuration - bit mask for input pins (1 = input, 0 = output)
-    constexpr uint16_t CHIP_1_INPUT_MASK = 
-        (1 << static_cast<uint8_t>(Pcal95555Chip1Pin::MOTOR_FAULT_1)) |
-        (1 << static_cast<uint8_t>(Pcal95555Chip1Pin::MOTOR_FAULT_2)) |
-        (1 << static_cast<uint8_t>(Pcal95555Chip1Pin::EXT_INPUT_1)) |
-        (1 << static_cast<uint8_t>(Pcal95555Chip1Pin::EXT_INPUT_2));
-    
-    // Chip 2 configuration - all pins are outputs by default
-    constexpr uint16_t CHIP_2_INPUT_MASK = 0x0000;
+    // Configuration - bit mask for input pins (1 = input, 0 = output)
+    constexpr uint16_t INPUT_MASK = 
+        (1 << static_cast<uint8_t>(Pcal95555Pin::MOTOR_FAULT_1)) |
+        (1 << static_cast<uint8_t>(Pcal95555Pin::MOTOR_FAULT_2)) |
+        (1 << static_cast<uint8_t>(Pcal95555Pin::EXT_INPUT_1)) |
+        (1 << static_cast<uint8_t>(Pcal95555Pin::EXT_INPUT_2));
 }
 
 /**
- * @brief String representations for external pins
+ * @brief String representation for PCAL95555 pins
  */
-constexpr const char* Pcal95555Chip1PinToString(Pcal95555Chip1Pin pin) {
+constexpr const char* Pcal95555PinToString(Pcal95555Pin pin) {
     switch (pin) {
         case Pcal95555Chip1Pin::TMC_GPIO17: return "TMC_GPIO17";
         case Pcal95555Chip1Pin::TMC_GPIO18: return "TMC_GPIO18";
