@@ -12,7 +12,7 @@ It exposes pin assignments and an initialization function that can be used by yo
 
 ## Pin Mapping
 
-The header `include/hf_gpio_config.hpp` lists every pin used on the ESP32‑C6. The mappings are grouped by peripheral for quick reference.
+The header `include/hf_platform_config.hpp` provides minimal platform-specific configuration for the ESP32‑C6. Hardware-specific initialization is delegated to the internal interface wrapper layer.
 
 ### SPI0
 - **MISO** – `GPIO_NUM_2` (data from device to controller)
@@ -61,13 +61,13 @@ See the header file for detailed definitions.
 
 ## Usage
 
-Include the header and call `init_mcu_pinconfig()` early in your application:
+Include the header and call `HardFOC::init_platform_hardware()` early in your application:
 
 ```cpp
-#include "hf_gpio_config.hpp"
+#include "hf_platform_config.hpp"
 
 void app_main() {
-    init_mcu_pinconfig();
+    HardFOC::init_platform_hardware();
     // rest of your initialization
 }
 ```
