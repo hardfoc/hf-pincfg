@@ -23,21 +23,21 @@ enum class HfFunctionalGpioPin : uint8_t {
     // ESP32C6
     XTAL_32K_P = 0,      // IO0
     XTAL_32K_N,          // IO1
-    SPI0_MISO,           // IO2
+    SPI2_MISO,           // IO2
     WS2812_LED_DAT,      // IO3
     UART_RXD,            // IO4
     UART_TXD,            // IO5
-    SPI0_SCK,            // IO6
-    SPI0_MOSI,           // IO7
+    SPI2_SCK,            // IO6
+    SPI2_MOSI,           // IO7
     EXT_GPIO_CS_2,       // IO8
     BOOT_SEL,            // IO9
     JTAG_USB_D_N,        // IO12
     JTAG_USB_D_P,        // IO13
     TWAI_TX,             // IO14
     TWAI_RX,             // IO15
-    SPI0_CS_TMC9660,     // IO18 (active low)
+    SPI2_CS_TMC9660,     // IO18 (active low)
     EXT_GPIO_CS_1,       // IO19 (active low)
-    SPI0_CS_AS5047,      // IO20 (active low)
+    SPI2_CS_AS5047,      // IO20 (active low)
     I2C_SDA,             // IO21
     I2C_SCL,             // IO22
     I2C_PCAL95555_INT,   // IO23 (active low)
@@ -116,21 +116,21 @@ static constexpr HfGpioMapping HF_GPIO_MAPPING[] = {
     // ESP32C6
     { HfFunctionalGpioPin::XTAL_32K_P, HfGpioChipType::ESP32_INTERNAL, 0, false, false, 0, "XTAL 32K P" },
     { HfFunctionalGpioPin::XTAL_32K_N, HfGpioChipType::ESP32_INTERNAL, 1, false, false, 0, "XTAL 32K N" },
-    { HfFunctionalGpioPin::SPI0_MISO, HfGpioChipType::ESP32_INTERNAL, 2, false, true, 40, "SPI0 MISO" },
+    { HfFunctionalGpioPin::SPI2_MISO, HfGpioChipType::ESP32_INTERNAL, 2, false, true, 40, "SPI2 MISO" },
     { HfFunctionalGpioPin::WS2812_LED_DAT, HfGpioChipType::ESP32_INTERNAL, 3, false, false, 40, "WS2812 LED Data" },
     { HfFunctionalGpioPin::UART_RXD, HfGpioChipType::ESP32_INTERNAL, 4, false, true, 40, "UART RXD" },
     { HfFunctionalGpioPin::UART_TXD, HfGpioChipType::ESP32_INTERNAL, 5, false, false, 40, "UART TXD" },
-    { HfFunctionalGpioPin::SPI0_SCK, HfGpioChipType::ESP32_INTERNAL, 6, false, false, 40, "SPI0 SCK" },
-    { HfFunctionalGpioPin::SPI0_MOSI, HfGpioChipType::ESP32_INTERNAL, 7, false, false, 40, "SPI0 MOSI" },
+    { HfFunctionalGpioPin::SPI2_SCK, HfGpioChipType::ESP32_INTERNAL, 6, false, false, 40, "SPI2 SCK" },
+    { HfFunctionalGpioPin::SPI2_MOSI, HfGpioChipType::ESP32_INTERNAL, 7, false, false, 40, "SPI2 MOSI" },
     { HfFunctionalGpioPin::EXT_GPIO_CS_2, HfGpioChipType::ESP32_INTERNAL, 8, false, false, 40, "EXT GPIO CS 2" },
     { HfFunctionalGpioPin::BOOT_SEL, HfGpioChipType::ESP32_INTERNAL, 9, false, false, 0, "BOOT SEL" },
     { HfFunctionalGpioPin::JTAG_USB_D_N, HfGpioChipType::ESP32_INTERNAL, 12, false, false, 0, "JTAG USB D N" },
     { HfFunctionalGpioPin::JTAG_USB_D_P, HfGpioChipType::ESP32_INTERNAL, 13, false, false, 0, "JTAG USB D P" },
     { HfFunctionalGpioPin::TWAI_TX, HfGpioChipType::ESP32_INTERNAL, 14, false, true, 40, "TWAI TX (CAN)" },
     { HfFunctionalGpioPin::TWAI_RX, HfGpioChipType::ESP32_INTERNAL, 15, false, true, 40, "TWAI RX (CAN)" },
-    { HfFunctionalGpioPin::SPI0_CS_TMC9660, HfGpioChipType::ESP32_INTERNAL, 18, true, true, 40, "SPI0 CS TMC9660 (active low)" },
+    { HfFunctionalGpioPin::SPI2_CS_TMC9660, HfGpioChipType::ESP32_INTERNAL, 18, true, true, 40, "SPI2 CS TMC9660 (active low)" },
     { HfFunctionalGpioPin::EXT_GPIO_CS_1, HfGpioChipType::ESP32_INTERNAL, 19, true, true, 40, "EXT GPIO CS 1 (active low)" },
-    { HfFunctionalGpioPin::SPI0_CS_AS5047, HfGpioChipType::ESP32_INTERNAL, 20, true, true, 40, "SPI0 CS AS5047 (active low)" },
+    { HfFunctionalGpioPin::SPI2_CS_AS5047, HfGpioChipType::ESP32_INTERNAL, 20, true, true, 40, "SPI2 CS AS5047 (active low)" },
     { HfFunctionalGpioPin::I2C_SDA, HfGpioChipType::ESP32_INTERNAL, 21, false, true, 40, "I2C SDA" },
     { HfFunctionalGpioPin::I2C_SCL, HfGpioChipType::ESP32_INTERNAL, 22, false, true, 40, "I2C SCL" },
     { HfFunctionalGpioPin::I2C_PCAL95555_INT, HfGpioChipType::ESP32_INTERNAL, 23, true, true, 40, "I2C PCAL95555 INT (active low)" },
