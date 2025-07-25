@@ -10,68 +10,31 @@
  *
  * The component handlers (AdcData, GpioData, etc.) use the functional identifiers
  * defined here, making the higher-level code completely portable.
+ *
+ * IMPORTANT: This file uses ONLY primitive types (bool, uint8_t, uint32_t, etc.)
+ * and its own local enums. It has NO dependencies on external types or enums.
  */
 
-#include "../component-handler/hf_ext_pins_enum.hpp"
 #include <cstdint>
+#include <string_view>
 
 //==============================================================================
-// FUNCTIONAL PIN IDENTIFIERS (EXACTLY MATCHING USER'S PINOUT)
+// PIN CATEGORIES (LOCAL ENUMS)
 //==============================================================================
 
-enum class HfFunctionalGpioPin : uint8_t {
-    // ESP32C6
-    XTAL_32K_P = 0,      // IO0
-    XTAL_32K_N,          // IO1
-    SPI2_MISO,           // IO2
-    WS2812_LED_DAT,      // IO3
-    UART_RXD,            // IO4
-    UART_TXD,            // IO5
-    SPI2_SCK,            // IO6
-    SPI2_MOSI,           // IO7
-    EXT_GPIO_CS_2,       // IO8
-    BOOT_SEL,            // IO9
-    JTAG_USB_D_N,        // IO12
-    JTAG_USB_D_P,        // IO13
-    TWAI_TX,             // IO14
-    TWAI_RX,             // IO15
-    SPI2_CS_TMC9660,     // IO18 (active low)
-    EXT_GPIO_CS_1,       // IO19 (active low)
-    SPI2_CS_AS5047,      // IO20 (active low)
-    I2C_SDA,             // IO21
-    I2C_SCL,             // IO22
-    I2C_PCAL95555_INT,   // IO23 (active low)
-
-    // PCAL95555 PORT 0
-    PCAL_GPIO17,         // IO0
-    PCAL_GPIO18,         // IO1
-    PCAL_FAULT_STATUS,   // IO3 (active low)
-    PCAL_DRV_EN,         // IO4
-    PCAL_RST_CTRL,       // IO5
-    PCAL_PWR_GOOD,       // IO6
-    // IO2, IO7 tied to GND, treat as input
-
-    // PCAL95555 PORT 1
-    PCAL_CAN_HS_STB_OP,  // IO2
-    PCAL_IMU_BOOT,       // IO3 (active low)
-    PCAL_IMU_INT,        // IO4 (active low)
-    PCAL_SPI_COMM_EN,    // IO5 (active low)
-    PCAL_WAKE_CTRL,      // IO6 (active low)
-    PCAL_IMU_RST,        // IO7 (active low)
-    // IO0, IO1 tied to GND, treat as input
-
-    HF_FUNCTIONAL_GPIO_COUNT // Always last
-};
-
-enum class HfFunctionalAdcChannel : uint8_t {
-    // TMC9660
-    BOARD_TEMP_SENSOR = 0, // AIN3
-    
-    HF_FUNCTIONAL_ADC_COUNT // Always last
+/**
+ * @brief Pin categories for registration control
+ * @details Determines which pins should be registered as GPIOs vs left for peripherals
+ */
+enum class HfPinCategory : uint8_t {
+    PIN_CATEGORY_CORE = 0,    ///< System/core pins (skip GPIO registration)
+    PIN_CATEGORY_COMM = 1,    ///< Communication pins (skip GPIO registration)  
+    PIN_CATEGORY_GPIO = 2,    ///< Available for GPIO operations
+    PIN_CATEGORY_USER = 3     ///< User-defined pins (always register)
 };
 
 //==============================================================================
-// CHIP TYPE ENUMS
+// CHIP TYPE ENUMS (LOCAL ENUMS)
 //==============================================================================
 
 enum class HfGpioChipType : uint8_t {
@@ -85,102 +48,287 @@ enum class HfAdcChipType : uint8_t {
 };
 
 //==============================================================================
-// MAPPING STRUCTS
+// MAPPING STRUCTURES
 //==============================================================================
 
+/**
+ * @brief Structure containing comprehensive GPIO pin information with platform mapping.
+ * @details Single source of truth for all pin configuration data.
+ * 
+ * IMPORTANT: This struct uses ONLY primitive types to maintain independence
+ * from external type definitions. The manager/driver layer will translate
+ * these primitive values to the appropriate driver enums/types.
+ */
 struct HfGpioMapping {
-    HfFunctionalGpioPin functional_pin;
-    HfGpioChipType chip_type;
-    uint8_t physical_pin;
-    bool is_inverted;
-    bool has_pullup;
-    uint32_t max_current_ma;
-    const char* description;
+    uint8_t functional_pin;    ///< Functional pin identifier (enum value)
+    uint8_t chip_type;         ///< Hardware chip identifier (enum value)
+    uint8_t physical_pin;      ///< Physical pin number on the chip
+    uint8_t unit_number;       ///< Unit/device number (0=first unit, 1=second unit, etc.)
+    bool is_inverted;          ///< Whether pin logic is inverted
+    bool has_pull;             ///< Whether pin has any pull resistor
+    bool pull_is_up;           ///< If has_pull=true: true=pull-up, false=pull-down
+    bool is_push_pull;         ///< Output mode: true=push-pull, false=open-drain
+    uint32_t max_current_ma;   ///< Maximum current in milliamps
+    uint8_t category;          ///< Pin category for registration control (enum value)
+    std::string_view name;     ///< Human-readable pin name (self-documenting)
 };
 
+/**
+ * @brief Structure containing ADC channel information.
+ */
 struct HfAdcMapping {
-    HfFunctionalAdcChannel functional_channel;
-    HfAdcChipType chip_type;
-    uint8_t physical_channel;
-    uint8_t resolution_bits;
-    uint32_t max_voltage_mv;
-    float voltage_divider;
-    const char* description;
+    uint8_t functional_channel;  ///< Functional channel identifier (enum value)
+    uint8_t chip_type;          ///< Hardware chip identifier (enum value)
+    uint8_t physical_channel;   ///< Physical channel number on the chip
+    uint8_t resolution_bits;    ///< ADC resolution in bits
+    uint32_t max_voltage_mv;    ///< Maximum voltage in millivolts
+    float voltage_divider;      ///< Voltage divider ratio
+    const char* description;    ///< Channel description
 };
 
 //==============================================================================
-// PIN MAPPING TABLES (EXACTLY MATCHING USER'S PINOUT, EXPLICIT)
+// SINGLE SOURCE OF TRUTH: XMACRO PIN DEFINITIONS
 //==============================================================================
 
+/**
+ * @brief XMACRO defining all GPIO pins with complete configuration data.
+ * 
+ * Format: X(ENUM_NAME, STRING_NAME, CATEGORY, CHIP_TYPE, PHYSICAL_PIN, UNIT_NUMBER, INVERTED, HAS_PULL, PULL_IS_UP, IS_PUSH_PULL, MAX_CURRENT_MA)
+ * 
+ * Field descriptions:
+ * - ENUM_NAME: Functional pin enum name
+ * - STRING_NAME: Human-readable pin name
+ * - CATEGORY: Pin category (0=CORE, 1=COMM, 2=GPIO, 3=USER)
+ * - CHIP_TYPE: Hardware chip (0=ESP32, 1=PCAL95555, 2=TMC9660)
+ * - PHYSICAL_PIN: Physical pin number on the chip
+ * - UNIT_NUMBER: Unit/device number (0=first unit, 1=second unit, etc.)
+ * - INVERTED: Logic inversion (true=inverted, false=normal)
+ * - HAS_PULL: Pull resistor present (true=has pull, false=no pull)
+ * - PULL_IS_UP: Pull direction (true=pull-up, false=pull-down, ignored if HAS_PULL=false)
+ * - IS_PUSH_PULL: Output mode (true=push-pull, false=open-drain)
+ * - MAX_CURRENT_MA: Maximum current in milliamps
+ * 
+ * This single definition generates:
+ * - Functional pin enums
+ * - String name tables  
+ * - Category tables
+ * - Complete GPIO mapping array
+ * 
+ * Benefits:
+ * - Single source of truth (no duplication)
+ * - Compile-time validation
+ * - Easy to maintain and extend
+ * - Self-documenting pin names
+ * - Complete independence from external types
+ */
+#define HF_FUNCTIONAL_GPIO_PIN_LIST(X) \
+    /* CORE pins (system reserved - skip GPIO registration) */ \
+    X(XTAL_32K_P, "CORE_XTAL_32K_P", PIN_CATEGORY_CORE, ESP32_INTERNAL, 0, 0, false, false, false, true, 0) \
+    X(XTAL_32K_N, "CORE_XTAL_32K_N", PIN_CATEGORY_CORE, ESP32_INTERNAL, 1, 0, false, false, false, true, 0) \
+    X(BOOT_SEL, "CORE_BOOT_SEL", PIN_CATEGORY_CORE, ESP32_INTERNAL, 9, 0, false, false, false, true, 0) \
+    X(JTAG_USB_D_N, "CORE_JTAG_USB_D_N", PIN_CATEGORY_CORE, ESP32_INTERNAL, 12, 0, false, false, false, true, 0) \
+    X(JTAG_USB_D_P, "CORE_JTAG_USB_D_P", PIN_CATEGORY_CORE, ESP32_INTERNAL, 13, 0, false, false, false, true, 0) \
+    \
+    /* COMM pins (communication - skip GPIO registration) */ \
+    X(SPI2_MISO, "COMM_SPI2_MISO", PIN_CATEGORY_COMM, ESP32_INTERNAL, 2, 0, false, true, true, true, 40) \
+    X(SPI2_SCK, "COMM_SPI2_SCK", PIN_CATEGORY_COMM, ESP32_INTERNAL, 6, 0, false, false, false, true, 40) \
+    X(SPI2_MOSI, "COMM_SPI2_MOSI", PIN_CATEGORY_COMM, ESP32_INTERNAL, 7, 0, false, false, false, true, 40) \
+    X(SPI2_CS_TMC9660, "COMM_SPI2_CS_TMC9660", PIN_CATEGORY_COMM, ESP32_INTERNAL, 18, 0, true, true, true, true, 40) \
+    X(SPI2_CS_AS5047, "COMM_SPI2_CS_AS5047", PIN_CATEGORY_COMM, ESP32_INTERNAL, 20, 0, true, true, true, true, 40) \
+    X(UART_RXD, "COMM_UART_RXD", PIN_CATEGORY_COMM, ESP32_INTERNAL, 4, 0, false, true, true, true, 40) \
+    X(UART_TXD, "COMM_UART_TXD", PIN_CATEGORY_COMM, ESP32_INTERNAL, 5, 0, false, false, false, true, 40) \
+    X(TWAI_TX, "COMM_TWAI_TX", PIN_CATEGORY_COMM, ESP32_INTERNAL, 14, 0, false, true, true, true, 40) \
+    X(TWAI_RX, "COMM_TWAI_RX", PIN_CATEGORY_COMM, ESP32_INTERNAL, 15, 0, false, true, true, true, 40) \
+    X(I2C_SDA, "COMM_I2C_SDA", PIN_CATEGORY_COMM, ESP32_INTERNAL, 21, 0, false, true, true, true, 40) \
+    X(I2C_SCL, "COMM_I2C_SCL", PIN_CATEGORY_COMM, ESP32_INTERNAL, 22, 0, false, true, true, true, 40) \
+    X(I2C_PCAL95555_INT, "COMM_I2C_PCAL95555_INT", PIN_CATEGORY_COMM, ESP32_INTERNAL, 23, 0, true, true, true, true, 40) \
+    \
+    /* GPIO pins (available for GPIO operations) */ \
+    X(WS2812_LED_DAT, "GPIO_WS2812_LED_DAT", PIN_CATEGORY_GPIO, ESP32_INTERNAL, 3, 0, false, false, false, true, 40) \
+    X(EXT_GPIO_CS_1, "GPIO_EXT_GPIO_CS_1", PIN_CATEGORY_GPIO, ESP32_INTERNAL, 19, 0, true, true, true, true, 40) \
+    X(EXT_GPIO_CS_2, "GPIO_EXT_GPIO_CS_2", PIN_CATEGORY_GPIO, ESP32_INTERNAL, 8, 0, false, false, false, true, 40) \
+    \
+    /* PCAL95555 GPIO pins (unit 0) */ \
+    X(PCAL_GPIO17, "GPIO_PCAL_GPIO17", PIN_CATEGORY_GPIO, PCAL95555_EXPANDER, 0, 0, false, false, false, true, 25) \
+    X(PCAL_GPIO18, "GPIO_PCAL_GPIO18", PIN_CATEGORY_GPIO, PCAL95555_EXPANDER, 1, 0, false, false, false, true, 25) \
+    X(PCAL_FAULT_STATUS, "GPIO_PCAL_FAULT_STATUS", PIN_CATEGORY_GPIO, PCAL95555_EXPANDER, 3, 0, true, false, false, true, 25) \
+    X(PCAL_DRV_EN, "GPIO_PCAL_DRV_EN", PIN_CATEGORY_GPIO, PCAL95555_EXPANDER, 4, 0, false, false, false, true, 25) \
+    X(PCAL_RST_CTRL, "GPIO_PCAL_RST_CTRL", PIN_CATEGORY_GPIO, PCAL95555_EXPANDER, 5, 0, false, false, false, true, 25) \
+    X(PCAL_PWR_GOOD, "GPIO_PCAL_PWR_GOOD", PIN_CATEGORY_GPIO, PCAL95555_EXPANDER, 6, 0, false, false, false, true, 25) \
+    X(PCAL_CAN_HS_STB_OP, "GPIO_PCAL_CAN_HS_STB_OP", PIN_CATEGORY_GPIO, PCAL95555_EXPANDER, 10, 0, false, false, false, true, 25) \
+    X(PCAL_IMU_BOOT, "GPIO_PCAL_IMU_BOOT", PIN_CATEGORY_GPIO, PCAL95555_EXPANDER, 11, 0, true, false, false, true, 25) \
+    X(PCAL_IMU_INT, "GPIO_PCAL_IMU_INT", PIN_CATEGORY_GPIO, PCAL95555_EXPANDER, 12, 0, true, false, false, true, 25) \
+    X(PCAL_IMU_RST, "GPIO_PCAL_IMU_RST", PIN_CATEGORY_GPIO, PCAL95555_EXPANDER, 15, 0, true, false, false, true, 25) \
+    X(PCAL_SPI_COMM_EN, "GPIO_PCAL_SPI_COMM_EN", PIN_CATEGORY_GPIO, PCAL95555_EXPANDER, 13, 0, true, false, false, true, 25) \
+    X(PCAL_WAKE_CTRL, "GPIO_PCAL_WAKE_CTRL", PIN_CATEGORY_GPIO, PCAL95555_EXPANDER, 14, 0, true, false, false, true, 25)
+
+//==============================================================================
+// GENERATED ENUMS AND TABLES
+//==============================================================================
+
+/**
+ * @brief Functional GPIO pin identifiers (generated from XMACRO).
+ */
+enum class HfFunctionalGpioPin : uint8_t {
+#define X(name, str, cat, chip, pin, unit, inv, pull, pull_up, push_pull, current) name,
+    HF_FUNCTIONAL_GPIO_PIN_LIST(X)
+#undef X
+    HF_FUNCTIONAL_GPIO_COUNT // Always last
+};
+
+/**
+ * @brief String names for functional pins (generated from XMACRO).
+ */
+static constexpr std::string_view HfFunctionalGpioPinNames[] = {
+#define X(name, str, cat, chip, pin, unit, inv, pull, pull_up, push_pull, current) str,
+    HF_FUNCTIONAL_GPIO_PIN_LIST(X)
+#undef X
+};
+
+/**
+ * @brief Pin categories for functional pins (generated from XMACRO).
+ */
+static constexpr HfPinCategory HfFunctionalGpioPinCategories[] = {
+#define X(name, str, cat, chip, pin, unit, inv, pull, pull_up, push_pull, current) cat,
+    HF_FUNCTIONAL_GPIO_PIN_LIST(X)
+#undef X
+};
+
+/**
+ * @brief Complete GPIO mapping table (generated from XMACRO).
+ * @details Single source of truth for all pin configuration data.
+ */
 static constexpr HfGpioMapping HF_GPIO_MAPPING[] = {
-    // ESP32C6
-    { HfFunctionalGpioPin::XTAL_32K_P, HfGpioChipType::ESP32_INTERNAL, 0, false, false, 0, "XTAL 32K P" },
-    { HfFunctionalGpioPin::XTAL_32K_N, HfGpioChipType::ESP32_INTERNAL, 1, false, false, 0, "XTAL 32K N" },
-    { HfFunctionalGpioPin::SPI2_MISO, HfGpioChipType::ESP32_INTERNAL, 2, false, true, 40, "SPI2 MISO" },
-    { HfFunctionalGpioPin::WS2812_LED_DAT, HfGpioChipType::ESP32_INTERNAL, 3, false, false, 40, "WS2812 LED Data" },
-    { HfFunctionalGpioPin::UART_RXD, HfGpioChipType::ESP32_INTERNAL, 4, false, true, 40, "UART RXD" },
-    { HfFunctionalGpioPin::UART_TXD, HfGpioChipType::ESP32_INTERNAL, 5, false, false, 40, "UART TXD" },
-    { HfFunctionalGpioPin::SPI2_SCK, HfGpioChipType::ESP32_INTERNAL, 6, false, false, 40, "SPI2 SCK" },
-    { HfFunctionalGpioPin::SPI2_MOSI, HfGpioChipType::ESP32_INTERNAL, 7, false, false, 40, "SPI2 MOSI" },
-    { HfFunctionalGpioPin::EXT_GPIO_CS_2, HfGpioChipType::ESP32_INTERNAL, 8, false, false, 40, "EXT GPIO CS 2" },
-    { HfFunctionalGpioPin::BOOT_SEL, HfGpioChipType::ESP32_INTERNAL, 9, false, false, 0, "BOOT SEL" },
-    { HfFunctionalGpioPin::JTAG_USB_D_N, HfGpioChipType::ESP32_INTERNAL, 12, false, false, 0, "JTAG USB D N" },
-    { HfFunctionalGpioPin::JTAG_USB_D_P, HfGpioChipType::ESP32_INTERNAL, 13, false, false, 0, "JTAG USB D P" },
-    { HfFunctionalGpioPin::TWAI_TX, HfGpioChipType::ESP32_INTERNAL, 14, false, true, 40, "TWAI TX (CAN)" },
-    { HfFunctionalGpioPin::TWAI_RX, HfGpioChipType::ESP32_INTERNAL, 15, false, true, 40, "TWAI RX (CAN)" },
-    { HfFunctionalGpioPin::SPI2_CS_TMC9660, HfGpioChipType::ESP32_INTERNAL, 18, true, true, 40, "SPI2 CS TMC9660 (active low)" },
-    { HfFunctionalGpioPin::EXT_GPIO_CS_1, HfGpioChipType::ESP32_INTERNAL, 19, true, true, 40, "EXT GPIO CS 1 (active low)" },
-    { HfFunctionalGpioPin::SPI2_CS_AS5047, HfGpioChipType::ESP32_INTERNAL, 20, true, true, 40, "SPI2 CS AS5047 (active low)" },
-    { HfFunctionalGpioPin::I2C_SDA, HfGpioChipType::ESP32_INTERNAL, 21, false, true, 40, "I2C SDA" },
-    { HfFunctionalGpioPin::I2C_SCL, HfGpioChipType::ESP32_INTERNAL, 22, false, true, 40, "I2C SCL" },
-    { HfFunctionalGpioPin::I2C_PCAL95555_INT, HfGpioChipType::ESP32_INTERNAL, 23, true, true, 40, "I2C PCAL95555 INT (active low)" },
+#define X(name, str, cat, chip, pin, unit, inv, pull, pull_up, push_pull, current) \
+    { static_cast<uint8_t>(HfFunctionalGpioPin::name), static_cast<uint8_t>(chip), pin, unit, inv, pull, pull_up, push_pull, current, static_cast<uint8_t>(cat), str },
+    HF_FUNCTIONAL_GPIO_PIN_LIST(X)
+#undef X
+};
 
-    // PCAL95555 PORT 0
-    { HfFunctionalGpioPin::PCAL_GPIO17, HfGpioChipType::PCAL95555_EXPANDER, 0, false, false, 25, "TMC9660 GPIO17" },
-    { HfFunctionalGpioPin::PCAL_GPIO18, HfGpioChipType::PCAL95555_EXPANDER, 1, false, false, 25, "TMC9660 GPIO18" },
-    { HfFunctionalGpioPin::PCAL_FAULT_STATUS, HfGpioChipType::PCAL95555_EXPANDER, 3, true, false, 25, "TMC9660 FAULT STATUS (active low)" },
-    { HfFunctionalGpioPin::PCAL_DRV_EN, HfGpioChipType::PCAL95555_EXPANDER, 4, false, false, 25, "TMC9660 DRV EN" },
-    { HfFunctionalGpioPin::PCAL_RST_CTRL, HfGpioChipType::PCAL95555_EXPANDER, 5, false, false, 25, "TMC9660 RST CTRL" },
-    { HfFunctionalGpioPin::PCAL_PWR_GOOD, HfGpioChipType::PCAL95555_EXPANDER, 6, false, false, 25, "SWR 3V3 PG FLAG" },
-    // IO2, IO7 tied to GND, treat as input (not mapped)
+//==============================================================================
+// COMPILE-TIME SIZE CALCULATIONS
+//==============================================================================
 
-    // PCAL95555 PORT 1
-    { HfFunctionalGpioPin::PCAL_CAN_HS_STB_OP, HfGpioChipType::PCAL95555_EXPANDER, 10, false, false, 25, "CAN HS STB OP" },
-    { HfFunctionalGpioPin::PCAL_IMU_BOOT, HfGpioChipType::PCAL95555_EXPANDER, 11, true, false, 25, "IMU BOOT (active low)" },
-    { HfFunctionalGpioPin::PCAL_IMU_INT, HfGpioChipType::PCAL95555_EXPANDER, 12, true, false, 25, "IMU INT (active low)" },
-    { HfFunctionalGpioPin::PCAL_SPI_COMM_EN, HfGpioChipType::PCAL95555_EXPANDER, 13, true, false, 25, "TMC9660 SPI COMM EN (active low)" },
-    { HfFunctionalGpioPin::PCAL_WAKE_CTRL, HfGpioChipType::PCAL95555_EXPANDER, 14, true, false, 25, "TMC WAKE CTRL (active low)" },
-    { HfFunctionalGpioPin::PCAL_IMU_RST, HfGpioChipType::PCAL95555_EXPANDER, 15, true, false, 25, "IMU RST (active low)" },
-    // IO8, IO9 tied to GND, treat as input (not mapped)
+/**
+ * @brief Compile-time size of GPIO mapping array.
+ */
+static constexpr size_t HF_GPIO_MAPPING_SIZE = sizeof(HF_GPIO_MAPPING) / sizeof(HF_GPIO_MAPPING[0]);
+
+//==============================================================================
+// ADC CHANNELS (UNCHANGED)
+//==============================================================================
+
+enum class HfFunctionalAdcChannel : uint8_t {
+    // TMC9660
+    BOARD_TEMP_SENSOR = 0, // AIN3
+    
+    HF_FUNCTIONAL_ADC_COUNT // Always last
 };
 
 static constexpr HfAdcMapping HF_ADC_MAPPING[] = {
     // TMC9660
-    { HfFunctionalAdcChannel::BOARD_TEMP_SENSOR, HfAdcChipType::TMC9660_CONTROLLER, 3, 12, 3300, 1.0f, "Board Temp Sensor (AIN3)" }
+    { static_cast<uint8_t>(HfFunctionalAdcChannel::BOARD_TEMP_SENSOR), static_cast<uint8_t>(TMC9660_CONTROLLER), 3, 12, 3300, 1.0f, "Board Temp Sensor (AIN3)" }
 };
 
+/**
+ * @brief Compile-time size of ADC mapping array.
+ */
+static constexpr size_t HF_ADC_MAPPING_SIZE = sizeof(HF_ADC_MAPPING) / sizeof(HF_ADC_MAPPING[0]);
+
 //==============================================================================
-// MAPPING ACCESS FUNCTIONS (LOOKUP BY VALUE, NOT INDEX)
+// HELPER FUNCTIONS
 //==============================================================================
 
+/**
+ * @brief Convert functional pin to string name.
+ * @param pin Functional pin identifier
+ * @return String view of pin name
+ */
+inline std::string_view to_string(HfFunctionalGpioPin pin) noexcept {
+    const size_t index = static_cast<size_t>(pin);
+    if (index < sizeof(HfFunctionalGpioPinNames) / sizeof(HfFunctionalGpioPinNames[0])) {
+        return HfFunctionalGpioPinNames[index];
+    }
+    return "UNKNOWN_PIN";
+}
+
+/**
+ * @brief Get pin category.
+ * @param pin Functional pin identifier
+ * @return Pin category
+ */
+inline HfPinCategory get_pin_category(HfFunctionalGpioPin pin) noexcept {
+    const size_t index = static_cast<size_t>(pin);
+    if (index < sizeof(HfFunctionalGpioPinCategories) / sizeof(HfFunctionalGpioPinCategories[0])) {
+        return HfFunctionalGpioPinCategories[index];
+    }
+    return HfPinCategory::PIN_CATEGORY_CORE; // Safe default
+}
+
+/**
+ * @brief Check if pin should be registered as GPIO.
+ * @param category Pin category
+ * @return true if should be registered as GPIO
+ */
+inline bool should_register_as_gpio(HfPinCategory category) noexcept {
+    return category == HfPinCategory::PIN_CATEGORY_GPIO || 
+           category == HfPinCategory::PIN_CATEGORY_USER;
+}
+
+/**
+ * @brief Check if string name has reserved prefix.
+ * @param name Pin name to check
+ * @return true if has reserved prefix
+ */
+inline bool is_reserved_prefix(std::string_view name) noexcept {
+    return name.starts_with("CORE_") || 
+           name.starts_with("COMM_") || 
+           name.starts_with("SYS_") ||
+           name.starts_with("INTERNAL_");
+}
+
+//==============================================================================
+// MAPPING ACCESS FUNCTIONS
+//==============================================================================
+
+/**
+ * @brief Get GPIO mapping for functional pin.
+ * @param functional_pin Functional pin identifier
+ * @return Pointer to GPIO mapping or nullptr if not found
+ */
 static inline const HfGpioMapping* GetGpioMapping(HfFunctionalGpioPin functional_pin) {
     for (const auto& mapping : HF_GPIO_MAPPING) {
-        if (mapping.functional_pin == functional_pin) return &mapping;
+        if (mapping.functional_pin == static_cast<uint8_t>(functional_pin)) return &mapping;
     }
     return nullptr;
 }
 
+/**
+ * @brief Get ADC mapping for functional channel.
+ * @param functional_channel Functional channel identifier
+ * @return Pointer to ADC mapping or nullptr if not found
+ */
 static inline const HfAdcMapping* GetAdcMapping(HfFunctionalAdcChannel functional_channel) {
     for (const auto& mapping : HF_ADC_MAPPING) {
-        if (mapping.functional_channel == functional_channel) return &mapping;
+        if (mapping.functional_channel == static_cast<uint8_t>(functional_channel)) return &mapping;
     }
     return nullptr;
 }
 
+/**
+ * @brief Check if GPIO pin is available.
+ * @param functional_pin Functional pin identifier
+ * @return true if pin is available
+ */
 static inline bool IsGpioPinAvailable(HfFunctionalGpioPin functional_pin) {
     return GetGpioMapping(functional_pin) != nullptr;
 }
 
+/**
+ * @brief Check if ADC channel is available.
+ * @param functional_channel Functional channel identifier
+ * @return true if channel is available
+ */
 static inline bool IsAdcChannelAvailable(HfFunctionalAdcChannel functional_channel) {
     return GetAdcMapping(functional_channel) != nullptr;
 }
