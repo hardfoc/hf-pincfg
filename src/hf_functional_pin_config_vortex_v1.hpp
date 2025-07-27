@@ -44,7 +44,8 @@ enum class HfGpioChipType : uint8_t {
 };
 
 enum class HfAdcChipType : uint8_t {
-    TMC9660_CONTROLLER = 0
+    ESP32_INTERNAL = 0,
+    TMC9660_CONTROLLER
 };
 
 //==============================================================================
@@ -162,6 +163,68 @@ struct HfAdcMapping {
     X(PCAL_SPI_COMM_EN, "GPIO_PCAL_SPI_COMM_EN", PIN_CATEGORY_GPIO, PCAL95555_EXPANDER, 13, 0, true, false, false, true, 25) \
     X(PCAL_WAKE_CTRL, "GPIO_PCAL_WAKE_CTRL", PIN_CATEGORY_GPIO, PCAL95555_EXPANDER, 14, 0, true, false, false, true, 25)
 
+/**
+ * @brief XMACRO defining all ADC channels with complete configuration data.
+ * 
+ * Format: X(ENUM_NAME, STRING_NAME, CHIP_TYPE, PHYSICAL_CHANNEL, RESOLUTION_BITS, MAX_VOLTAGE_MV, VOLTAGE_DIVIDER, DESCRIPTION)
+ * 
+ * Field descriptions:
+ * - ENUM_NAME: Functional ADC channel enum name
+ * - STRING_NAME: Human-readable channel name
+ * - CHIP_TYPE: Hardware chip (0=ESP32_INTERNAL, 1=TMC9660_CONTROLLER)
+ * - PHYSICAL_CHANNEL: Physical channel number on the chip
+ * - RESOLUTION_BITS: ADC resolution in bits
+ * - MAX_VOLTAGE_MV: Maximum voltage in millivolts
+ * - VOLTAGE_DIVIDER: Voltage divider ratio (1.0 = no divider)
+ * - DESCRIPTION: Channel description
+ * 
+ * This single definition generates:
+ * - Functional ADC channel enums
+ * - String name tables
+ * - Complete ADC mapping array
+ * 
+ * Benefits:
+ * - Single source of truth (no duplication)
+ * - Compile-time validation
+ * - Easy to maintain and extend
+ * - Self-documenting channel names
+ * - Complete independence from external types
+ */
+#define HF_FUNCTIONAL_ADC_CHANNEL_LIST(X) \
+    /* ESP32-C6 Internal ADC Channels (ADC1) - Currently not used but available for future expansion */ \
+    /* X(ESP32_ADC_CH0, "ADC_ESP32_CH0", ESP32_INTERNAL, 0, 12, 1100, 1.0f, "ESP32 Internal ADC Channel 0") */ \
+    /* X(ESP32_ADC_CH1, "ADC_ESP32_CH1", ESP32_INTERNAL, 1, 12, 1100, 1.0f, "ESP32 Internal ADC Channel 1") */ \
+    /* X(ESP32_ADC_CH2, "ADC_ESP32_CH2", ESP32_INTERNAL, 2, 12, 1100, 1.0f, "ESP32 Internal ADC Channel 2") */ \
+    /* X(ESP32_ADC_CH3, "ADC_ESP32_CH3", ESP32_INTERNAL, 3, 12, 1100, 1.0f, "ESP32 Internal ADC Channel 3") */ \
+    /* X(ESP32_ADC_CH4, "ADC_ESP32_CH4", ESP32_INTERNAL, 4, 12, 1100, 1.0f, "ESP32 Internal ADC Channel 4") */ \
+    /* X(ESP32_ADC_CH5, "ADC_ESP32_CH5", ESP32_INTERNAL, 5, 12, 1100, 1.0f, "ESP32 Internal ADC Channel 5") */ \
+    /* X(ESP32_ADC_CH6, "ADC_ESP32_CH6", ESP32_INTERNAL, 6, 12, 1100, 1.0f, "ESP32 Internal ADC Channel 6") */ \
+    \
+    /* TMC9660 ADC Channels - Reserved channels 0-3 for AIN inputs (only AIN3 connected to temperature sensor) */ \
+    X(TMC9660_AIN0, "ADC_TMC9660_AIN0", TMC9660_CONTROLLER, 0, 16, 3300, 1.0f, "TMC9660 ADC Input 0 (Reserved)") \
+    X(TMC9660_AIN1, "ADC_TMC9660_AIN1", TMC9660_CONTROLLER, 1, 16, 3300, 1.0f, "TMC9660 ADC Input 1 (Reserved)") \
+    X(TMC9660_AIN2, "ADC_TMC9660_AIN2", TMC9660_CONTROLLER, 2, 16, 3300, 1.0f, "TMC9660 ADC Input 2 (Reserved)") \
+    X(TMC9660_AIN3, "ADC_TMC9660_AIN3", TMC9660_CONTROLLER, 3, 16, 3300, 1.0f, "TMC9660 ADC Input 3 (Temperature Sensor)") \
+    \
+    /* TMC9660 Internal Monitoring Channels - Current Sensing (ADC I0-I3) */ \
+    X(TMC9660_CURRENT_I0, "TMC9660_CURRENT_I0", TMC9660_CONTROLLER, 10, 16, 3300, 1.0f, "TMC9660 Current Sense I0") \
+    X(TMC9660_CURRENT_I1, "TMC9660_CURRENT_I1", TMC9660_CONTROLLER, 11, 16, 3300, 1.0f, "TMC9660 Current Sense I1") \
+    X(TMC9660_CURRENT_I2, "TMC9660_CURRENT_I2", TMC9660_CONTROLLER, 12, 16, 3300, 1.0f, "TMC9660 Current Sense I2") \
+    X(TMC9660_CURRENT_I3, "TMC9660_CURRENT_I3", TMC9660_CONTROLLER, 13, 16, 3300, 1.0f, "TMC9660 Current Sense I3") \
+    \
+    /* TMC9660 Internal Monitoring Channels - Voltage Monitoring */ \
+    X(TMC9660_SUPPLY_VOLTAGE, "TMC9660_SUPPLY_VOLTAGE", TMC9660_CONTROLLER, 20, 16, 3300, 1.0f, "TMC9660 Supply Voltage") \
+    X(TMC9660_DRIVER_VOLTAGE, "TMC9660_DRIVER_VOLTAGE", TMC9660_CONTROLLER, 21, 16, 3300, 1.0f, "TMC9660 Driver Voltage") \
+    \
+    /* TMC9660 Internal Monitoring Channels - Temperature */ \
+    X(TMC9660_CHIP_TEMPERATURE, "TMC9660_CHIP_TEMPERATURE", TMC9660_CONTROLLER, 30, 16, 3300, 1.0f, "TMC9660 Chip Temperature") \
+    X(TMC9660_EXTERNAL_TEMPERATURE, "TMC9660_EXTERNAL_TEMPERATURE", TMC9660_CONTROLLER, 31, 16, 3300, 1.0f, "TMC9660 External Temperature") \
+    \
+    /* TMC9660 Internal Monitoring Channels - Motor Control Data */ \
+    X(TMC9660_MOTOR_CURRENT, "TMC9660_MOTOR_CURRENT", TMC9660_CONTROLLER, 40, 16, 3300, 1.0f, "TMC9660 Motor Current") \
+    X(TMC9660_MOTOR_VELOCITY, "TMC9660_MOTOR_VELOCITY", TMC9660_CONTROLLER, 41, 16, 3300, 1.0f, "TMC9660 Motor Velocity") \
+    X(TMC9660_MOTOR_POSITION, "TMC9660_MOTOR_POSITION", TMC9660_CONTROLLER, 42, 16, 3300, 1.0f, "TMC9660 Motor Position")
+
 //==============================================================================
 // GENERATED ENUMS AND TABLES
 //==============================================================================
@@ -205,6 +268,36 @@ static constexpr HfGpioMapping HF_GPIO_MAPPING[] = {
 #undef X
 };
 
+/**
+ * @brief Functional ADC channel identifiers (generated from XMACRO).
+ */
+enum class HfFunctionalAdcChannel : uint8_t {
+#define X(name, str, chip, ch, res, max_v, div, desc) name,
+    HF_FUNCTIONAL_ADC_CHANNEL_LIST(X)
+#undef X
+    HF_FUNCTIONAL_ADC_COUNT // Always last
+};
+
+/**
+ * @brief String names for functional ADC channels (generated from XMACRO).
+ */
+static constexpr std::string_view HfFunctionalAdcChannelNames[] = {
+#define X(name, str, chip, ch, res, max_v, div, desc) str,
+    HF_FUNCTIONAL_ADC_CHANNEL_LIST(X)
+#undef X
+};
+
+/**
+ * @brief Complete ADC mapping table (generated from XMACRO).
+ * @details Single source of truth for all ADC channel configuration data.
+ */
+static constexpr HfAdcMapping HF_ADC_MAPPING[] = {
+#define X(name, str, chip, ch, res, max_v, div, desc) \
+    { static_cast<uint8_t>(HfFunctionalAdcChannel::name), static_cast<uint8_t>(chip), ch, res, max_v, div, desc },
+    HF_FUNCTIONAL_ADC_CHANNEL_LIST(X)
+#undef X
+};
+
 //==============================================================================
 // COMPILE-TIME SIZE CALCULATIONS
 //==============================================================================
@@ -213,22 +306,6 @@ static constexpr HfGpioMapping HF_GPIO_MAPPING[] = {
  * @brief Compile-time size of GPIO mapping array.
  */
 static constexpr size_t HF_GPIO_MAPPING_SIZE = sizeof(HF_GPIO_MAPPING) / sizeof(HF_GPIO_MAPPING[0]);
-
-//==============================================================================
-// ADC CHANNELS (UNCHANGED)
-//==============================================================================
-
-enum class HfFunctionalAdcChannel : uint8_t {
-    // TMC9660
-    BOARD_TEMP_SENSOR = 0, // AIN3
-    
-    HF_FUNCTIONAL_ADC_COUNT // Always last
-};
-
-static constexpr HfAdcMapping HF_ADC_MAPPING[] = {
-    // TMC9660
-    { static_cast<uint8_t>(HfFunctionalAdcChannel::BOARD_TEMP_SENSOR), static_cast<uint8_t>(TMC9660_CONTROLLER), 3, 12, 3300, 1.0f, "Board Temp Sensor (AIN3)" }
-};
 
 /**
  * @brief Compile-time size of ADC mapping array.
@@ -250,6 +327,19 @@ inline std::string_view to_string(HfFunctionalGpioPin pin) noexcept {
         return HfFunctionalGpioPinNames[index];
     }
     return "UNKNOWN_PIN";
+}
+
+/**
+ * @brief Convert functional ADC channel to string name.
+ * @param channel Functional ADC channel identifier
+ * @return String view of channel name
+ */
+inline std::string_view to_string(HfFunctionalAdcChannel channel) noexcept {
+    const size_t index = static_cast<size_t>(channel);
+    if (index < sizeof(HfFunctionalAdcChannelNames) / sizeof(HfFunctionalAdcChannelNames[0])) {
+        return HfFunctionalAdcChannelNames[index];
+    }
+    return "UNKNOWN_ADC_CHANNEL";
 }
 
 /**
