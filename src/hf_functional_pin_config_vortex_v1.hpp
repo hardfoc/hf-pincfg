@@ -387,8 +387,9 @@ inline bool is_reserved_prefix(std::string_view name) noexcept {
  * @return Pointer to GPIO mapping or nullptr if not found
  */
 static inline const HfGpioMapping* GetGpioMapping(HfFunctionalGpioPin functional_pin) {
-    for (const auto& mapping : HF_GPIO_MAPPING) {
-        if (mapping.functional_pin == static_cast<uint8_t>(functional_pin)) return &mapping;
+    const size_t index = static_cast<size_t>(functional_pin);
+    if (index < HF_GPIO_MAPPING_SIZE) {
+        return &HF_GPIO_MAPPING[index];
     }
     return nullptr;
 }
@@ -399,8 +400,9 @@ static inline const HfGpioMapping* GetGpioMapping(HfFunctionalGpioPin functional
  * @return Pointer to ADC mapping or nullptr if not found
  */
 static inline const HfAdcMapping* GetAdcMapping(HfFunctionalAdcChannel functional_channel) {
-    for (const auto& mapping : HF_ADC_MAPPING) {
-        if (mapping.functional_channel == static_cast<uint8_t>(functional_channel)) return &mapping;
+    const size_t index = static_cast<size_t>(functional_channel);
+    if (index < HF_ADC_MAPPING_SIZE) {
+        return &HF_ADC_MAPPING[index];
     }
     return nullptr;
 }
@@ -421,6 +423,64 @@ static inline bool IsGpioPinAvailable(HfFunctionalGpioPin functional_pin) {
  */
 static inline bool IsAdcChannelAvailable(HfFunctionalAdcChannel functional_channel) {
     return GetAdcMapping(functional_channel) != nullptr;
+}
+
+//==============================================================================
+// UTILITY FUNCTIONS
+//==============================================================================
+
+/**
+ * @brief Get all GPIO pins of a specific category.
+ * @param category Pin category to filter by
+ * @param output Array to store matching pins
+ * @param max_count Maximum number of pins to store
+ * @return Number of pins found
+ */
+static inline size_t GetGpioPinsByCategory(HfPinCategory category, HfFunctionalGpioPin* output, size_t max_count) {
+    size_t count = 0;
+    for (size_t i = 0; i < HF_GPIO_MAPPING_SIZE && count < max_count; ++i) {
+        if (HfFunctionalGpioPinCategories[i] == category) {
+            output[count++] = static_cast<HfFunctionalGpioPin>(i);
+        }
+    }
+    return count;
+}
+
+/**
+ * @brief Get all GPIO pins for a specific chip type.
+ * @param chip_type Chip type to filter by
+ * @param output Array to store matching pins
+ * @param max_count Maximum number of pins to store
+ * @return Number of pins found
+ */
+static inline size_t GetGpioPinsByChipType(HfGpioChipType chip_type, HfFunctionalGpioPin* output, size_t max_count) {
+    size_t count = 0;
+    for (size_t i = 0; i < HF_GPIO_MAPPING_SIZE && count < max_count; ++i) {
+        if (HF_GPIO_MAPPING[i].chip_type == static_cast<uint8_t>(chip_type)) {
+            output[count++] = static_cast<HfFunctionalGpioPin>(i);
+        }
+    }
+    return count;
+}
+
+/**
+ * @brief Check if a pin requires pull-up resistor.
+ * @param functional_pin Functional pin identifier
+ * @return true if pin needs pull-up
+ */
+static inline bool RequiresPullUp(HfFunctionalGpioPin functional_pin) {
+    const auto* mapping = GetGpioMapping(functional_pin);
+    return mapping && mapping->has_pull && mapping->pull_is_up;
+}
+
+/**
+ * @brief Check if a pin requires pull-down resistor.
+ * @param functional_pin Functional pin identifier
+ * @return true if pin needs pull-down
+ */
+static inline bool RequiresPullDown(HfFunctionalGpioPin functional_pin) {
+    const auto* mapping = GetGpioMapping(functional_pin);
+    return mapping && mapping->has_pull && !mapping->pull_is_up;
 }
 
 #endif // HF_FUNCTIONAL_PIN_CONFIG_VORTEX_V1_HPP 
