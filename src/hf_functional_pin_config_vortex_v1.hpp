@@ -145,7 +145,7 @@ struct HfAdcMapping {
     X(I2C_PCAL95555_INT, "COMM_I2C_PCAL95555_INT", PIN_CATEGORY_COMM, ESP32_INTERNAL, 23, 0, true, true, true, true, 40) \
     \
     /* GPIO pins (available for GPIO operations) */ \
-    X(WS2812_LED_DAT, "GPIO_WS2812_LED_DAT", PIN_CATEGORY_GPIO, ESP32_INTERNAL, 3, 0, false, false, false, true, 40) \
+    X(WS2812_LED_DAT, "COMM_WS2812_LED_DAT", PIN_CATEGORY_COMM, ESP32_INTERNAL, 3, 0, false, false, false, true, 40) \
     X(EXT_GPIO_CS_1, "GPIO_EXT_GPIO_CS_1", PIN_CATEGORY_GPIO, ESP32_INTERNAL, 19, 0, true, true, true, true, 40) \
     X(EXT_GPIO_CS_2, "GPIO_EXT_GPIO_CS_2", PIN_CATEGORY_GPIO, ESP32_INTERNAL, 8, 0, false, false, false, true, 40) \
     \
