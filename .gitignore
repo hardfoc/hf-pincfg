@@ -36,3 +36,8 @@
 build/
 docs/doxygen/
 *.DS_Store
+
+# ESP-IDF specific
+# sdkconfig and sdkconfig.defaults should be tracked (contain important ESP32 configuration)
+# Only ignore backup files
+**/sdkconfig.old
