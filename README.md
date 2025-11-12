@@ -1,18 +1,24 @@
 # HF-PINCFG
 
-HF-PINCFG provides a simple way to configure the GPIO layout for the HardFOC controller on an ESP32‑C6.
-It exposes pin assignments and an initialization function that can be used by your project right away.
+HF-PINCFG defines the **hardware-agnostic functional pin configuration** for HardFOC-based boards. It abstracts what each pin does functionally (SPI, UART, motor control, sensors) independent of the underlying microcontroller or physical pin assignments.
+
+## Supported Boards
+
+Currently supported HardFOC board variants:
+- **Vortex V1** - ESP32-C6 based controller board
 
 ## Features
 
-- Predefined GPIO layout for the ESP32-C6 platform
-- Helper function for configuring pins with the ESP-IDF `gpio_config` API
-- Central location to keep track of SPI, UART, I2C and other connections
-- Source code is annotated with Doxygen comments for easy reference
+- **Hardware Abstraction**: Defines WHAT pins do functionally, not WHERE they are physically
+- **HardFOC Standardization**: Consistent functional pin definitions across all HardFOC board variants
+- **Portable Firmware**: Write code once, run on any HardFOC board variant
+- **Functional Identifiers**: Use semantic names like `MOTOR_SPI_CS` instead of `GPIO_18`
+- **Board-Specific Mapping**: Each board variant maps functional pins to its physical implementation
+- **Zero Runtime Cost**: All abstraction resolved at compile time
 
-## Pin Mapping
+## Pin Mapping (Vortex V1 Board)
 
-The header `include/hf_platform_config.hpp` provides minimal platform-specific configuration for the ESP32‑C6. Hardware-specific initialization is delegated to the internal interface wrapper layer.
+The following pin assignments are specific to the **HardFOC Vortex V1** board (ESP32-C6 based). The functional pin configuration is defined in `hf_functional_pin_config_vortex_v1.hpp`.
 
 ### SPI0
 - **MISO** – `GPIO_NUM_2` (data from device to controller)
@@ -48,7 +54,36 @@ The header `include/hf_platform_config.hpp` provides minimal platform-specific c
 
 See the header file for detailed definitions.
 
-## Connecting External Peripherals
+## Board Selection
+
+The library automatically selects the appropriate pin configuration based on compile-time defines:
+
+```cpp
+// For Vortex V1 board (default)
+#define HARDFOC_BOARD_VORTEX_V1
+
+// Future board variants will be added like:
+// #define HARDFOC_BOARD_VORTEX_V2
+// #define HARDFOC_BOARD_NEXUS_V1
+```
+
+## Architecture
+
+HF-PinCfg provides **functional abstraction** through a two-layer system:
+
+### Layer 1: Functional Definition (Hardware Agnostic)
+- **`hf_functional_pin_config.hpp`** - Defines WHAT each pin does functionally
+- Provides semantic identifiers like `MOTOR_DRIVER_SPI_CS`, `ENCODER_SPI_MISO`
+- Board selection logic chooses appropriate implementation
+
+### Layer 2: Physical Implementation (Board Specific)  
+- **`hf_functional_pin_config_vortex_v1.hpp`** - Maps functional pins to physical GPIO pins on Vortex V1
+- **Future implementations** - Each HardFOC board variant maps the same functional pins to its hardware
+
+### Result: Write Once, Run Anywhere
+Your firmware uses functional identifiers and automatically works on any supported HardFOC board variant.
+
+## Connecting External Peripherals (Vortex V1)
 
 1. **TMC9660 Driver** – Connect the driver chip to the SPI0 bus. The chip select line should be connected to GPIO 18.
 2. **AS5047P Encoder** – This magnetic encoder is also on SPI0 with chip select GPIO 20. Ensure MISO, MOSI and CLK are connected as per the table above.

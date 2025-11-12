@@ -1,0 +1,86 @@
+/* Custom styles for HF-PinCfg documentation */
+
+/* Custom header responsiveness */
+.custom-header .header-content {
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .custom-header h1 {
+        font-size: 2em !important;
+    }
+    
+    .custom-header p {
+        font-size: 1em !important;
+    }
+    
+    .custom-header .header-badges {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+    }
+    
+    .custom-header .header-badges span {
+        margin: 0 !important;
+    }
+}
+
+/* Custom footer responsiveness */
+.custom-footer .footer-content > div {
+    flex-direction: column;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .custom-footer .footer-content > div {
+        flex-direction: row;
+        text-align: left;
+    }
+}
+
+.custom-footer .footer-links a:hover {
+    color: #764ba2 !important;
+    transition: color 0.3s ease;
+}
+
+/* Dark mode compatibility */
+html[data-theme="dark"] .custom-header {
+    background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%) !important;
+}
+
+html[data-theme="dark"] .custom-footer {
+    background: #2d3748 !important;
+    border-top-color: #4a5568 !important;
+    color: #e2e8f0 !important;
+}
+
+html[data-theme="dark"] .custom-footer .footer-links a {
+    color: #90cdf4 !important;
+}
+
+html[data-theme="dark"] .custom-footer .footer-links a:hover {
+    color: #63b3ed !important;
+}
+
+/* Integration with doxygen-awesome theme */
+.custom-header + #top {
+    margin-top: 0 !important;
+}
+
+/* Hide default title area when using custom header */
+#titlearea {
+    display: none !important;
+}
+
+/* Adjust main content spacing */
+#main-nav,
+.contents {
+    margin-top: 20px;
+}
+
+/* Enhance readability */
+.custom-header .header-badges span {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
