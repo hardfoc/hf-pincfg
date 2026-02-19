@@ -15,23 +15,7 @@
  * and its own local enums. It has NO dependencies on external types or enums.
  */
 
-#include <cstdint>
-#include <string_view>
-
-//==============================================================================
-// PIN CATEGORIES (LOCAL ENUMS)
-//==============================================================================
-
-/**
- * @brief Pin categories for registration control
- * @details Determines which pins should be registered as GPIOs vs left for peripherals
- */
-enum class HfPinCategory : uint8_t {
-    PIN_CATEGORY_CORE = 0,    ///< System/core pins (skip GPIO registration)
-    PIN_CATEGORY_COMM = 1,    ///< Communication pins (skip GPIO registration)  
-    PIN_CATEGORY_GPIO = 2,    ///< Available for GPIO operations
-    PIN_CATEGORY_USER = 3     ///< User-defined pins (always register)
-};
+#include "hf_functional_pin_config_base.hpp"
 
 //==============================================================================
 // CHIP TYPE ENUMS (LOCAL ENUMS)
@@ -48,73 +32,6 @@ enum class HfAdcChipType : uint8_t {
     TMC9660_CONTROLLER
 };
 
-//==============================================================================
-// XMACRO BOOLEAN VALUE DEFINES (FOR READABILITY)
-//==============================================================================
-
-/**
- * @brief Boolean value defines for XMACRO readability
- * @details These defines make the XMACRO much more readable by clearly indicating
- * what each boolean value represents in the pin configuration.
- */
-
-// Logic inversion
-#define PIN_LOGIC_NORMAL     false    ///< Pin logic is not inverted
-#define PIN_LOGIC_INVERTED   true     ///< Pin logic is inverted
-
-// Pull resistor configuration
-#define PIN_NO_PULL         false    ///< No pull resistor
-#define PIN_HAS_PULL        true     ///< Has pull resistor
-
-// Pull resistor direction (only meaningful if PIN_HAS_PULL is used)
-#define PIN_PULL_DOWN       false    ///< Pull-down resistor
-#define PIN_PULL_UP         true     ///< Pull-up resistor
-
-// Output mode configuration
-#define PIN_OPEN_DRAIN      false    ///< Open-drain output mode
-#define PIN_PUSH_PULL       true     ///< Push-pull output mode
-
-//==============================================================================
-// MAPPING STRUCTURES
-//==============================================================================
-
-/**
- * @brief Structure containing comprehensive GPIO pin information with platform mapping.
- * @details Single source of truth for all pin configuration data.
- * 
- * IMPORTANT: This struct uses ONLY primitive types to maintain independence
- * from external type definitions. The manager/driver layer will translate
- * these primitive values to the appropriate driver enums/types.
- */
-struct HfGpioMapping {
-    uint8_t functional_pin;    ///< Functional pin identifier (enum value)
-    uint8_t chip_type;         ///< Hardware chip identifier (enum value)
-    uint8_t chip_unit;         ///< Chip unit/device number (0=first chip, 1=second chip, etc.)
-    uint8_t gpio_bank;         ///< GPIO bank/port number within the chip (0=bank A, 1=bank B, etc.)
-    uint8_t physical_pin;      ///< Physical pin number within the GPIO bank
-    bool is_inverted;          ///< Whether pin logic is inverted
-    bool has_pull;             ///< Whether pin has any pull resistor
-    bool pull_is_up;           ///< If has_pull=true: true=pull-up, false=pull-down
-    bool is_push_pull;         ///< Output mode: true=push-pull, false=open-drain
-    uint32_t max_current_ma;   ///< Maximum current in milliamps
-    uint8_t category;          ///< Pin category for registration control (enum value)
-    std::string_view name;     ///< Human-readable pin name (self-documenting)
-};
-
-/**
- * @brief Structure containing ADC channel information.
- */
-struct HfAdcMapping {
-    uint8_t functional_channel;  ///< Functional channel identifier (enum value)
-    uint8_t chip_type;          ///< Hardware chip identifier (enum value)
-    uint8_t chip_unit;          ///< Chip unit/device number (0=first chip, 1=second chip, etc.)
-    uint8_t adc_unit;           ///< ADC unit/bank number within the chip (0=ADC1, 1=ADC2, etc.)
-    uint8_t physical_channel;   ///< Physical channel number within the ADC unit
-    uint8_t resolution_bits;    ///< ADC resolution in bits
-    uint32_t max_voltage_mv;    ///< Maximum voltage in millivolts
-    float voltage_divider;      ///< Voltage divider ratio
-    const char* description;    ///< Channel description
-};
 
 //==============================================================================
 // SINGLE SOURCE OF TRUTH: XMACRO PIN DEFINITIONS
@@ -128,8 +45,8 @@ struct HfAdcMapping {
  * Field descriptions:
  * - ENUM_NAME: Functional pin enum name
  * - STRING_NAME: Human-readable pin name
- * - CATEGORY: Pin category (PIN_CATEGORY_CORE, PIN_CATEGORY_COMM, PIN_CATEGORY_GPIO, PIN_CATEGORY_USER)
- * - CHIP_TYPE: Hardware chip (ESP32_INTERNAL, PCAL95555_EXPANDER, TMC9660_CONTROLLER)
+ * - CATEGORY: Pin category (HfPinCategory::PIN_CATEGORY_CORE, HfPinCategory::PIN_CATEGORY_COMM, HfPinCategory::PIN_CATEGORY_GPIO, HfPinCategory::PIN_CATEGORY_USER)
+ * - CHIP_TYPE: Hardware chip (HfGpioChipType::ESP32_INTERNAL, HfGpioChipType::PCAL95555_EXPANDER, HfGpioChipType::TMC9660_CONTROLLER)
  * - CHIP_UNIT: Chip unit/device number (0=first chip, 1=second chip, etc.)
  * - GPIO_BANK: GPIO bank/port number within the chip (0=bank A, 1=bank B, etc.)
  * - PHYSICAL_PIN: Physical pin number within the GPIO bank
@@ -161,46 +78,46 @@ struct HfAdcMapping {
  */
 #define HF_FUNCTIONAL_GPIO_PIN_LIST(X) \
     /* CORE pins (system reserved - skip GPIO registration) */ \
-    X(XTAL_32K_P, "CORE_XTAL_32K_P", PIN_CATEGORY_CORE, ESP32_INTERNAL, 0, 0, 0, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 0) \
-    X(XTAL_32K_N, "CORE_XTAL_32K_N", PIN_CATEGORY_CORE, ESP32_INTERNAL, 0, 0, 1, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 0) \
-    X(BOOT_SEL, "CORE_BOOT_SEL", PIN_CATEGORY_CORE, ESP32_INTERNAL, 0, 0, 9, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 0) \
-    X(JTAG_USB_D_N, "CORE_JTAG_USB_D_N", PIN_CATEGORY_CORE, ESP32_INTERNAL, 0, 0, 12, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 0) \
-    X(JTAG_USB_D_P, "CORE_JTAG_USB_D_P", PIN_CATEGORY_CORE, ESP32_INTERNAL, 0, 0, 13, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 0) \
+    X(XTAL_32K_P, "CORE_XTAL_32K_P", HfPinCategory::PIN_CATEGORY_CORE, HfGpioChipType::ESP32_INTERNAL, 0, 0, 0, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 0) \
+    X(XTAL_32K_N, "CORE_XTAL_32K_N", HfPinCategory::PIN_CATEGORY_CORE, HfGpioChipType::ESP32_INTERNAL, 0, 0, 1, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 0) \
+    X(BOOT_SEL, "CORE_BOOT_SEL", HfPinCategory::PIN_CATEGORY_CORE, HfGpioChipType::ESP32_INTERNAL, 0, 0, 9, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 0) \
+    X(JTAG_USB_D_N, "CORE_JTAG_USB_D_N", HfPinCategory::PIN_CATEGORY_CORE, HfGpioChipType::ESP32_INTERNAL, 0, 0, 12, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 0) \
+    X(JTAG_USB_D_P, "CORE_JTAG_USB_D_P", HfPinCategory::PIN_CATEGORY_CORE, HfGpioChipType::ESP32_INTERNAL, 0, 0, 13, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 0) \
     \
     /* COMM pins (communication - skip GPIO registration) */ \
-    X(SPI2_MISO, "COMM_SPI2_MISO", PIN_CATEGORY_COMM, ESP32_INTERNAL, 0, 0, 2, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
-    X(SPI2_SCK, "COMM_SPI2_SCK", PIN_CATEGORY_COMM, ESP32_INTERNAL, 0, 0, 6, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
-    X(SPI2_MOSI, "COMM_SPI2_MOSI", PIN_CATEGORY_COMM, ESP32_INTERNAL, 0, 0, 7, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
-    X(SPI2_CS_TMC9660, "COMM_SPI2_CS_TMC9660", PIN_CATEGORY_COMM, ESP32_INTERNAL, 0, 0, 18, PIN_LOGIC_INVERTED, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
-    X(SPI2_CS_AS5047, "COMM_SPI2_CS_AS5047", PIN_CATEGORY_COMM, ESP32_INTERNAL, 0, 0, 20, PIN_LOGIC_INVERTED, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
-    X(UART_RXD, "COMM_UART_RXD", PIN_CATEGORY_COMM, ESP32_INTERNAL, 0, 0, 4, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
-    X(UART_TXD, "COMM_UART_TXD", PIN_CATEGORY_COMM, ESP32_INTERNAL, 0, 0, 5, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
-    X(TWAI_TX, "COMM_TWAI_TX", PIN_CATEGORY_COMM, ESP32_INTERNAL, 0, 0, 14, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
-    X(TWAI_RX, "COMM_TWAI_RX", PIN_CATEGORY_COMM, ESP32_INTERNAL, 0, 0, 15, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
-    X(I2C_SDA, "COMM_I2C_SDA", PIN_CATEGORY_COMM, ESP32_INTERNAL, 0, 0, 21, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
-    X(I2C_SCL, "COMM_I2C_SCL", PIN_CATEGORY_COMM, ESP32_INTERNAL, 0, 0, 22, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
-    X(I2C_PCAL95555_INT, "COMM_I2C_PCAL95555_INT", PIN_CATEGORY_COMM, ESP32_INTERNAL, 0, 0, 23, PIN_LOGIC_INVERTED, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
-    X(WS2812_LED_DAT, "COMM_WS2812_LED_DAT", PIN_CATEGORY_COMM, ESP32_INTERNAL, 0, 0, 3, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
+    X(SPI2_MISO, "COMM_SPI2_MISO", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 2, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
+    X(SPI2_SCK, "COMM_SPI2_SCK", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 6, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
+    X(SPI2_MOSI, "COMM_SPI2_MOSI", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 7, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
+    X(SPI2_CS_TMC9660, "COMM_SPI2_CS_TMC9660", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 18, PIN_LOGIC_INVERTED, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
+    X(SPI2_CS_AS5047, "COMM_SPI2_CS_AS5047", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 20, PIN_LOGIC_INVERTED, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
+    X(UART_RXD, "COMM_UART_RXD", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 4, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
+    X(UART_TXD, "COMM_UART_TXD", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 5, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
+    X(TWAI_TX, "COMM_TWAI_TX", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 14, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
+    X(TWAI_RX, "COMM_TWAI_RX", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 15, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
+    X(I2C_SDA, "COMM_I2C_SDA", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 21, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
+    X(I2C_SCL, "COMM_I2C_SCL", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 22, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
+    X(I2C_PCAL95555_INT, "COMM_I2C_PCAL95555_INT", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 23, PIN_LOGIC_INVERTED, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
+    X(WS2812_LED_DAT, "COMM_WS2812_LED_DAT", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 3, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
     \
     /* GPIO pins (available for GPIO operations) */ \
-    X(EXT_GPIO_CS_1, "GPIO_EXT_GPIO_CS_1", PIN_CATEGORY_GPIO, ESP32_INTERNAL, 0, 0, 19, PIN_LOGIC_INVERTED, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
-    X(EXT_GPIO_CS_2, "GPIO_EXT_GPIO_CS_2", PIN_CATEGORY_GPIO, ESP32_INTERNAL, 0, 0, 8, PIN_LOGIC_INVERTED, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
+    X(EXT_GPIO_CS_1, "GPIO_EXT_GPIO_CS_1", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::ESP32_INTERNAL, 0, 0, 19, PIN_LOGIC_INVERTED, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
+    X(EXT_GPIO_CS_2, "GPIO_EXT_GPIO_CS_2", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::ESP32_INTERNAL, 0, 0, 8, PIN_LOGIC_INVERTED, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
     \
     /* PCAL95555 GPIO pins (chip unit 0, bank 0) */ \
-    X(PCAL_FAULT_STATUS, "GPIO_PCAL_FAULT_STATUS", PIN_CATEGORY_GPIO, PCAL95555_EXPANDER, 0, 0, 3, PIN_LOGIC_INVERTED, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
-    X(PCAL_DRV_EN, "GPIO_PCAL_DRV_EN", PIN_CATEGORY_GPIO, PCAL95555_EXPANDER, 0, 0, 4, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
-    X(PCAL_RST_CTRL, "GPIO_PCAL_RST_CTRL", PIN_CATEGORY_GPIO, PCAL95555_EXPANDER, 0, 0, 5, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
-    X(PCAL_PWR_GOOD, "GPIO_PCAL_PWR_GOOD", PIN_CATEGORY_GPIO, PCAL95555_EXPANDER, 0, 0, 6, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
-    X(PCAL_CAN_HS_STB_OP, "GPIO_PCAL_CAN_HS_STB_OP", PIN_CATEGORY_GPIO, PCAL95555_EXPANDER, 0, 0, 10, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
-    X(PCAL_IMU_BOOT, "GPIO_PCAL_IMU_BOOT", PIN_CATEGORY_GPIO, PCAL95555_EXPANDER, 0, 0, 11, PIN_LOGIC_INVERTED, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
-    X(PCAL_IMU_INT, "GPIO_PCAL_IMU_INT", PIN_CATEGORY_GPIO, PCAL95555_EXPANDER, 0, 0, 12, PIN_LOGIC_INVERTED, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
-    X(PCAL_IMU_RST, "GPIO_PCAL_IMU_RST", PIN_CATEGORY_GPIO, PCAL95555_EXPANDER, 0, 0, 15, PIN_LOGIC_INVERTED, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
-    X(PCAL_SPI_COMM_EN, "GPIO_PCAL_SPI_COMM_EN", PIN_CATEGORY_GPIO, PCAL95555_EXPANDER, 0, 0, 13, PIN_LOGIC_INVERTED, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
-    X(PCAL_WAKE_CTRL, "GPIO_PCAL_WAKE_CTRL", PIN_CATEGORY_GPIO, PCAL95555_EXPANDER, 0, 0, 14, PIN_LOGIC_INVERTED, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
+    X(PCAL_FAULT_STATUS, "GPIO_PCAL_FAULT_STATUS", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::PCAL95555_EXPANDER, 0, 0, 3, PIN_LOGIC_INVERTED, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
+    X(PCAL_DRV_EN, "GPIO_PCAL_DRV_EN", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::PCAL95555_EXPANDER, 0, 0, 4, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
+    X(PCAL_RST_CTRL, "GPIO_PCAL_RST_CTRL", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::PCAL95555_EXPANDER, 0, 0, 5, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
+    X(PCAL_PWR_GOOD, "GPIO_PCAL_PWR_GOOD", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::PCAL95555_EXPANDER, 0, 0, 6, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
+    X(PCAL_CAN_HS_STB_OP, "GPIO_PCAL_CAN_HS_STB_OP", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::PCAL95555_EXPANDER, 0, 0, 10, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
+    X(PCAL_IMU_BOOT, "GPIO_PCAL_IMU_BOOT", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::PCAL95555_EXPANDER, 0, 0, 11, PIN_LOGIC_INVERTED, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
+    X(PCAL_IMU_INT, "GPIO_PCAL_IMU_INT", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::PCAL95555_EXPANDER, 0, 0, 12, PIN_LOGIC_INVERTED, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
+    X(PCAL_IMU_RST, "GPIO_PCAL_IMU_RST", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::PCAL95555_EXPANDER, 0, 0, 15, PIN_LOGIC_INVERTED, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
+    X(PCAL_SPI_COMM_EN, "GPIO_PCAL_SPI_COMM_EN", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::PCAL95555_EXPANDER, 0, 0, 13, PIN_LOGIC_INVERTED, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
+    X(PCAL_WAKE_CTRL, "GPIO_PCAL_WAKE_CTRL", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::PCAL95555_EXPANDER, 0, 0, 14, PIN_LOGIC_INVERTED, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
     \
     /* TMC9660 GPIO pins (chip unit 0, bank 0) */ \
-    X(TMC_GPIO17, "GPIO_TMC_GPIO17", PIN_CATEGORY_GPIO, TMC9660_CONTROLLER, 0, 0, 17, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
-    X(TMC_GPIO18, "GPIO_TMC_GPIO18", PIN_CATEGORY_GPIO, TMC9660_CONTROLLER, 0, 0, 18, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
+    X(TMC_GPIO17, "GPIO_TMC_GPIO17", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::TMC9660_CONTROLLER, 0, 0, 17, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
+    X(TMC_GPIO18, "GPIO_TMC_GPIO18", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::TMC9660_CONTROLLER, 0, 0, 18, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
 
 /**
  * @brief XMACRO defining all ADC channels with complete configuration data.
@@ -210,7 +127,7 @@ struct HfAdcMapping {
  * Field descriptions:
  * - ENUM_NAME: Functional ADC channel enum name
  * - STRING_NAME: Human-readable channel name
- * - CHIP_TYPE: Hardware chip (ESP32_INTERNAL, TMC9660_CONTROLLER)
+ * - CHIP_TYPE: Hardware chip (HfAdcChipType::ESP32_INTERNAL, HfAdcChipType::TMC9660_CONTROLLER)
  * - CHIP_UNIT: Chip unit/device number (0=first chip, 1=second chip, etc.)
  * - ADC_UNIT: ADC unit/bank number within the chip (0=ADC1, 1=ADC2, etc.)
  * - PHYSICAL_CHANNEL: Physical channel number within the ADC unit
@@ -233,38 +150,38 @@ struct HfAdcMapping {
  */
 #define HF_FUNCTIONAL_ADC_CHANNEL_LIST(X) \
     /* ESP32-C6 Internal ADC Channels (ADC1) - Currently not used but available for future expansion */ \
-    /* X(ESP32_ADC_CH0, "ADC_ESP32_CH0", ESP32_INTERNAL, 0, 0, 0, 12, 1100, 1.0f, "ESP32 Internal ADC Channel 0") */ \
-    /* X(ESP32_ADC_CH1, "ADC_ESP32_CH1", ESP32_INTERNAL, 0, 0, 1, 12, 1100, 1.0f, "ESP32 Internal ADC Channel 1") */ \
-    /* X(ESP32_ADC_CH2, "ADC_ESP32_CH2", ESP32_INTERNAL, 0, 0, 2, 12, 1100, 1.0f, "ESP32 Internal ADC Channel 2") */ \
-    /* X(ESP32_ADC_CH3, "ADC_ESP32_CH3", ESP32_INTERNAL, 0, 0, 3, 12, 1100, 1.0f, "ESP32 Internal ADC Channel 3") */ \
-    /* X(ESP32_ADC_CH4, "ADC_ESP32_CH4", ESP32_INTERNAL, 0, 0, 4, 12, 1100, 1.0f, "ESP32 Internal ADC Channel 4") */ \
-    /* X(ESP32_ADC_CH5, "ADC_ESP32_CH5", ESP32_INTERNAL, 0, 0, 5, 12, 1100, 1.0f, "ESP32 Internal ADC Channel 5") */ \
-    /* X(ESP32_ADC_CH6, "ADC_ESP32_CH6", ESP32_INTERNAL, 0, 0, 6, 12, 1100, 1.0f, "ESP32 Internal ADC Channel 6") */ \
+    /* X(ESP32_ADC_CH0, "ADC_ESP32_CH0", HfAdcChipType::ESP32_INTERNAL, 0, 0, 0, 12, 1100, 1.0f, "ESP32 Internal ADC Channel 0") */ \
+    /* X(ESP32_ADC_CH1, "ADC_ESP32_CH1", HfAdcChipType::ESP32_INTERNAL, 0, 0, 1, 12, 1100, 1.0f, "ESP32 Internal ADC Channel 1") */ \
+    /* X(ESP32_ADC_CH2, "ADC_ESP32_CH2", HfAdcChipType::ESP32_INTERNAL, 0, 0, 2, 12, 1100, 1.0f, "ESP32 Internal ADC Channel 2") */ \
+    /* X(ESP32_ADC_CH3, "ADC_ESP32_CH3", HfAdcChipType::ESP32_INTERNAL, 0, 0, 3, 12, 1100, 1.0f, "ESP32 Internal ADC Channel 3") */ \
+    /* X(ESP32_ADC_CH4, "ADC_ESP32_CH4", HfAdcChipType::ESP32_INTERNAL, 0, 0, 4, 12, 1100, 1.0f, "ESP32 Internal ADC Channel 4") */ \
+    /* X(ESP32_ADC_CH5, "ADC_ESP32_CH5", HfAdcChipType::ESP32_INTERNAL, 0, 0, 5, 12, 1100, 1.0f, "ESP32 Internal ADC Channel 5") */ \
+    /* X(ESP32_ADC_CH6, "ADC_ESP32_CH6", HfAdcChipType::ESP32_INTERNAL, 0, 0, 6, 12, 1100, 1.0f, "ESP32 Internal ADC Channel 6") */ \
     \
     /* TMC9660 ADC Channels - Reserved channels 0-3 for AIN inputs (only AIN3 connected to temperature sensor) */ \
-    X(TMC9660_AIN0, "ADC_TMC9660_AIN0", TMC9660_CONTROLLER, 0, 0, 0, 16, 3300, 1.0f, "TMC9660 ADC Input 0 (Reserved)") \
-    X(TMC9660_AIN1, "ADC_TMC9660_AIN1", TMC9660_CONTROLLER, 0, 0, 1, 16, 3300, 1.0f, "TMC9660 ADC Input 1 (Reserved)") \
-    X(TMC9660_AIN2, "ADC_TMC9660_AIN2", TMC9660_CONTROLLER, 0, 0, 2, 16, 3300, 1.0f, "TMC9660 ADC Input 2 (Reserved)") \
-    X(TMC9660_AIN3, "ADC_TMC9660_AIN3", TMC9660_CONTROLLER, 0, 0, 3, 16, 3300, 1.0f, "TMC9660 ADC Input 3 (Temperature Sensor)") \
+    X(TMC9660_AIN0, "ADC_TMC9660_AIN0", HfAdcChipType::TMC9660_CONTROLLER, 0, 0, 0, 16, 3300, 1.0f, "TMC9660 ADC Input 0 (Reserved)") \
+    X(TMC9660_AIN1, "ADC_TMC9660_AIN1", HfAdcChipType::TMC9660_CONTROLLER, 0, 0, 1, 16, 3300, 1.0f, "TMC9660 ADC Input 1 (Reserved)") \
+    X(TMC9660_AIN2, "ADC_TMC9660_AIN2", HfAdcChipType::TMC9660_CONTROLLER, 0, 0, 2, 16, 3300, 1.0f, "TMC9660 ADC Input 2 (Reserved)") \
+    X(TMC9660_AIN3, "ADC_TMC9660_AIN3", HfAdcChipType::TMC9660_CONTROLLER, 0, 0, 3, 16, 3300, 1.0f, "TMC9660 ADC Input 3 (Temperature Sensor)") \
     \
     /* TMC9660 Internal Monitoring Channels - Current Sensing (ADC I0-I3) */ \
-    X(TMC9660_CURRENT_I0, "TMC9660_CURRENT_I0", TMC9660_CONTROLLER, 0, 0, 10, 16, 3300, 1.0f, "TMC9660 Current Sense I0") \
-    X(TMC9660_CURRENT_I1, "TMC9660_CURRENT_I1", TMC9660_CONTROLLER, 0, 0, 11, 16, 3300, 1.0f, "TMC9660 Current Sense I1") \
-    X(TMC9660_CURRENT_I2, "TMC9660_CURRENT_I2", TMC9660_CONTROLLER, 0, 0, 12, 16, 3300, 1.0f, "TMC9660 Current Sense I2") \
-    X(TMC9660_CURRENT_I3, "TMC9660_CURRENT_I3", TMC9660_CONTROLLER, 0, 0, 13, 16, 3300, 1.0f, "TMC9660 Current Sense I3") \
+    X(TMC9660_CURRENT_I0, "TMC9660_CURRENT_I0", HfAdcChipType::TMC9660_CONTROLLER, 0, 0, 10, 16, 3300, 1.0f, "TMC9660 Current Sense I0") \
+    X(TMC9660_CURRENT_I1, "TMC9660_CURRENT_I1", HfAdcChipType::TMC9660_CONTROLLER, 0, 0, 11, 16, 3300, 1.0f, "TMC9660 Current Sense I1") \
+    X(TMC9660_CURRENT_I2, "TMC9660_CURRENT_I2", HfAdcChipType::TMC9660_CONTROLLER, 0, 0, 12, 16, 3300, 1.0f, "TMC9660 Current Sense I2") \
+    X(TMC9660_CURRENT_I3, "TMC9660_CURRENT_I3", HfAdcChipType::TMC9660_CONTROLLER, 0, 0, 13, 16, 3300, 1.0f, "TMC9660 Current Sense I3") \
     \
     /* TMC9660 Internal Monitoring Channels - Voltage Monitoring */ \
-    X(TMC9660_SUPPLY_VOLTAGE, "TMC9660_SUPPLY_VOLTAGE", TMC9660_CONTROLLER, 0, 0, 20, 16, 3300, 1.0f, "TMC9660 Supply Voltage") \
-    X(TMC9660_DRIVER_VOLTAGE, "TMC9660_DRIVER_VOLTAGE", TMC9660_CONTROLLER, 0, 0, 21, 16, 3300, 1.0f, "TMC9660 Driver Voltage") \
+    X(TMC9660_SUPPLY_VOLTAGE, "TMC9660_SUPPLY_VOLTAGE", HfAdcChipType::TMC9660_CONTROLLER, 0, 0, 20, 16, 3300, 1.0f, "TMC9660 Supply Voltage") \
+    X(TMC9660_DRIVER_VOLTAGE, "TMC9660_DRIVER_VOLTAGE", HfAdcChipType::TMC9660_CONTROLLER, 0, 0, 21, 16, 3300, 1.0f, "TMC9660 Driver Voltage") \
     \
     /* TMC9660 Internal Monitoring Channels - Temperature */ \
-    X(TMC9660_CHIP_TEMPERATURE, "TMC9660_CHIP_TEMPERATURE", TMC9660_CONTROLLER, 0, 0, 30, 16, 3300, 1.0f, "TMC9660 Chip Temperature") \
-    X(TMC9660_EXTERNAL_TEMPERATURE, "TMC9660_EXTERNAL_TEMPERATURE", TMC9660_CONTROLLER, 0, 0, 31, 16, 3300, 1.0f, "TMC9660 External Temperature") \
+    X(TMC9660_CHIP_TEMPERATURE, "TMC9660_CHIP_TEMPERATURE", HfAdcChipType::TMC9660_CONTROLLER, 0, 0, 30, 16, 3300, 1.0f, "TMC9660 Chip Temperature") \
+    X(TMC9660_EXTERNAL_TEMPERATURE, "TMC9660_EXTERNAL_TEMPERATURE", HfAdcChipType::TMC9660_CONTROLLER, 0, 0, 31, 16, 3300, 1.0f, "TMC9660 External Temperature") \
     \
     /* TMC9660 Internal Monitoring Channels - Motor Control Data */ \
-    X(TMC9660_MOTOR_CURRENT, "TMC9660_MOTOR_CURRENT", TMC9660_CONTROLLER, 0, 0, 40, 16, 3300, 1.0f, "TMC9660 Motor Current") \
-    X(TMC9660_MOTOR_VELOCITY, "TMC9660_MOTOR_VELOCITY", TMC9660_CONTROLLER, 0, 0, 41, 16, 3300, 1.0f, "TMC9660 Motor Velocity") \
-    X(TMC9660_MOTOR_POSITION, "TMC9660_MOTOR_POSITION", TMC9660_CONTROLLER, 0, 0, 42, 16, 3300, 1.0f, "TMC9660 Motor Position")
+    X(TMC9660_MOTOR_CURRENT, "TMC9660_MOTOR_CURRENT", HfAdcChipType::TMC9660_CONTROLLER, 0, 0, 40, 16, 3300, 1.0f, "TMC9660 Motor Current") \
+    X(TMC9660_MOTOR_VELOCITY, "TMC9660_MOTOR_VELOCITY", HfAdcChipType::TMC9660_CONTROLLER, 0, 0, 41, 16, 3300, 1.0f, "TMC9660 Motor Velocity") \
+    X(TMC9660_MOTOR_POSITION, "TMC9660_MOTOR_POSITION", HfAdcChipType::TMC9660_CONTROLLER, 0, 0, 42, 16, 3300, 1.0f, "TMC9660 Motor Position")
 
 //==============================================================================
 // GENERATED ENUMS AND TABLES

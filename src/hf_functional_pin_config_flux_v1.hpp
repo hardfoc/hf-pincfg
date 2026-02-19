@@ -20,23 +20,7 @@
  * and its own local enums. It has NO dependencies on external types or enums.
  */
 
-#include <cstdint>
-#include <string_view>
-
-//==============================================================================
-// PIN CATEGORIES (LOCAL ENUMS)
-//==============================================================================
-
-/**
- * @brief Pin categories for registration control
- * @details Determines which pins should be registered as GPIOs vs left for peripherals
- */
-enum class HfPinCategory : uint8_t {
-    PIN_CATEGORY_CORE = 0,    ///< System/core pins (skip GPIO registration)
-    PIN_CATEGORY_COMM = 1,    ///< Communication pins (skip GPIO registration)
-    PIN_CATEGORY_GPIO = 2,    ///< Available for GPIO operations
-    PIN_CATEGORY_USER = 3     ///< User-defined pins (always register)
-};
+#include "hf_functional_pin_config_base.hpp"
 
 //==============================================================================
 // CHIP TYPE ENUMS (LOCAL ENUMS)
@@ -52,58 +36,6 @@ enum class HfAdcChipType : uint8_t {
     ESP32_INTERNAL = 0
 };
 
-//==============================================================================
-// XMACRO BOOLEAN VALUE DEFINES (FOR READABILITY)
-//==============================================================================
-
-#define PIN_LOGIC_NORMAL     false    ///< Pin logic is not inverted
-#define PIN_LOGIC_INVERTED   true     ///< Pin logic is inverted
-
-#define PIN_NO_PULL         false    ///< No pull resistor
-#define PIN_HAS_PULL        true     ///< Has pull resistor
-
-#define PIN_PULL_DOWN       false    ///< Pull-down resistor
-#define PIN_PULL_UP         true     ///< Pull-up resistor
-
-#define PIN_OPEN_DRAIN      false    ///< Open-drain output mode
-#define PIN_PUSH_PULL       true     ///< Push-pull output mode
-
-//==============================================================================
-// MAPPING STRUCTURES
-//==============================================================================
-
-/**
- * @brief Structure containing comprehensive GPIO pin information with platform mapping.
- */
-struct HfGpioMapping {
-    uint8_t functional_pin;    ///< Functional pin identifier (enum value)
-    uint8_t chip_type;         ///< Hardware chip identifier (enum value)
-    uint8_t chip_unit;         ///< Chip unit/device number
-    uint8_t gpio_bank;         ///< GPIO bank/port number within the chip
-    uint8_t physical_pin;      ///< Physical pin number within the GPIO bank
-    bool is_inverted;          ///< Whether pin logic is inverted
-    bool has_pull;             ///< Whether pin has any pull resistor
-    bool pull_is_up;           ///< If has_pull=true: true=pull-up, false=pull-down
-    bool is_push_pull;         ///< Output mode: true=push-pull, false=open-drain
-    uint32_t max_current_ma;   ///< Maximum current in milliamps
-    uint8_t category;          ///< Pin category for registration control (enum value)
-    std::string_view name;     ///< Human-readable pin name
-};
-
-/**
- * @brief Structure containing ADC channel information.
- */
-struct HfAdcMapping {
-    uint8_t functional_channel;  ///< Functional channel identifier (enum value)
-    uint8_t chip_type;          ///< Hardware chip identifier (enum value)
-    uint8_t chip_unit;          ///< Chip unit/device number
-    uint8_t adc_unit;           ///< ADC unit/bank number within the chip
-    uint8_t physical_channel;   ///< Physical channel number within the ADC unit
-    uint8_t resolution_bits;    ///< ADC resolution in bits
-    uint32_t max_voltage_mv;    ///< Maximum voltage in millivolts
-    float voltage_divider;      ///< Voltage divider ratio
-    const char* description;    ///< Channel description
-};
 
 //==============================================================================
 // SINGLE SOURCE OF TRUTH: XMACRO PIN DEFINITIONS
@@ -144,37 +76,37 @@ struct HfAdcMapping {
  */
 #define HF_FUNCTIONAL_GPIO_PIN_LIST(X) \
     /* CORE pins (system reserved - skip GPIO registration) */ \
-    X(XTAL_32K_P, "CORE_XTAL_32K_P", PIN_CATEGORY_CORE, ESP32_INTERNAL, 0, 0, 0, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 0) \
-    X(XTAL_32K_N, "CORE_XTAL_32K_N", PIN_CATEGORY_CORE, ESP32_INTERNAL, 0, 0, 1, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 0) \
-    X(BOOT_SEL, "CORE_BOOT_SEL", PIN_CATEGORY_CORE, ESP32_INTERNAL, 0, 0, 9, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 0) \
-    X(JTAG_USB_D_N, "CORE_JTAG_USB_D_N", PIN_CATEGORY_CORE, ESP32_INTERNAL, 0, 0, 12, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 0) \
-    X(JTAG_USB_D_P, "CORE_JTAG_USB_D_P", PIN_CATEGORY_CORE, ESP32_INTERNAL, 0, 0, 13, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 0) \
+    X(XTAL_32K_P, "CORE_XTAL_32K_P", HfPinCategory::PIN_CATEGORY_CORE, HfGpioChipType::ESP32_INTERNAL, 0, 0, 0, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 0) \
+    X(XTAL_32K_N, "CORE_XTAL_32K_N", HfPinCategory::PIN_CATEGORY_CORE, HfGpioChipType::ESP32_INTERNAL, 0, 0, 1, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 0) \
+    X(BOOT_SEL, "CORE_BOOT_SEL", HfPinCategory::PIN_CATEGORY_CORE, HfGpioChipType::ESP32_INTERNAL, 0, 0, 9, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 0) \
+    X(JTAG_USB_D_N, "CORE_JTAG_USB_D_N", HfPinCategory::PIN_CATEGORY_CORE, HfGpioChipType::ESP32_INTERNAL, 0, 0, 12, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 0) \
+    X(JTAG_USB_D_P, "CORE_JTAG_USB_D_P", HfPinCategory::PIN_CATEGORY_CORE, HfGpioChipType::ESP32_INTERNAL, 0, 0, 13, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 0) \
     \
     /* COMM pins (communication - skip GPIO registration) */ \
-    X(SPI2_MISO, "COMM_SPI2_MISO", PIN_CATEGORY_COMM, ESP32_INTERNAL, 0, 0, 2, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
-    X(SPI2_SCK, "COMM_SPI2_SCK", PIN_CATEGORY_COMM, ESP32_INTERNAL, 0, 0, 6, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
-    X(SPI2_MOSI, "COMM_SPI2_MOSI", PIN_CATEGORY_COMM, ESP32_INTERNAL, 0, 0, 7, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
-    X(SPI2_CS_MAX22200, "COMM_SPI2_CS_MAX22200", PIN_CATEGORY_COMM, ESP32_INTERNAL, 0, 0, 18, PIN_LOGIC_INVERTED, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
-    X(SPI2_CS_TLE92466, "COMM_SPI2_CS_TLE92466", PIN_CATEGORY_COMM, ESP32_INTERNAL, 0, 0, 19, PIN_LOGIC_INVERTED, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
-    X(TWAI_TX, "COMM_TWAI_TX", PIN_CATEGORY_COMM, ESP32_INTERNAL, 0, 0, 14, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
-    X(TWAI_RX, "COMM_TWAI_RX", PIN_CATEGORY_COMM, ESP32_INTERNAL, 0, 0, 15, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
-    X(I2C_SDA, "COMM_I2C_SDA", PIN_CATEGORY_COMM, ESP32_INTERNAL, 0, 0, 21, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
-    X(I2C_SCL, "COMM_I2C_SCL", PIN_CATEGORY_COMM, ESP32_INTERNAL, 0, 0, 22, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
-    X(WS2812_LED_DAT, "COMM_WS2812_LED_DAT", PIN_CATEGORY_COMM, ESP32_INTERNAL, 0, 0, 3, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
+    X(SPI2_MISO, "COMM_SPI2_MISO", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 2, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
+    X(SPI2_SCK, "COMM_SPI2_SCK", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 6, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
+    X(SPI2_MOSI, "COMM_SPI2_MOSI", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 7, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
+    X(SPI2_CS_MAX22200, "COMM_SPI2_CS_MAX22200", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 18, PIN_LOGIC_INVERTED, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
+    X(SPI2_CS_TLE92466, "COMM_SPI2_CS_TLE92466", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 19, PIN_LOGIC_INVERTED, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
+    X(TWAI_TX, "COMM_TWAI_TX", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 14, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
+    X(TWAI_RX, "COMM_TWAI_RX", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 15, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
+    X(I2C_SDA, "COMM_I2C_SDA", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 21, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
+    X(I2C_SCL, "COMM_I2C_SCL", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 22, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
+    X(WS2812_LED_DAT, "COMM_WS2812_LED_DAT", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 3, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
     \
     /* MAX22200 control pins (managed by ESP32) */ \
-    X(MAX22200_ENABLE, "GPIO_MAX22200_ENABLE", PIN_CATEGORY_GPIO, ESP32_INTERNAL, 0, 0, 11, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
-    X(MAX22200_CMD, "GPIO_MAX22200_CMD", PIN_CATEGORY_GPIO, ESP32_INTERNAL, 0, 0, 10, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
-    X(MAX22200_FAULT_N, "GPIO_MAX22200_FAULT_N", PIN_CATEGORY_GPIO, ESP32_INTERNAL, 0, 0, 5, PIN_LOGIC_INVERTED, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
+    X(MAX22200_ENABLE, "GPIO_MAX22200_ENABLE", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::ESP32_INTERNAL, 0, 0, 11, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
+    X(MAX22200_CMD, "GPIO_MAX22200_CMD", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::ESP32_INTERNAL, 0, 0, 10, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
+    X(MAX22200_FAULT_N, "GPIO_MAX22200_FAULT_N", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::ESP32_INTERNAL, 0, 0, 5, PIN_LOGIC_INVERTED, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
     \
     /* TLE92466ED control pins (managed by ESP32) */ \
-    X(TLE92466_RESN, "GPIO_TLE92466_RESN", PIN_CATEGORY_GPIO, ESP32_INTERNAL, 0, 0, 16, PIN_LOGIC_INVERTED, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
-    X(TLE92466_EN, "GPIO_TLE92466_EN", PIN_CATEGORY_GPIO, ESP32_INTERNAL, 0, 0, 17, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
-    X(TLE92466_FAULT_N, "GPIO_TLE92466_FAULT_N", PIN_CATEGORY_GPIO, ESP32_INTERNAL, 0, 0, 8, PIN_LOGIC_INVERTED, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
+    X(TLE92466_RESN, "GPIO_TLE92466_RESN", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::ESP32_INTERNAL, 0, 0, 16, PIN_LOGIC_INVERTED, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
+    X(TLE92466_EN, "GPIO_TLE92466_EN", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::ESP32_INTERNAL, 0, 0, 17, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
+    X(TLE92466_FAULT_N, "GPIO_TLE92466_FAULT_N", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::ESP32_INTERNAL, 0, 0, 8, PIN_LOGIC_INVERTED, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
     \
     /* User-available GPIO pins */ \
-    X(USER_GPIO_1, "GPIO_USER_1", PIN_CATEGORY_USER, ESP32_INTERNAL, 0, 0, 20, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
-    X(USER_GPIO_2, "GPIO_USER_2", PIN_CATEGORY_USER, ESP32_INTERNAL, 0, 0, 23, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
+    X(USER_GPIO_1, "GPIO_USER_1", HfPinCategory::PIN_CATEGORY_USER, HfGpioChipType::ESP32_INTERNAL, 0, 0, 20, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
+    X(USER_GPIO_2, "GPIO_USER_2", HfPinCategory::PIN_CATEGORY_USER, HfGpioChipType::ESP32_INTERNAL, 0, 0, 23, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
 
 /**
  * @brief XMACRO defining all ADC channels for the Flux V1 board.
@@ -187,10 +119,10 @@ struct HfAdcMapping {
  */
 #define HF_FUNCTIONAL_ADC_CHANNEL_LIST(X) \
     /* ESP32-C6 Internal ADC - NTC thermistor on GPIO4 (ADC1_CH4) */ \
-    X(ESP32_NTC_THERMISTOR, "ADC_NTC_THERMISTOR", ESP32_INTERNAL, 0, 0, 4, 12, 3300, 1.0f, "NTC Thermistor Temperature Input") \
+    X(ESP32_NTC_THERMISTOR, "ADC_NTC_THERMISTOR", HfAdcChipType::ESP32_INTERNAL, 0, 0, 4, 12, 3300, 1.0f, "NTC Thermistor Temperature Input") \
     \
     /* ESP32-C6 Internal ADC - Supply voltage monitoring (if connected) */ \
-    X(ESP32_VBUS_MONITOR, "ADC_VBUS_MONITOR", ESP32_INTERNAL, 0, 0, 0, 12, 3300, 11.0f, "Bus Voltage Monitor (with divider)") \
+    X(ESP32_VBUS_MONITOR, "ADC_VBUS_MONITOR", HfAdcChipType::ESP32_INTERNAL, 0, 0, 0, 12, 3300, 11.0f, "Bus Voltage Monitor (with divider)") \
 
 //==============================================================================
 // GENERATED ENUMS AND TABLES
