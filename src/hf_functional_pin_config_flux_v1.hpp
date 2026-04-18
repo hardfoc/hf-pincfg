@@ -36,7 +36,8 @@ enum class HfGpioChipType : uint8_t {
 };
 
 enum class HfAdcChipType : uint8_t {
-    ESP32_INTERNAL = 0
+    ESP32_INTERNAL = 0,
+    ADS7952_EXTERNAL
 };
 
 
@@ -57,8 +58,10 @@ enum class HfAdcChipType : uint8_t {
  *   GPIO7  - TLE92466_DRV0          (GPIO - external drive 0)
  *   GPIO8  - NTC_ADC_INPUT          (ADC1_CH7 - thermistor)
  *   GPIO9  - VBUS_ADC_INPUT         (ADC1_CH8 - bus voltage monitor)
- *   GPIO10 - USER_GPIO_1            (GPIO - available for user)
- *   GPIO11 - USER_GPIO_2            (GPIO - available for user)
+ *   GPIO10 - SPI3_CS_ADS7952_0     (Comm - ADS7952 ADC chip select)
+ *   GPIO11 - SPI3_MOSI             (Comm - ADS7952 dedicated SPI bus)
+ *   GPIO12 - SPI3_SCK              (Comm - ADS7952 dedicated SPI bus)
+ *   GPIO13 - SPI3_MISO             (Comm - ADS7952 dedicated SPI bus)
  *   GPIO15 - TLE92466_DRV1          (GPIO - external drive 1)
  *   GPIO16 - TLE92466_FAULT_N       (GPIO - fault input, active low)
  *   GPIO17 - TWAI_TX                (Comm - CAN TX)
@@ -112,9 +115,11 @@ enum class HfAdcChipType : uint8_t {
     X(TLE92466_DRV1, "GPIO_TLE92466_DRV1", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::ESP32_INTERNAL, 0, 0, 15, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
     X(TLE92466_FAULT_N, "GPIO_TLE92466_FAULT_N", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::ESP32_INTERNAL, 0, 0, 16, PIN_LOGIC_INVERTED, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
     \
-    /* User-available GPIO pins */ \
-    X(USER_GPIO_1, "GPIO_USER_1", HfPinCategory::PIN_CATEGORY_USER, HfGpioChipType::ESP32_INTERNAL, 0, 0, 10, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
-    X(USER_GPIO_2, "GPIO_USER_2", HfPinCategory::PIN_CATEGORY_USER, HfGpioChipType::ESP32_INTERNAL, 0, 0, 11, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
+    /* SPI3 pins — dedicated ADS7952 ADC bus */ \
+    X(SPI3_CS_ADS7952_0, "COMM_SPI3_CS_ADS7952_0", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 10, PIN_LOGIC_INVERTED, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
+    X(SPI3_MOSI, "COMM_SPI3_MOSI", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 11, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
+    X(SPI3_SCK, "COMM_SPI3_SCK", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 12, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
+    X(SPI3_MISO, "COMM_SPI3_MISO", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 13, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
 
 /**
  * @brief XMACRO defining all ADC channels for the Flux V1 board.
@@ -135,6 +140,21 @@ enum class HfAdcChipType : uint8_t {
     \
     /* ESP32-S3 Internal ADC - Supply voltage monitoring on GPIO9 (ADC1_CH8) */ \
     X(ESP32_VBUS_MONITOR, "ADC_VBUS_MONITOR", HfAdcChipType::ESP32_INTERNAL, 0, 0, 8, 12, 3300, 11.0f, "Bus Voltage Monitor (with divider)") \
+    \
+    /* ADS7952 External 12-ch ADC — Device 0 on SPI3, Vref=2.5V, VA=5.0V */ \
+    /* Channels 0-11 mapped as individual functional ADC channels           */ \
+    X(ADS7952_0_CH0,  "ADC_ADS7952_0_CH0",  HfAdcChipType::ADS7952_EXTERNAL, 0, 0,  0, 12, 2500, 1.0f, "ADS7952 Dev0 CH0") \
+    X(ADS7952_0_CH1,  "ADC_ADS7952_0_CH1",  HfAdcChipType::ADS7952_EXTERNAL, 0, 0,  1, 12, 2500, 1.0f, "ADS7952 Dev0 CH1") \
+    X(ADS7952_0_CH2,  "ADC_ADS7952_0_CH2",  HfAdcChipType::ADS7952_EXTERNAL, 0, 0,  2, 12, 2500, 1.0f, "ADS7952 Dev0 CH2") \
+    X(ADS7952_0_CH3,  "ADC_ADS7952_0_CH3",  HfAdcChipType::ADS7952_EXTERNAL, 0, 0,  3, 12, 2500, 1.0f, "ADS7952 Dev0 CH3") \
+    X(ADS7952_0_CH4,  "ADC_ADS7952_0_CH4",  HfAdcChipType::ADS7952_EXTERNAL, 0, 0,  4, 12, 2500, 1.0f, "ADS7952 Dev0 CH4") \
+    X(ADS7952_0_CH5,  "ADC_ADS7952_0_CH5",  HfAdcChipType::ADS7952_EXTERNAL, 0, 0,  5, 12, 2500, 1.0f, "ADS7952 Dev0 CH5") \
+    X(ADS7952_0_CH6,  "ADC_ADS7952_0_CH6",  HfAdcChipType::ADS7952_EXTERNAL, 0, 0,  6, 12, 2500, 1.0f, "ADS7952 Dev0 CH6") \
+    X(ADS7952_0_CH7,  "ADC_ADS7952_0_CH7",  HfAdcChipType::ADS7952_EXTERNAL, 0, 0,  7, 12, 2500, 1.0f, "ADS7952 Dev0 CH7") \
+    X(ADS7952_0_CH8,  "ADC_ADS7952_0_CH8",  HfAdcChipType::ADS7952_EXTERNAL, 0, 0,  8, 12, 2500, 1.0f, "ADS7952 Dev0 CH8") \
+    X(ADS7952_0_CH9,  "ADC_ADS7952_0_CH9",  HfAdcChipType::ADS7952_EXTERNAL, 0, 0,  9, 12, 2500, 1.0f, "ADS7952 Dev0 CH9") \
+    X(ADS7952_0_CH10, "ADC_ADS7952_0_CH10", HfAdcChipType::ADS7952_EXTERNAL, 0, 0, 10, 12, 2500, 1.0f, "ADS7952 Dev0 CH10") \
+    X(ADS7952_0_CH11, "ADC_ADS7952_0_CH11", HfAdcChipType::ADS7952_EXTERNAL, 0, 0, 11, 12, 2500, 1.0f, "ADS7952 Dev0 CH11") \
 
 //==============================================================================
 // GENERATED ENUMS AND TABLES
