@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 600" width="920" height="600" role="img" aria-labelledby="t-pin d-pin">
+  <title id="t-pin">hf-pincfg &#8212; functional pin abstraction</title>
+  <desc id="d-pin">Application code references semantic pin names (SPI2_CS_TMC9660, I2C_SDA, ...). At compile time, a board-specific XMACRO header is selected via #if defined(HARDFOC_BOARD_*), expanding into constexpr HfGpioMapping[] tables that map each functional enum to a physical GPIO number.</desc>
+  <defs>
+    <style type="text/css"><![CDATA[
+      .panel     { fill: #ffffff; }
+      .app       { fill: #f4f6f8; stroke: #718096; stroke-width: 1.6; stroke-dasharray: 6 3; }
+      .func      { fill: #ebf4ff; stroke: #2c5282; stroke-width: 2; }
+      .func-cell { fill: #ffffff; stroke: #4299e1; stroke-width: 1.5; }
+      .selector  { fill: #fef5e7; stroke: #c05621; stroke-width: 2; }
+      .board     { fill: #f0fff4; stroke: #276749; stroke-width: 2; }
+      .board-cell{ fill: #ffffff; stroke: #38a169; stroke-width: 1.5; }
+      .none-cell { fill: #f4f6f8; stroke: #4a5568; stroke-width: 1.4; stroke-dasharray: 4 3; }
+      .output    { fill: #faf5ff; stroke: #6b46c1; stroke-width: 2; }
+      .arrow     { stroke: #2c5282; stroke-width: 2.5; fill: none; stroke-linecap: round; }
+      .arrow-sel { stroke: #c05621; stroke-width: 2; fill: none; stroke-linecap: round; }
+      .head      { font-family: system-ui, sans-serif; font-size: 16px; font-weight: 600; fill: #1a365d; text-anchor: middle; }
+      .layer-title { font-family: system-ui, sans-serif; font-size: 14px; font-weight: 700; text-anchor: start; }
+      .title     { font-family: system-ui, sans-serif; font-size: 12.5px; font-weight: 600; fill: #1a365d; text-anchor: middle; }
+      .titleL    { font-family: system-ui, sans-serif; font-size: 12.5px; font-weight: 600; fill: #1a365d; text-anchor: start; }
+      .small     { font-family: system-ui, sans-serif; font-size: 11px; fill: #4a5568; text-anchor: middle; }
+      .smallL    { font-family: system-ui, sans-serif; font-size: 11px; fill: #4a5568; text-anchor: start; }
+      .pin       { font-family: "DejaVu Sans Mono", Consolas, monospace; font-size: 10.5px; fill: #1a202c; text-anchor: start; }
+      .pinC      { font-family: "DejaVu Sans Mono", Consolas, monospace; font-size: 10.5px; fill: #1a202c; text-anchor: middle; }
+      .legend    { font-family: system-ui, sans-serif; font-size: 11px; fill: #4a5568; }
+      .badge     { font-family: system-ui, sans-serif; font-size: 10.5px; font-weight: 600; fill: #ffffff; text-anchor: middle; }
+    ]]></style>
+    <marker id="ar-d" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 z" fill="#2c5282"/>
+    </marker>
+    <marker id="ar-s" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 z" fill="#c05621"/>
+    </marker>
+  </defs>
+  <rect class="panel" width="920" height="600"/>
+
+  <text class="head" x="460" y="24">hf-pincfg &#8212; compile-time functional pin abstraction</text>
+  <text class="small" x="460" y="42">One firmware, many boards. Semantic pin names resolve to physical GPIOs at compile time via XMACRO expansion.</text>
+
+  <!-- ======= ROW 0: Consumer (handler/driver code) ======= -->
+  <rect class="app" x="40" y="56" width="840" height="48" rx="6"/>
+  <text class="titleL" x="56" y="74" fill="#718096">Handler / driver code  (consumer)</text>
+  <text class="pin" x="56" y="94">EspGpio gpio(GetGpioMapping(HfFunctionalGpioPin::SPI2_CS_TMC9660)-&gt;physical_pin);</text>
+
+  <line class="arrow" x1="460" y1="104" x2="460" y2="124" marker-end="url(#ar-d)"/>
+  <text class="smallL" x="468" y="120" fill="#2c5282">uses enum + GetGpioMapping()</text>
+
+  <!-- ======= ROW 1: Functional pin identifiers ======= -->
+  <rect class="func" x="40" y="126" width="840" height="80" rx="6"/>
+  <text class="layer-title" x="56" y="148" fill="#2c5282">Functional pin identifiers  (board-agnostic enums)</text>
+  <rect fill="#2c5282" x="730" y="134" width="140" height="16" rx="8"/>
+  <text class="badge" x="800" y="146">N3b3x/hf-pincfg</text>
+  <text class="smallL" x="56" y="164">enum class HfFunctionalGpioPin : uint8_t &#8212; same names on every board; physical mapping differs.</text>
+
+  <g>
+    <rect class="func-cell" x="56"  y="172" width="120" height="28" rx="4"/>
+    <text class="pinC" x="116" y="190">SPI2_CS_TMC9660</text>
+
+    <rect class="func-cell" x="182" y="172" width="100" height="28" rx="4"/>
+    <text class="pinC" x="232" y="190">SPI2_MOSI</text>
+
+    <rect class="func-cell" x="288" y="172" width="82" height="28" rx="4"/>
+    <text class="pinC" x="329" y="190">I2C_SDA</text>
+
+    <rect class="func-cell" x="376" y="172" width="110" height="28" rx="4"/>
+    <text class="pinC" x="431" y="190">STATUS_LED</text>
+
+    <rect class="func-cell" x="492" y="172" width="104" height="28" rx="4"/>
+    <text class="pinC" x="544" y="190">VBUS_SENSE</text>
+
+    <rect class="func-cell" x="602" y="172" width="130" height="28" rx="4"/>
+    <text class="pinC" x="667" y="190">SPI2_CS_AS5047</text>
+
+    <rect class="func-cell" x="738" y="172" width="134" height="28" rx="4"/>
+    <text class="pinC" x="805" y="190">SPI2_CS_MAX22200</text>
+  </g>
+
+  <line class="arrow" x1="460" y1="206" x2="460" y2="226" marker-end="url(#ar-d)"/>
+
+  <!-- ======= ROW 2: Compile-time selector ======= -->
+  <rect class="selector" x="40" y="228" width="840" height="52" rx="6"/>
+  <text class="layer-title" x="56" y="248" fill="#c05621">Compile-time board selector  (hf_functional_pin_config.hpp)</text>
+  <text class="pin" x="56" y="268">#if defined(HARDFOC_BOARD_FLUX_V1)  &#8594; #include flux_v1.hpp  |  #elif VORTEX_V1  &#8594; vortex_v1.hpp  |  #elif NONE  &#8594; none.hpp</text>
+
+  <!-- Arrows from selector down to each board -->
+  <line class="arrow-sel" x1="220" y1="280" x2="220" y2="300" marker-end="url(#ar-s)"/>
+  <line class="arrow-sel" x1="620" y1="280" x2="620" y2="300" marker-end="url(#ar-s)"/>
+  <line class="arrow-sel" x1="840" y1="280" x2="840" y2="300" marker-end="url(#ar-s)"/>
+
+  <!-- ======= ROW 3: Per-board XMACRO pin maps ======= -->
+  <!-- Flux V1 -->
+  <rect class="board" x="40" y="302" width="380" height="142" rx="6"/>
+  <text class="layer-title" x="56" y="322" fill="#276749">Flux V1  (ESP32-S3, valve platform)</text>
+  <text class="smallL" x="56" y="338">hf_functional_pin_config_flux_v1.hpp</text>
+  <text class="smallL" x="56" y="352">ChipType: ESP32_INTERNAL, MAX22200, TLE92466ED</text>
+
+  <rect class="board-cell" x="56" y="362" width="352" height="72" rx="4"/>
+  <text class="titleL" x="68" y="378" fill="#276749">HF_FUNCTIONAL_GPIO_PIN_LIST(X) expands to:</text>
+  <text class="pin" x="68" y="394">SPI2_CS_MAX22200  &#8594; GPIO 38  (COMM)</text>
+  <text class="pin" x="68" y="408">SPI2_CS_TLE92466  &#8594; GPIO  4  (COMM)</text>
+  <text class="pin" x="68" y="422">I2C_SDA           &#8594; GPIO 47  (COMM)</text>
+
+  <!-- Vortex V1 -->
+  <rect class="board" x="440" y="302" width="360" height="142" rx="6"/>
+  <text class="layer-title" x="456" y="322" fill="#276749">Vortex V1  (ESP32-C6, motor platform)</text>
+  <text class="smallL" x="456" y="338">hf_functional_pin_config_vortex_v1.hpp</text>
+  <text class="smallL" x="456" y="352">ChipType: ESP32_INTERNAL, PCAL95555, TMC9660</text>
+
+  <rect class="board-cell" x="456" y="362" width="332" height="72" rx="4"/>
+  <text class="titleL" x="468" y="378" fill="#276749">HF_FUNCTIONAL_GPIO_PIN_LIST(X) expands to:</text>
+  <text class="pin" x="468" y="394">SPI2_CS_TMC9660   &#8594; GPIO 18  (COMM)</text>
+  <text class="pin" x="468" y="408">SPI2_CS_AS5047    &#8594; GPIO 20  (COMM)</text>
+  <text class="pin" x="468" y="422">I2C_SDA           &#8594; GPIO 21  (COMM)</text>
+
+  <!-- NONE stub -->
+  <rect class="none-cell" x="810" y="302" width="70" height="52" rx="4"/>
+  <text class="title" x="845" y="322" fill="#4a5568">NONE</text>
+  <text class="smallL" x="818" y="340" fill="#4a5568">empty</text>
+  <text class="smallL" x="818" y="352" fill="#4a5568">tables</text>
+
+  <!-- ======= ROW 4: Generated compile-time artifacts ======= -->
+  <line class="arrow" x1="220" y1="444" x2="220" y2="464" marker-end="url(#ar-d)"/>
+  <line class="arrow" x1="620" y1="444" x2="620" y2="464" marker-end="url(#ar-d)"/>
+
+  <rect class="output" x="40" y="466" width="840" height="72" rx="6"/>
+  <text class="layer-title" x="56" y="486" fill="#6b46c1">Generated constexpr artifacts  (from XMACRO expansion)</text>
+  <text class="smallL" x="56" y="502">All generated at compile time from the single HF_FUNCTIONAL_GPIO_PIN_LIST(X) and HF_FUNCTIONAL_ADC_CHANNEL_LIST(X) macros.</text>
+  <g>
+    <rect class="func-cell" x="56"  y="510" width="220" height="22" rx="3"/>
+    <text class="pinC" x="166" y="525">enum HfFunctionalGpioPin</text>
+
+    <rect class="func-cell" x="284" y="510" width="260" height="22" rx="3"/>
+    <text class="pinC" x="414" y="525">constexpr HfGpioMapping HF_GPIO_MAPPING[]</text>
+
+    <rect class="func-cell" x="552" y="510" width="170" height="22" rx="3"/>
+    <text class="pinC" x="637" y="525">HfFunctionalGpioPinNames[]</text>
+
+    <rect class="func-cell" x="730" y="510" width="142" height="22" rx="3"/>
+    <text class="pinC" x="801" y="525">GetGpioMapping(pin)</text>
+  </g>
+
+  <!-- ======= Bottom legend ======= -->
+  <g transform="translate(40, 560)">
+    <text class="layer-title" x="0" y="0" fill="#1a365d">Legend</text>
+    <rect class="app"  x="70"  y="-12" width="14" height="14"/>
+    <text class="legend" x="90" y="-1">consumer (above)</text>
+    <rect class="func" x="200" y="-12" width="14" height="14"/>
+    <text class="legend" x="220" y="-1">functional identifier</text>
+    <rect class="selector" x="340" y="-12" width="14" height="14"/>
+    <text class="legend" x="360" y="-1">#if selector</text>
+    <rect class="board" x="440" y="-12" width="14" height="14"/>
+    <text class="legend" x="460" y="-1">board variant</text>
+    <rect class="output" x="550" y="-12" width="14" height="14"/>
+    <text class="legend" x="570" y="-1">generated artifacts</text>
+    <line class="arrow" x1="680" y1="-5" x2="704" y2="-5" marker-end="url(#ar-d)"/>
+    <text class="legend" x="712" y="-1">compile-time flow</text>
+  </g>
+  <g transform="translate(40, 582)">
+    <text class="smallL" x="0" y="0">CMake sets -DHARDFOC_BOARD_* &#8594; one board header included &#8594; XMACRO expands &#8594; constexpr tables &#8594; zero runtime cost.</text>
+    <text class="smallL" x="0" y="14">Same firmware source compiles for any HardFOC board variant by switching the CMake define.</text>
+  </g>
+</svg>
