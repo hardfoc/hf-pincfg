@@ -76,8 +76,8 @@ enum class HfAdcChipType : uint8_t {
  *   GPIO40 - MAX22200_TRIGA         (GPIO - trigger A)
  *   GPIO41 - MAX22200_TRIGB         (GPIO - trigger B)
  *   GPIO42 - MAX22200_FAULT_N       (GPIO - fault input, active low)
- *   GPIO47 - I2C_SDA                (Comm - future expansion)
- *   GPIO48 - I2C_SCL                (Comm - future expansion)
+ *   GPIO47 - UART_FDO2_TX           (Comm — PyroScience FDO2-G2 host TX)
+ *   GPIO48 - UART_FDO2_RX           (Comm — PyroScience FDO2-G2 host RX)
  *
  * Format: X(ENUM_NAME, STRING_NAME, CATEGORY, CHIP_TYPE, CHIP_UNIT, GPIO_BANK,
  *           PHYSICAL_PIN, LOGIC_INVERSION, HAS_PULL, PULL_DIRECTION, OUTPUT_MODE,
@@ -97,8 +97,8 @@ enum class HfAdcChipType : uint8_t {
     X(SPI2_CS_TLE92466, "COMM_SPI2_CS_TLE92466", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 4, PIN_LOGIC_INVERTED, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
     X(TWAI_TX, "COMM_TWAI_TX", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 17, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
     X(TWAI_RX, "COMM_TWAI_RX", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 18, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
-    X(I2C_SDA, "COMM_I2C_SDA", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 47, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
-    X(I2C_SCL, "COMM_I2C_SCL", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 48, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
+    X(UART_FDO2_TX, "COMM_UART_FDO2_TX", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 47, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
+    X(UART_FDO2_RX, "COMM_UART_FDO2_RX", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 48, PIN_LOGIC_NORMAL, PIN_HAS_PULL, PIN_PULL_UP, PIN_PUSH_PULL, 40) \
     X(WS2812_LED_DAT, "COMM_WS2812_LED_DAT", HfPinCategory::PIN_CATEGORY_COMM, HfGpioChipType::ESP32_INTERNAL, 0, 0, 3, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 40) \
     \
     /* MAX22200 control pins (managed by ESP32) */ \
@@ -233,6 +233,18 @@ static constexpr HfAdcMapping HF_ADC_MAPPING[] = {
 
 static constexpr size_t HF_GPIO_MAPPING_SIZE = sizeof(HF_GPIO_MAPPING) / sizeof(HF_GPIO_MAPPING[0]);
 static constexpr size_t HF_ADC_MAPPING_SIZE = sizeof(HF_ADC_MAPPING) / sizeof(HF_ADC_MAPPING[0]);
+
+//==============================================================================
+// FDO2 UART — exported physical GPIO (must match UART_FDO2_TX / UART_FDO2_RX)
+//==============================================================================
+
+/** MCU TX line → FDO2 RX (PSUP). Same value as `HF_GPIO_MAPPING[UART_FDO2_TX].physical_pin`. */
+inline constexpr int kFluxHwUartFdo2TxGpio =
+    static_cast<int>(HF_GPIO_MAPPING[static_cast<size_t>(HfFunctionalGpioPin::UART_FDO2_TX)].physical_pin);
+
+/** MCU RX line ← FDO2 TX (PSUP). Same value as `HF_GPIO_MAPPING[UART_FDO2_RX].physical_pin`. */
+inline constexpr int kFluxHwUartFdo2RxGpio =
+    static_cast<int>(HF_GPIO_MAPPING[static_cast<size_t>(HfFunctionalGpioPin::UART_FDO2_RX)].physical_pin);
 
 //==============================================================================
 // HELPER FUNCTIONS
