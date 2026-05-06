@@ -105,7 +105,7 @@ enum class HfAdcChipType : uint8_t {
     \
     /* PCAL95555 @ I2C 0x20 — physical_pin = expander port bit 0..15. */ \
     /* Signals INTO the TMC9660 (PCAL outputs, host-driven): PCAL_TMC_DRV_EN, PCAL_TMC_RST_CTRL, */ \
-    /* PCAL_TMC_SPI_COMM_EN (TMC_COMM_ENn), PCAL_TMC_SHARED_FLASH_HOLD (FLASH_HOLDn), PCAL_TMC_WAKE_CTRL; */ \
+    /* PCAL_TMC_SPI_COMM_EN (TMC_COMM_ENn — host SPI↔TMC mux), PCAL_TMC_WAKE_CTRL; */ \
     /* plus IMU/CAN below. Signals FROM TMC/board (PCAL inputs): PCAL_TMC_FAULT_STATUS, PWR_GOOD, IMU_INT. */ \
     /* TMC9660 package GPIO17/18 are wired to PCAL port inputs P1 and P2 — use PCAL_TMC_GPIO17_EXP_IN / */ \
     /* PCAL_TMC_GPIO18_EXP_IN to sample those pins at the expander. For configuring the GPIOs inside the */ \
@@ -120,8 +120,7 @@ enum class HfAdcChipType : uint8_t {
     X(PCAL_IMU_INT, "GPIO_PCAL_IMU_INT", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::PCAL95555_EXPANDER, 0, 0, 12, PIN_LOGIC_INVERTED, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
     X(PCAL_IMU_RST, "GPIO_PCAL_IMU_RST", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::PCAL95555_EXPANDER, 0, 0, 15, PIN_LOGIC_INVERTED, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
     X(PCAL_TMC_SPI_COMM_EN, "GPIO_PCAL_TMC_SPI_COMM_EN", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::PCAL95555_EXPANDER, 0, 0, 13, PIN_LOGIC_INVERTED, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
-    /* Host SPI→TMC9660 mux enable (TMC_COMM_ENn, active-low); paired with FLASH_HOLD on shared SPI flash. */ \
-    X(PCAL_TMC_SHARED_FLASH_HOLD, "GPIO_PCAL_TMC_SHARED_FLASH_HOLD", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::PCAL95555_EXPANDER, 0, 0, 9, PIN_LOGIC_INVERTED, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
+    /* Host SPI↔TMC9660 mux (TMC_COMM_ENn, active-low). Single board net — not a separate flash-HOLD HAL. */ \
     X(PCAL_TMC_WAKE_CTRL, "GPIO_PCAL_TMC_WAKE_CTRL", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::PCAL95555_EXPANDER, 0, 0, 14, PIN_LOGIC_INVERTED, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
     /* TMC9660 GPIO17/18 wired to PCAL inputs P1/P2 (read-only at expander; drive/config via TMC_GPIO17/18). */ \
     X(PCAL_TMC_GPIO17_EXP_IN, "GPIO_PCAL_TMC_GPIO17_EXP_IN", HfPinCategory::PIN_CATEGORY_GPIO, HfGpioChipType::PCAL95555_EXPANDER, 0, 0, 1, PIN_LOGIC_NORMAL, PIN_NO_PULL, PIN_PULL_DOWN, PIN_PUSH_PULL, 25) \
