@@ -50,7 +50,7 @@
   <rect class="func" x="40" y="126" width="840" height="80" rx="6"/>
   <text class="layer-title" x="56" y="148" fill="#2c5282">Functional pin identifiers  (board-agnostic enums)</text>
   <rect fill="#2c5282" x="730" y="134" width="140" height="16" rx="8"/>
-  <text class="badge" x="800" y="146">N3b3x/hf-pincfg</text>
+  <text class="badge" x="800" y="146">hardfoc/hf-pincfg</text>
   <text class="smallL" x="56" y="164">enum class HfFunctionalGpioPin : uint8_t &#8212; same names on every board; physical mapping differs.</text>
 
   <g>
