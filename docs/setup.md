@@ -169,7 +169,6 @@ If it compiles and runs without errors, your setup is correct!
 
 - **Explore Examples**: Check out the [Usage Examples](examples.md) page
 - **Learn the API**: Read the [API Reference](api.md)
-- **Platform Support**: See [Platform Support](platforms.md) for your hardware
 - **Contribute**: Help improve the library with [Contributing Guide](contributing.md)
 
 ## Troubleshooting
@@ -197,4 +196,3 @@ If you encounter issues not covered here:
 
 1. Check the [GitHub Issues](https://github.com/hardfoc/hf-pincfg/issues) for similar problems
 2. Create a new issue with detailed information about your setup
-3. Join the [GitHub Discussions](https://github.com/hardfoc/hf-pincfg/discussions) for community support

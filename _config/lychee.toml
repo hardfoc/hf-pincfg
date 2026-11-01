@@ -46,6 +46,11 @@ skip_missing = false
 accept = ["200", "429", "403"]
 
 # Exclude URLs and mail addresses from checking (treated as regular expressions)
+# Do not scan the vendored Doxygen theme submodule
+exclude_path = [
+  "(/|^)_config/doxygen-extensions/",
+]
+
 exclude = [
   # GNU License URLs - frequently rate limited (exact matches)
   '^https://www\.gnu\.org/licenses/gpl-3\.0/?$',
@@ -58,4 +63,7 @@ exclude = [
   # General patterns for GNU license URLs (broader matching)
   '^https?://(www\.)?gnu\.org/licenses/.*',
   '^https?://img\.shields\.io/badge/License-.*',
+
+  # GitHub Pages for this repo — 404s until Pages is enabled and the site is first published; README still links for humans
+  '^https://hardfoc\.github\.io/hf-pincfg/?.*',
 ]

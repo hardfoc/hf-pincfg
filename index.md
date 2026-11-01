@@ -80,7 +80,6 @@ For detailed setup instructions, see the [Setup Guide](docs/setup.md).
 - [**Setup Guide**](docs/setup.md) - Installation and initial setup
 - [**Usage Examples**](docs/examples.md) - Common usage patterns and examples  
 - [**API Reference**](docs/api.md) - Complete API documentation
-- [**Platform Support**](docs/platforms.md) - Supported hardware platforms
 - [**Contributing**](docs/contributing.md) - How to contribute to the project
 
 ## Project Structure
@@ -106,7 +105,6 @@ We welcome contributions! Please see our [Contributing Guide](docs/contributing.
 ## Support
 
 - **Issues**: Report bugs and request features on [GitHub Issues](https://github.com/hardfoc/hf-pincfg/issues)
-- **Discussions**: Join the conversation in [GitHub Discussions](https://github.com/hardfoc/hf-pincfg/discussions)
 - **Documentation**: Browse the [online documentation](https://hardfoc.github.io/hf-pincfg)
 
 ---
