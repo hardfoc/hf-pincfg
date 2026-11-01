@@ -1,7 +1,7 @@
-warning: ignoring unsupported tag 'INPUT_FILE_FILTER' at line 97, file /tmp/doxyfile.kgBYhn
-warning: Tag 'HTML_TIMESTAMP' at line 186 of file '/tmp/doxyfile.kgBYhn' has become obsolete.
+warning: ignoring unsupported tag 'INPUT_FILE_FILTER' at line 97, file /tmp/doxyfile.I6Pqsx
+warning: Tag 'HTML_TIMESTAMP' at line 186 of file '/tmp/doxyfile.I6Pqsx' has become obsolete.
          To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
-warning: Tag 'FORMULA_TRANSPARENT' at line 222 of file '/tmp/doxyfile.kgBYhn' has become obsolete.
+warning: Tag 'FORMULA_TRANSPARENT' at line 222 of file '/tmp/doxyfile.I6Pqsx' has become obsolete.
          To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
 warning: argument 'AUTO' for option HTML_COLORSTYLE is not a valid enum value
 Using the default: AUTO_LIGHT!
