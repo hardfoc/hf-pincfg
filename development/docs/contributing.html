@@ -1,0 +1,1201 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  <link rel="stylesheet" href="/hf-pincfg/development/assets/css/just-the-docs-default.css">
+
+  <link rel="stylesheet" href="/hf-pincfg/development/assets/css/just-the-docs-head-nav.css" id="jtd-head-nav-stylesheet">
+
+  <style id="jtd-nav-activation">
+  
+
+    
+    .site-nav > ul.nav-list:first-child > li:not(:nth-child(5)) > a,
+    .site-nav > ul.nav-list:first-child > li > ul > li a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:not(:first-child) a,
+    .site-nav li.external a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:first-child > li:nth-child(5) > a {
+      font-weight: 600;
+      text-decoration: none;
+    }.site-nav > ul.nav-list:first-child > li:nth-child(5) > button svg {
+      transform: rotate(-90deg);
+    }.site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(5) > ul.nav-list {
+      display: block;
+    }
+  </style>
+
+  
+
+  
+    <script src="/hf-pincfg/development/assets/js/vendor/lunr.min.js"></script>
+  
+
+  <script src="/hf-pincfg/development/assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Contributing | HardFOC Pin Configuration Library - development</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Contributing" />
+<meta name="author" content="HardFOC Team" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Hardware-Agnostic C++ Pin Configuration Library for Embedded Systems - Providing type-safe, compile-time pin mapping and configuration management" />
+<meta property="og:description" content="Hardware-Agnostic C++ Pin Configuration Library for Embedded Systems - Providing type-safe, compile-time pin mapping and configuration management" />
+<link rel="canonical" href="https://hardfoc.github.io/hf-pincfg/development/docs/contributing.html" />
+<meta property="og:url" content="https://hardfoc.github.io/hf-pincfg/development/docs/contributing.html" />
+<meta property="og:site_name" content="HardFOC Pin Configuration Library - development" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Contributing" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"HardFOC Team","url":"https://github.com/hardfoc"},"description":"Hardware-Agnostic C++ Pin Configuration Library for Embedded Systems - Providing type-safe, compile-time pin mapping and configuration management","headline":"Contributing","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hardfoc.github.io/hf-pincfg/development/assets/images/logo.png"},"name":"HardFOC Team"},"url":"https://hardfoc.github.io/hf-pincfg/development/docs/contributing.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+</head>
+
+<body>
+  <a class="skip-to-main" href="#main-content">Skip to main content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="svg-link" viewBox="0 0 24 24">
+  <title>Link</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+  </svg>
+</symbol>
+
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+  <title>Menu</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+    <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</symbol>
+
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+  <title>Expand</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </svg>
+</symbol>
+
+  <!-- Feather. MIT License: https://github.com/feathericons/feather/blob/master/LICENSE -->
+<symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
+  <title id="svg-external-link-title">(external link)</title>
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+</symbol>
+
+  
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+  <title>Document</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+  </svg>
+</symbol>
+
+    <symbol id="svg-search" viewBox="0 0 24 24">
+  <title>Search</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+    <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+</symbol>
+
+  
+  
+    <!-- Bootstrap Icons. MIT License: https://github.com/twbs/icons/blob/main/LICENSE.md -->
+<symbol id="svg-copy" viewBox="0 0 16 16">
+  <title>Copy</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+  </svg>
+</symbol>
+<symbol id="svg-copied" viewBox="0 0 16 16">
+  <title>Copied</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
+    <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
+  </svg>
+</symbol>
+
+  
+</svg>
+
+  
+    <header class="side-bar">
+  <div class="site-header">
+    <a href="/hf-pincfg/development/" class="site-title lh-tight">
+  <div class="site-logo" role="img" aria-label="HardFOC Pin Configuration Library - development"></div>
+
+</a>
+    <button id="menu-button" class="site-button btn-reset" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg>
+    </button>
+  </div>
+
+  <nav aria-label="Main" id="site-nav" class="site-nav">
+  
+  
+    <ul class="nav-list"><li class="nav-list-item"><a href="/hf-pincfg/development/" class="nav-list-link">Home</a></li><li class="nav-list-item"><a href="/hf-pincfg/development/docs/setup.html" class="nav-list-link">Setup Guide</a></li><li class="nav-list-item"><a href="/hf-pincfg/development/docs/examples.html" class="nav-list-link">Usage Examples</a></li><li class="nav-list-item"><a href="/hf-pincfg/development/docs/api.html" class="nav-list-link">API Reference</a></li><li class="nav-list-item"><a href="/hf-pincfg/development/docs/contributing.html" class="nav-list-link">Contributing</a></li></ul>
+  
+</nav>
+
+
+<div class="d-md-block d-none site-footer">
+  
+  
+    This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+  
+  </div>
+</header>
+
+  
+  <div class="main" id="top">
+    <div id="main-header" class="main-header">
+  
+    
+
+<div class="search" role="search">
+  <div class="search-input-wrap">
+    <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search HardFOC Pin Configuration Library - development" autocomplete="off">
+    <label for="search-input" class="search-label">
+      <span class="sr-only">Search HardFOC Pin Configuration Library - development</span>
+      <svg viewBox="0 0 24 24" class="search-icon" aria-hidden="true"><use xlink:href="#svg-search"></use></svg>
+    </label>
+  </div>
+  <div id="search-results" class="search-results"></div>
+</div>
+
+  
+  
+  
+    <nav aria-label="Auxiliary" class="aux-nav">
+  <ul class="aux-nav-list">
+    
+      <li class="aux-nav-list-item">
+        <a href="/hf-pincfg/development/api/index.html" class="site-button"
+          
+        >
+          📖 API Reference
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://github.com/hardfoc/hf-pincfg" class="site-button"
+          
+        >
+          📚 GitHub Repository
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://github.com/hardfoc/hf-pincfg/issues" class="site-button"
+          
+        >
+          🐛 Report Issues
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://github.com/hardfoc/hf-pincfg/stargazers" class="site-button"
+          
+        >
+          ⭐ Star on GitHub
+        </a>
+      </li>
+    
+  </ul>
+</nav>
+
+  
+</div>
+
+    <div class="main-content-wrap">
+      
+      <div id="main-content" class="main-content">
+        <main>
+          
+            <h1 class="no_toc" id="contributing-to-hf-pincfg">
+  
+  
+    <a href="#contributing-to-hf-pincfg" class="anchor-heading" aria-labelledby="contributing-to-hf-pincfg"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Contributing to HF-PinCfg
+  
+  
+</h1>
+    
+
+<p>We welcome contributions to the HF-PinCfg library! This guide will help you get started with contributing to the project.</p>
+<h2 class="no_toc text-delta" id="table-of-contents">
+  
+  
+    <a href="#table-of-contents" class="anchor-heading" aria-labelledby="table-of-contents"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Table of Contents
+  
+  
+</h2>
+    
+
+<ol id="markdown-toc">
+  <li><a href="#how-to-contribute" id="markdown-toc-how-to-contribute">How to Contribute</a>    <ol>
+      <li><a href="#types-of-contributions" id="markdown-toc-types-of-contributions">Types of Contributions</a></li>
+      <li><a href="#getting-started" id="markdown-toc-getting-started">Getting Started</a></li>
+    </ol>
+  </li>
+  <li><a href="#development-guidelines" id="markdown-toc-development-guidelines">Development Guidelines</a>    <ol>
+      <li><a href="#code-style" id="markdown-toc-code-style">Code Style</a>        <ol>
+          <li><a href="#c-coding-standards" id="markdown-toc-c-coding-standards">C++ Coding Standards</a></li>
+          <li><a href="#header-organization" id="markdown-toc-header-organization">Header Organization</a></li>
+        </ol>
+      </li>
+      <li><a href="#adding-new-platform-support" id="markdown-toc-adding-new-platform-support">Adding New Platform Support</a>        <ol>
+          <li><a href="#1-create-platform-configuration-header" id="markdown-toc-1-create-platform-configuration-header">1. Create Platform Configuration Header</a></li>
+          <li><a href="#2-platform-documentation" id="markdown-toc-2-platform-documentation">2. Platform Documentation</a></li>
+        </ol>
+      </li>
+      <li><a href="#hardware-requirements" id="markdown-toc-hardware-requirements">Hardware Requirements</a>        <ol>
+          <li><a href="#3-validation-and-testing" id="markdown-toc-3-validation-and-testing">3. Validation and Testing</a></li>
+        </ol>
+      </li>
+      <li><a href="#documentation-standards" id="markdown-toc-documentation-standards">Documentation Standards</a>        <ol>
+          <li><a href="#api-documentation" id="markdown-toc-api-documentation">API Documentation</a></li>
+          <li><a href="#markdown-documentation" id="markdown-toc-markdown-documentation">Markdown Documentation</a></li>
+        </ol>
+      </li>
+      <li><a href="#testing" id="markdown-toc-testing">Testing</a>        <ol>
+          <li><a href="#compile-time-testing" id="markdown-toc-compile-time-testing">Compile-Time Testing</a></li>
+          <li><a href="#platform-testing" id="markdown-toc-platform-testing">Platform Testing</a></li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+  <li><a href="#pull-request-process" id="markdown-toc-pull-request-process">Pull Request Process</a>    <ol>
+      <li><a href="#before-submitting" id="markdown-toc-before-submitting">Before Submitting</a></li>
+      <li><a href="#pull-request-template" id="markdown-toc-pull-request-template">Pull Request Template</a></li>
+      <li><a href="#review-process" id="markdown-toc-review-process">Review Process</a></li>
+    </ol>
+  </li>
+  <li><a href="#community-guidelines" id="markdown-toc-community-guidelines">Community Guidelines</a>    <ol>
+      <li><a href="#code-of-conduct" id="markdown-toc-code-of-conduct">Code of Conduct</a></li>
+      <li><a href="#communication" id="markdown-toc-communication">Communication</a></li>
+      <li><a href="#recognition" id="markdown-toc-recognition">Recognition</a></li>
+    </ol>
+  </li>
+  <li><a href="#getting-help" id="markdown-toc-getting-help">Getting Help</a></li>
+</ol><hr />
+<h2 id="how-to-contribute">
+  
+  
+    <a href="#how-to-contribute" class="anchor-heading" aria-labelledby="how-to-contribute"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> How to Contribute
+  
+  
+</h2>
+    
+<h3 id="types-of-contributions">
+  
+  
+    <a href="#types-of-contributions" class="anchor-heading" aria-labelledby="types-of-contributions"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Types of Contributions
+  
+  
+</h3>
+    
+
+<p>We welcome several types of contributions:</p>
+
+<ul>
+  <li><strong>Bug Reports</strong>: Help us identify and fix issues</li>
+  <li><strong>Feature Requests</strong>: Suggest new functionality or improvements</li>
+  <li><strong>Code Contributions</strong>: Submit bug fixes, new features, or optimizations</li>
+  <li><strong>Documentation</strong>: Improve existing docs or add new documentation</li>
+  <li><strong>Platform Support</strong>: Add support for new hardware platforms</li>
+  <li><strong>Examples</strong>: Provide usage examples and tutorials</li>
+</ul>
+<h3 id="getting-started">
+  
+  
+    <a href="#getting-started" class="anchor-heading" aria-labelledby="getting-started"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Getting Started
+  
+  
+</h3>
+    
+
+<ol>
+  <li><strong>Fork the Repository</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="c"># Fork on GitHub, then clone your fork</span>
+git clone https://github.com/your-username/hf-pincfg.git
+<span class="nb">cd </span>hf-pincfg
+</pre></td></tr></tbody></table></div></code></pre></div>    </div>
+  </li>
+  <li><strong>Set Up Development Environment</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="c"># Add upstream remote</span>
+git remote add upstream https://github.com/hardfoc/hf-pincfg.git
+   
+<span class="c"># Create a development branch</span>
+git checkout <span class="nt">-b</span> feature/your-feature-name
+</pre></td></tr></tbody></table></div></code></pre></div>    </div>
+  </li>
+  <li><strong>Make Your Changes</strong>
+    <ul>
+      <li>Follow the coding standards outlined below</li>
+      <li>Add tests for new functionality</li>
+      <li>Update documentation as needed</li>
+    </ul>
+  </li>
+  <li><strong>Submit a Pull Request</strong>
+    <ul>
+      <li>Push your changes to your fork</li>
+      <li>Create a pull request with a clear description</li>
+      <li>Link any related issues</li>
+    </ul>
+  </li>
+</ol>
+<h2 id="development-guidelines">
+  
+  
+    <a href="#development-guidelines" class="anchor-heading" aria-labelledby="development-guidelines"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Development Guidelines
+  
+  
+</h2>
+    
+<h3 id="code-style">
+  
+  
+    <a href="#code-style" class="anchor-heading" aria-labelledby="code-style"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Code Style
+  
+  
+</h3>
+    
+<h4 id="c-coding-standards">
+  
+  
+    <a href="#c-coding-standards" class="anchor-heading" aria-labelledby="c-coding-standards"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> C++ Coding Standards
+  
+  
+</h4>
+    
+
+<ul>
+  <li><strong>C++ Standard</strong>: Use C++17 features, ensure compatibility with C++17 compilers</li>
+  <li><strong>Naming Conventions</strong>:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">snake_case</code> for variables, functions, and namespaces</li>
+      <li><code class="language-plaintext highlighter-rouge">PascalCase</code> for classes and structs</li>
+      <li><code class="language-plaintext highlighter-rouge">UPPER_CASE</code> for constants and macros</li>
+      <li>Descriptive names that clearly indicate purpose</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="c1">// Good examples</span>
+<span class="k">namespace</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nc">VortexV1Config</span> <span class="p">{</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="n">PinDefinition</span> <span class="n">status_led</span><span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="s">"Status LED"</span><span class="p">};</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="n">PinDefinition</span> <span class="n">debug_uart_tx</span><span class="p">{</span><span class="mi">17</span><span class="p">,</span> <span class="s">"Debug UART TX"</span><span class="p">};</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="c1">// Avoid</span>
+<span class="k">struct</span> <span class="nc">config</span> <span class="p">{</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="n">PinDefinition</span> <span class="n">led</span><span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="s">"LED"</span><span class="p">};</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="n">PinDefinition</span> <span class="n">tx</span><span class="p">{</span><span class="mi">17</span><span class="p">,</span> <span class="s">"TX"</span><span class="p">};</span>
+<span class="p">};</span>
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+<h4 id="header-organization">
+  
+  
+    <a href="#header-organization" class="anchor-heading" aria-labelledby="header-organization"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Header Organization
+  
+  
+</h4>
+    
+
+<ul>
+  <li><strong>Include Guards</strong>: Use <code class="language-plaintext highlighter-rouge">#pragma once</code> at the top of header files</li>
+  <li><strong>Includes</strong>: Group system includes, then third-party, then local includes</li>
+  <li><strong>Namespace</strong>: Use consistent namespace structure</li>
+  <li><strong>Documentation</strong>: Use Doxygen-style comments for API documentation</li>
+</ul>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="rouge-code"><pre><span class="cp">#pragma once
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstdint&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;type_traits&gt;</span><span class="cp">
+</span>
+<span class="k">namespace</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span> <span class="p">{</span>
+
+<span class="cm">/**
+ * @brief Represents a hardware pin configuration
+ * 
+ * @details This structure holds the pin number and description
+ * for compile-time pin configuration management.
+ */</span>
+<span class="k">struct</span> <span class="nc">PinDefinition</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">pin</span><span class="p">;</span>                    <span class="c1">///&lt; Physical pin number</span>
+    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">description</span><span class="p">;</span>    <span class="c1">///&lt; Human-readable description</span>
+    
+    <span class="cm">/**
+     * @brief Construct a pin definition
+     * @param pin_num Physical pin number
+     * @param desc Human-readable description
+     */</span>
+    <span class="k">constexpr</span> <span class="n">PinDefinition</span><span class="p">(</span><span class="kt">int</span> <span class="n">pin_num</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">desc</span><span class="p">)</span> 
+        <span class="o">:</span> <span class="n">pin</span><span class="p">(</span><span class="n">pin_num</span><span class="p">),</span> <span class="n">description</span><span class="p">(</span><span class="n">desc</span><span class="p">)</span> <span class="p">{}</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace hf::functional_pin_config</span>
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+<h3 id="adding-new-platform-support">
+  
+  
+    <a href="#adding-new-platform-support" class="anchor-heading" aria-labelledby="adding-new-platform-support"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Adding New Platform Support
+  
+  
+</h3>
+    
+<h4 id="1-create-platform-configuration-header">
+  
+  
+    <a href="#1-create-platform-configuration-header" class="anchor-heading" aria-labelledby="1-create-platform-configuration-header"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> 1. Create Platform Configuration Header
+  
+  
+</h4>
+    
+
+<p>Create a new header file following the naming pattern:
+<code class="language-plaintext highlighter-rouge">hf_functional_pin_config_&lt;platform_name&gt;.hpp</code></p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+</pre></td><td class="rouge-code"><pre><span class="cp">#pragma once
+</span>
+<span class="cp">#include</span> <span class="cpf">"hf_functional_pin_config.hpp"</span><span class="cp">
+</span>
+<span class="k">namespace</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::&lt;</span><span class="n">platform_name</span><span class="o">&gt;</span> <span class="p">{</span>
+
+<span class="cm">/**
+ * @brief Default pin configuration for &lt;Platform Name&gt;
+ * 
+ * @details Complete pin mapping for the &lt;Platform Name&gt; development board
+ * including all standard peripherals and GPIO assignments.
+ */</span>
+<span class="k">struct</span> <span class="nc">DefaultConfig</span> <span class="p">{</span>
+    <span class="c1">// System pins</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="n">PinDefinition</span> <span class="n">reset_button</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="s">"Reset Button (Boot)"</span><span class="p">};</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="n">PinDefinition</span> <span class="n">status_led</span><span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="s">"Built-in Status LED"</span><span class="p">};</span>
+    
+    <span class="c1">// Communication interfaces</span>
+    <span class="k">struct</span> <span class="nc">UART</span> <span class="p">{</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="n">PinDefinition</span> <span class="n">tx</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="s">"UART0 TX (USB)"</span><span class="p">};</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="n">PinDefinition</span> <span class="n">rx</span><span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="s">"UART0 RX (USB)"</span><span class="p">};</span>
+        <span class="c1">// Add more UART pins as available</span>
+    <span class="p">};</span>
+    
+    <span class="k">struct</span> <span class="nc">SPI</span> <span class="p">{</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="n">PinDefinition</span> <span class="n">mosi</span><span class="p">{</span><span class="mi">23</span><span class="p">,</span> <span class="s">"SPI MOSI"</span><span class="p">};</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="n">PinDefinition</span> <span class="n">miso</span><span class="p">{</span><span class="mi">19</span><span class="p">,</span> <span class="s">"SPI MISO"</span><span class="p">};</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="n">PinDefinition</span> <span class="n">sck</span><span class="p">{</span><span class="mi">18</span><span class="p">,</span> <span class="s">"SPI SCK"</span><span class="p">};</span>
+        <span class="c1">// Add chip select pins</span>
+    <span class="p">};</span>
+    
+    <span class="k">struct</span> <span class="nc">I2C</span> <span class="p">{</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="n">PinDefinition</span> <span class="n">sda</span><span class="p">{</span><span class="mi">21</span><span class="p">,</span> <span class="s">"I2C SDA"</span><span class="p">};</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="n">PinDefinition</span> <span class="n">scl</span><span class="p">{</span><span class="mi">22</span><span class="p">,</span> <span class="s">"I2C SCL"</span><span class="p">};</span>
+    <span class="p">};</span>
+    
+    <span class="c1">// Add platform-specific pins</span>
+    <span class="c1">// Sensor inputs, motor outputs, etc.</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace hf::functional_pin_config::&lt;platform_name&gt;</span>
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+<h4 id="2-platform-documentation">
+  
+  
+    <a href="#2-platform-documentation" class="anchor-heading" aria-labelledby="2-platform-documentation"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> 2. Platform Documentation
+  
+  
+</h4>
+    
+
+<p>Add platform-specific documentation:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre></td><td class="rouge-code"><pre><span class="gu">## &lt;Platform Name&gt; Support</span>
+
+<span class="gu">### Pin Mapping</span>
+
+| Function | GPIO | Notes |
+|----------|------|-------|
+| Status LED | 2 | Built-in LED |
+| UART TX | 1 | Connected to USB-Serial |
+| UART RX | 3 | Connected to USB-Serial |
+| ... | ... | ... |
+
+<span class="gu">### Usage Example</span>
+
+<span class="p">```</span><span class="nl">cpp
+</span><span class="cp">#include</span> <span class="cpf">"hf_functional_pin_config_&lt;platform_name&gt;.hpp"</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="n">PinConfig</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::&lt;</span><span class="n">platform_name</span><span class="o">&gt;::</span><span class="n">DefaultConfig</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">led</span> <span class="o">=</span> <span class="n">PinConfig</span><span class="o">::</span><span class="n">status_led</span><span class="p">;</span>
+    <span class="n">pinMode</span><span class="p">(</span><span class="n">led</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+<h3 id="hardware-requirements">
+  
+  
+    <a href="#hardware-requirements" class="anchor-heading" aria-labelledby="hardware-requirements"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Hardware Requirements
+  
+  
+</h3>
+    
+
+<ul>
+  <li>Microcontroller: <specifications></specifications></li>
+  <li>Development Board: <board name="" and="" version=""></board></li>
+  <li>Tested Frameworks: Arduino, ESP-IDF, etc.
+```</li>
+</ul>
+<h4 id="3-validation-and-testing">
+  
+  
+    <a href="#3-validation-and-testing" class="anchor-heading" aria-labelledby="3-validation-and-testing"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> 3. Validation and Testing
+  
+  
+</h4>
+    
+
+<p>Add compile-time validation for the new platform:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="rouge-code"><pre><span class="k">namespace</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::&lt;</span><span class="n">platform_name</span><span class="o">&gt;</span> <span class="p">{</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">Config</span> <span class="o">=</span> <span class="n">DefaultConfig</span><span class="p">&gt;</span>
+<span class="k">constexpr</span> <span class="kt">bool</span> <span class="n">validate_pin_config</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Platform-specific validations</span>
+    <span class="k">static_assert</span><span class="p">(</span><span class="n">Config</span><span class="o">::</span><span class="n">status_led</span><span class="p">.</span><span class="n">pin</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">Config</span><span class="o">::</span><span class="n">status_led</span><span class="p">.</span><span class="n">pin</span> <span class="o">&lt;=</span> <span class="mi">39</span><span class="p">,</span>
+                  <span class="s">"Status LED pin out of range for &lt;Platform&gt;"</span><span class="p">);</span>
+    
+    <span class="k">static_assert</span><span class="p">(</span><span class="n">Config</span><span class="o">::</span><span class="n">UART</span><span class="o">::</span><span class="n">tx</span><span class="p">.</span><span class="n">pin</span> <span class="o">!=</span> <span class="n">Config</span><span class="o">::</span><span class="n">UART</span><span class="o">::</span><span class="n">rx</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span>
+                  <span class="s">"UART TX and RX cannot use the same pin"</span><span class="p">);</span>
+    
+    <span class="c1">// Add more platform-specific checks</span>
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Apply validation</span>
+<span class="k">static_assert</span><span class="p">(</span><span class="n">validate_pin_config</span><span class="o">&lt;</span><span class="n">DefaultConfig</span><span class="o">&gt;</span><span class="p">(),</span> 
+              <span class="s">"Default configuration validation failed"</span><span class="p">);</span>
+
+<span class="p">}</span> <span class="c1">// namespace</span>
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+<h3 id="documentation-standards">
+  
+  
+    <a href="#documentation-standards" class="anchor-heading" aria-labelledby="documentation-standards"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Documentation Standards
+  
+  
+</h3>
+    
+<h4 id="api-documentation">
+  
+  
+    <a href="#api-documentation" class="anchor-heading" aria-labelledby="api-documentation"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> API Documentation
+  
+  
+</h4>
+    
+
+<p>Use Doxygen-style comments for all public APIs:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="rouge-code"><pre><span class="cm">/**
+ * @brief Brief description of the function/class/struct
+ * 
+ * @details Detailed description explaining the purpose, behavior,
+ * and any important implementation details.
+ * 
+ * @param param_name Description of parameter
+ * @return Description of return value
+ * 
+ * @note Important notes or warnings
+ * @warning Critical warnings about usage
+ * 
+ * @example
+ * ```cpp
+ * // Usage example
+ * constexpr auto pin = PinDefinition{5, "Example Pin"};
+ * ```
+ */</span>
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+<h4 id="markdown-documentation">
+  
+  
+    <a href="#markdown-documentation" class="anchor-heading" aria-labelledby="markdown-documentation"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Markdown Documentation
+  
+  
+</h4>
+    
+
+<ul>
+  <li>Use clear, descriptive headings</li>
+  <li>Include code examples for all major features</li>
+  <li>Provide both basic and advanced usage examples</li>
+  <li>Link to related documentation sections</li>
+  <li>Include troubleshooting information</li>
+</ul>
+<h3 id="testing">
+  
+  
+    <a href="#testing" class="anchor-heading" aria-labelledby="testing"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Testing
+  
+  
+</h3>
+    
+<h4 id="compile-time-testing">
+  
+  
+    <a href="#compile-time-testing" class="anchor-heading" aria-labelledby="compile-time-testing"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Compile-Time Testing
+  
+  
+</h4>
+    
+
+<p>Create compile-time tests for new features:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre></td><td class="rouge-code"><pre><span class="c1">// test_compile_time.cpp</span>
+<span class="cp">#include</span> <span class="cpf">"hf_functional_pin_config.hpp"</span><span class="cp">
+#include</span> <span class="cpf">"hf_functional_pin_config_vortex_v1.hpp"</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="n">Config</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">vortex_v1</span><span class="o">::</span><span class="n">DefaultConfig</span><span class="p">;</span>
+
+<span class="c1">// Test basic functionality</span>
+<span class="k">static_assert</span><span class="p">(</span><span class="n">Config</span><span class="o">::</span><span class="n">status_led</span><span class="p">.</span><span class="n">pin</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="s">"Pin should be valid"</span><span class="p">);</span>
+<span class="k">static_assert</span><span class="p">(</span><span class="n">Config</span><span class="o">::</span><span class="n">status_led</span><span class="p">.</span><span class="n">description</span> <span class="o">!=</span> <span class="nb">nullptr</span><span class="p">,</span> <span class="s">"Description should exist"</span><span class="p">);</span>
+
+<span class="c1">// Test configuration validation</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">&gt;</span>
+<span class="k">constexpr</span> <span class="kt">bool</span> <span class="nf">test_validation</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Add your validation tests</span>
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static_assert</span><span class="p">(</span><span class="n">test_validation</span><span class="o">&lt;</span><span class="n">Config</span><span class="o">&gt;</span><span class="p">(),</span> <span class="s">"Validation tests failed"</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// If this compiles, tests pass</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+<h4 id="platform-testing">
+  
+  
+    <a href="#platform-testing" class="anchor-heading" aria-labelledby="platform-testing"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Platform Testing
+  
+  
+</h4>
+    
+
+<p>Test on actual hardware when possible:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre></td><td class="rouge-code"><pre><span class="c1">// test_hardware.cpp - Arduino example</span>
+<span class="cp">#include</span> <span class="cpf">"hf_functional_pin_config_new_platform.hpp"</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="n">Config</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">new_platform</span><span class="o">::</span><span class="n">DefaultConfig</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+    
+    <span class="c1">// Test pin access</span>
+    <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">led</span> <span class="o">=</span> <span class="n">Config</span><span class="o">::</span><span class="n">status_led</span><span class="p">;</span>
+    <span class="n">pinMode</span><span class="p">(</span><span class="n">led</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+    
+    <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"Testing %s on GPIO%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">led</span><span class="p">.</span><span class="n">description</span><span class="p">,</span> <span class="n">led</span><span class="p">.</span><span class="n">pin</span><span class="p">);</span>
+    
+    <span class="c1">// Basic functionality test</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">digitalWrite</span><span class="p">(</span><span class="n">led</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+        <span class="n">delay</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+        <span class="n">digitalWrite</span><span class="p">(</span><span class="n">led</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+        <span class="n">delay</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Hardware test completed successfully"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">loop</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Test complete</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+<h2 id="pull-request-process">
+  
+  
+    <a href="#pull-request-process" class="anchor-heading" aria-labelledby="pull-request-process"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Pull Request Process
+  
+  
+</h2>
+    
+<h3 id="before-submitting">
+  
+  
+    <a href="#before-submitting" class="anchor-heading" aria-labelledby="before-submitting"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Before Submitting
+  
+  
+</h3>
+    
+
+<ol>
+  <li><strong>Ensure Code Quality</strong>
+    <ul>
+      <li>Code compiles without warnings</li>
+      <li>Follows the coding standards</li>
+      <li>Includes appropriate documentation</li>
+      <li>Has been tested (compile-time and hardware if possible)</li>
+    </ul>
+  </li>
+  <li><strong>Update Documentation</strong>
+    <ul>
+      <li>Update relevant API documentation</li>
+      <li>Add or update examples</li>
+      <li>Update README if adding new platform support</li>
+    </ul>
+  </li>
+  <li><strong>Check Existing Issues</strong>
+    <ul>
+      <li>Link to any related issues</li>
+      <li>Ensure your contribution doesn’t duplicate existing work</li>
+    </ul>
+  </li>
+</ol>
+<h3 id="pull-request-template">
+  
+  
+    <a href="#pull-request-template" class="anchor-heading" aria-labelledby="pull-request-template"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Pull Request Template
+  
+  
+</h3>
+    
+
+<p>Use this template for pull requests:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+</pre></td><td class="rouge-code"><pre><span class="gu">## Description</span>
+Brief description of changes and their purpose.
+
+<span class="gu">## Type of Change</span>
+<span class="p">-</span> [ ] Bug fix (non-breaking change that fixes an issue)
+<span class="p">-</span> [ ] New feature (non-breaking change that adds functionality)
+<span class="p">-</span> [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
+<span class="p">-</span> [ ] Documentation update
+<span class="p">-</span> [ ] New platform support
+
+<span class="gu">## Testing</span>
+<span class="p">-</span> [ ] Code compiles without warnings
+<span class="p">-</span> [ ] Compile-time tests pass
+<span class="p">-</span> [ ] Hardware testing completed (if applicable)
+<span class="p">-</span> [ ] Documentation builds correctly
+
+<span class="gu">## Platform Support (if applicable)</span>
+<span class="p">-</span> Hardware tested: 
+<span class="p">-</span> Frameworks tested: 
+<span class="p">-</span> Compiler versions tested: 
+
+<span class="gu">## Checklist</span>
+<span class="p">-</span> [ ] My code follows the style guidelines
+<span class="p">-</span> [ ] I have performed a self-review of my code
+<span class="p">-</span> [ ] I have commented my code, particularly in hard-to-understand areas
+<span class="p">-</span> [ ] I have made corresponding changes to the documentation
+<span class="p">-</span> [ ] My changes generate no new warnings
+<span class="p">-</span> [ ] I have added tests that prove my fix is effective or that my feature works
+
+<span class="gu">## Related Issues</span>
+Closes #(issue_number)
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+<h3 id="review-process">
+  
+  
+    <a href="#review-process" class="anchor-heading" aria-labelledby="review-process"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Review Process
+  
+  
+</h3>
+    
+
+<ol>
+  <li><strong>Automated Checks</strong>: All PRs will be automatically checked for:
+    <ul>
+      <li>Code compilation</li>
+      <li>Documentation generation</li>
+      <li>Style compliance</li>
+      <li>Link validation</li>
+    </ul>
+  </li>
+  <li><strong>Manual Review</strong>: Maintainers will review:
+    <ul>
+      <li>Code quality and architecture</li>
+      <li>Documentation completeness</li>
+      <li>Testing adequacy</li>
+      <li>Backward compatibility</li>
+    </ul>
+  </li>
+  <li><strong>Feedback Integration</strong>:
+    <ul>
+      <li>Address reviewer feedback promptly</li>
+      <li>Update your branch with requested changes</li>
+      <li>Discuss any concerns or questions</li>
+    </ul>
+  </li>
+</ol>
+<h2 id="community-guidelines">
+  
+  
+    <a href="#community-guidelines" class="anchor-heading" aria-labelledby="community-guidelines"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Community Guidelines
+  
+  
+</h2>
+    
+<h3 id="code-of-conduct">
+  
+  
+    <a href="#code-of-conduct" class="anchor-heading" aria-labelledby="code-of-conduct"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Code of Conduct
+  
+  
+</h3>
+    
+
+<ul>
+  <li>Be respectful and inclusive</li>
+  <li>Provide constructive feedback</li>
+  <li>Help newcomers get started</li>
+  <li>Focus on the technical aspects of contributions</li>
+</ul>
+<h3 id="communication">
+  
+  
+    <a href="#communication" class="anchor-heading" aria-labelledby="communication"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Communication
+  
+  
+</h3>
+    
+
+<ul>
+  <li><strong>GitHub Issues</strong>: For bug reports and feature requests</li>
+  <li><strong>GitHub Discussions</strong>: For questions and general discussion</li>
+  <li><strong>Pull Requests</strong>: For code contributions and reviews</li>
+</ul>
+<h3 id="recognition">
+  
+  
+    <a href="#recognition" class="anchor-heading" aria-labelledby="recognition"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Recognition
+  
+  
+</h3>
+    
+
+<p>Contributors will be acknowledged in:</p>
+<ul>
+  <li>Project README contributors section</li>
+  <li>Release notes for significant contributions</li>
+  <li>Documentation credits</li>
+</ul>
+<h2 id="getting-help">
+  
+  
+    <a href="#getting-help" class="anchor-heading" aria-labelledby="getting-help"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Getting Help
+  
+  
+</h2>
+    
+
+<p>If you need help with contributing:</p>
+
+<ol>
+  <li><strong>Check Documentation</strong>: Review existing docs and examples</li>
+  <li><strong>Search Issues</strong>: Look for similar questions or problems</li>
+  <li><strong>Ask Questions</strong>: Create a GitHub Discussion or issue</li>
+  <li><strong>Join the Community</strong>: Participate in discussions and reviews</li>
+</ol>
+
+<p>Thank you for contributing to HF-PinCfg! Your contributions help make embedded development more accessible and maintainable for everyone.</p>
+
+          
+
+          
+            
+          
+        </main>
+        
+<hr>
+<footer>
+  
+
+  <p class="text-small mb-0">Built with ❤️ using <a href='https://just-the-docs.github.io/just-the-docs/'>Just the Docs</a> • <a href='https://github.com/hardfoc/hf-pincfg/blob/main/LICENSE'>MIT License</a> • <a href='https://github.com/hardfoc/hf-pincfg'>View on GitHub</a>
+</p>
+
+  <div class="d-md-none mt-4 fs-2">
+    
+    
+      This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+    
+  </div>
+</footer>
+
+      </div>
+    </div>
+    
+      
+<button id="search-button" class="search-button btn-reset" aria-label="Focus on search">
+  <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-search"></use></svg>
+</button>
+
+
+<div class="search-overlay"></div>
+
+    
+  </div>
+
+  
+</body>
+</html>
+

@@ -1,0 +1,1130 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  <link rel="stylesheet" href="/hf-pincfg/development/assets/css/just-the-docs-default.css">
+
+  <link rel="stylesheet" href="/hf-pincfg/development/assets/css/just-the-docs-head-nav.css" id="jtd-head-nav-stylesheet">
+
+  <style id="jtd-nav-activation">
+  
+
+    
+    .site-nav > ul.nav-list:first-child > li:not(:nth-child(3)) > a,
+    .site-nav > ul.nav-list:first-child > li > ul > li a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:not(:first-child) a,
+    .site-nav li.external a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:first-child > li:nth-child(3) > a {
+      font-weight: 600;
+      text-decoration: none;
+    }.site-nav > ul.nav-list:first-child > li:nth-child(3) > button svg {
+      transform: rotate(-90deg);
+    }.site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(3) > ul.nav-list {
+      display: block;
+    }
+  </style>
+
+  
+
+  
+    <script src="/hf-pincfg/development/assets/js/vendor/lunr.min.js"></script>
+  
+
+  <script src="/hf-pincfg/development/assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Usage Examples | HardFOC Pin Configuration Library - development</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Usage Examples" />
+<meta name="author" content="HardFOC Team" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Hardware-Agnostic C++ Pin Configuration Library for Embedded Systems - Providing type-safe, compile-time pin mapping and configuration management" />
+<meta property="og:description" content="Hardware-Agnostic C++ Pin Configuration Library for Embedded Systems - Providing type-safe, compile-time pin mapping and configuration management" />
+<link rel="canonical" href="https://hardfoc.github.io/hf-pincfg/development/docs/examples.html" />
+<meta property="og:url" content="https://hardfoc.github.io/hf-pincfg/development/docs/examples.html" />
+<meta property="og:site_name" content="HardFOC Pin Configuration Library - development" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Usage Examples" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"HardFOC Team","url":"https://github.com/hardfoc"},"description":"Hardware-Agnostic C++ Pin Configuration Library for Embedded Systems - Providing type-safe, compile-time pin mapping and configuration management","headline":"Usage Examples","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hardfoc.github.io/hf-pincfg/development/assets/images/logo.png"},"name":"HardFOC Team"},"url":"https://hardfoc.github.io/hf-pincfg/development/docs/examples.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+</head>
+
+<body>
+  <a class="skip-to-main" href="#main-content">Skip to main content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="svg-link" viewBox="0 0 24 24">
+  <title>Link</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+  </svg>
+</symbol>
+
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+  <title>Menu</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+    <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</symbol>
+
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+  <title>Expand</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </svg>
+</symbol>
+
+  <!-- Feather. MIT License: https://github.com/feathericons/feather/blob/master/LICENSE -->
+<symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
+  <title id="svg-external-link-title">(external link)</title>
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+</symbol>
+
+  
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+  <title>Document</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+  </svg>
+</symbol>
+
+    <symbol id="svg-search" viewBox="0 0 24 24">
+  <title>Search</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+    <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+</symbol>
+
+  
+  
+    <!-- Bootstrap Icons. MIT License: https://github.com/twbs/icons/blob/main/LICENSE.md -->
+<symbol id="svg-copy" viewBox="0 0 16 16">
+  <title>Copy</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+  </svg>
+</symbol>
+<symbol id="svg-copied" viewBox="0 0 16 16">
+  <title>Copied</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
+    <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
+  </svg>
+</symbol>
+
+  
+</svg>
+
+  
+    <header class="side-bar">
+  <div class="site-header">
+    <a href="/hf-pincfg/development/" class="site-title lh-tight">
+  <div class="site-logo" role="img" aria-label="HardFOC Pin Configuration Library - development"></div>
+
+</a>
+    <button id="menu-button" class="site-button btn-reset" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg>
+    </button>
+  </div>
+
+  <nav aria-label="Main" id="site-nav" class="site-nav">
+  
+  
+    <ul class="nav-list"><li class="nav-list-item"><a href="/hf-pincfg/development/" class="nav-list-link">Home</a></li><li class="nav-list-item"><a href="/hf-pincfg/development/docs/setup.html" class="nav-list-link">Setup Guide</a></li><li class="nav-list-item"><a href="/hf-pincfg/development/docs/examples.html" class="nav-list-link">Usage Examples</a></li><li class="nav-list-item"><a href="/hf-pincfg/development/docs/api.html" class="nav-list-link">API Reference</a></li><li class="nav-list-item"><a href="/hf-pincfg/development/docs/contributing.html" class="nav-list-link">Contributing</a></li></ul>
+  
+</nav>
+
+
+<div class="d-md-block d-none site-footer">
+  
+  
+    This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+  
+  </div>
+</header>
+
+  
+  <div class="main" id="top">
+    <div id="main-header" class="main-header">
+  
+    
+
+<div class="search" role="search">
+  <div class="search-input-wrap">
+    <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search HardFOC Pin Configuration Library - development" autocomplete="off">
+    <label for="search-input" class="search-label">
+      <span class="sr-only">Search HardFOC Pin Configuration Library - development</span>
+      <svg viewBox="0 0 24 24" class="search-icon" aria-hidden="true"><use xlink:href="#svg-search"></use></svg>
+    </label>
+  </div>
+  <div id="search-results" class="search-results"></div>
+</div>
+
+  
+  
+  
+    <nav aria-label="Auxiliary" class="aux-nav">
+  <ul class="aux-nav-list">
+    
+      <li class="aux-nav-list-item">
+        <a href="/hf-pincfg/development/api/index.html" class="site-button"
+          
+        >
+          📖 API Reference
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://github.com/hardfoc/hf-pincfg" class="site-button"
+          
+        >
+          📚 GitHub Repository
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://github.com/hardfoc/hf-pincfg/issues" class="site-button"
+          
+        >
+          🐛 Report Issues
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://github.com/hardfoc/hf-pincfg/stargazers" class="site-button"
+          
+        >
+          ⭐ Star on GitHub
+        </a>
+      </li>
+    
+  </ul>
+</nav>
+
+  
+</div>
+
+    <div class="main-content-wrap">
+      
+      <div id="main-content" class="main-content">
+        <main>
+          
+            <h1 class="no_toc" id="usage-examples">
+  
+  
+    <a href="#usage-examples" class="anchor-heading" aria-labelledby="usage-examples"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Usage Examples
+  
+  
+</h1>
+    
+
+<p>This page provides practical examples of using the HF-PinCfg library in real-world embedded applications.</p>
+<h2 class="no_toc text-delta" id="table-of-contents">
+  
+  
+    <a href="#table-of-contents" class="anchor-heading" aria-labelledby="table-of-contents"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Table of Contents
+  
+  
+</h2>
+    
+
+<ol id="markdown-toc">
+  <li><a href="#basic-pin-configuration" id="markdown-toc-basic-pin-configuration">Basic Pin Configuration</a>    <ol>
+      <li><a href="#simple-led-control" id="markdown-toc-simple-led-control">Simple LED Control</a></li>
+      <li><a href="#uart-communication-setup" id="markdown-toc-uart-communication-setup">UART Communication Setup</a></li>
+    </ol>
+  </li>
+  <li><a href="#advanced-configuration" id="markdown-toc-advanced-configuration">Advanced Configuration</a>    <ol>
+      <li><a href="#custom-hardware-configuration" id="markdown-toc-custom-hardware-configuration">Custom Hardware Configuration</a></li>
+      <li><a href="#rgb-status-led-control" id="markdown-toc-rgb-status-led-control">RGB Status LED Control</a></li>
+    </ol>
+  </li>
+  <li><a href="#platform-integration-examples" id="markdown-toc-platform-integration-examples">Platform Integration Examples</a>    <ol>
+      <li><a href="#esp32-spi-driver-integration" id="markdown-toc-esp32-spi-driver-integration">ESP32 SPI Driver Integration</a></li>
+      <li><a href="#freertos-task-with-pin-configuration" id="markdown-toc-freertos-task-with-pin-configuration">FreeRTOS Task with Pin Configuration</a></li>
+    </ol>
+  </li>
+  <li><a href="#compile-time-validation" id="markdown-toc-compile-time-validation">Compile-Time Validation</a>    <ol>
+      <li><a href="#pin-conflict-detection" id="markdown-toc-pin-conflict-detection">Pin Conflict Detection</a></li>
+      <li><a href="#pin-usage-documentation" id="markdown-toc-pin-usage-documentation">Pin Usage Documentation</a></li>
+    </ol>
+  </li>
+  <li><a href="#best-practices" id="markdown-toc-best-practices">Best Practices</a>    <ol>
+      <li><a href="#1-namespace-organization" id="markdown-toc-1-namespace-organization">1. Namespace Organization</a></li>
+      <li><a href="#2-component-based-organization" id="markdown-toc-2-component-based-organization">2. Component-Based Organization</a></li>
+      <li><a href="#3-version-management" id="markdown-toc-3-version-management">3. Version Management</a></li>
+    </ol>
+  </li>
+</ol><hr />
+<h2 id="basic-pin-configuration">
+  
+  
+    <a href="#basic-pin-configuration" class="anchor-heading" aria-labelledby="basic-pin-configuration"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Basic Pin Configuration
+  
+  
+</h2>
+    
+<h3 id="simple-led-control">
+  
+  
+    <a href="#simple-led-control" class="anchor-heading" aria-labelledby="simple-led-control"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Simple LED Control
+  
+  
+</h3>
+    
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre></td><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">"hf_functional_pin_config.hpp"</span><span class="cp">
+#include</span> <span class="cpf">"hf_functional_pin_config_vortex_v1.hpp"</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="n">PinConfig</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">vortex_v1</span><span class="o">::</span><span class="n">DefaultConfig</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Configure status LED pin</span>
+    <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">status_led</span> <span class="o">=</span> <span class="n">PinConfig</span><span class="o">::</span><span class="n">status_led</span><span class="p">;</span>
+    <span class="n">pinMode</span><span class="p">(</span><span class="n">status_led</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+    
+    <span class="c1">// Turn on the LED</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">status_led</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">loop</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Blink the status LED</span>
+    <span class="k">static</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">last_toggle</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">millis</span><span class="p">()</span> <span class="o">-</span> <span class="n">last_toggle</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">status_led</span> <span class="o">=</span> <span class="n">PinConfig</span><span class="o">::</span><span class="n">status_led</span><span class="p">;</span>
+        <span class="n">digitalWrite</span><span class="p">(</span><span class="n">status_led</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="o">!</span><span class="n">digitalRead</span><span class="p">(</span><span class="n">status_led</span><span class="p">.</span><span class="n">pin</span><span class="p">));</span>
+        <span class="n">last_toggle</span> <span class="o">=</span> <span class="n">millis</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+<h3 id="uart-communication-setup">
+  
+  
+    <a href="#uart-communication-setup" class="anchor-heading" aria-labelledby="uart-communication-setup"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> UART Communication Setup
+  
+  
+</h3>
+    
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">"hf_functional_pin_config.hpp"</span><span class="cp">
+#include</span> <span class="cpf">"hf_functional_pin_config_vortex_v1.hpp"</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="n">PinConfig</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">vortex_v1</span><span class="o">::</span><span class="n">DefaultConfig</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Configure debug UART using pin configuration</span>
+    <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">uart_tx</span> <span class="o">=</span> <span class="n">PinConfig</span><span class="o">::</span><span class="n">debug_uart_tx</span><span class="p">;</span>
+    <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">uart_rx</span> <span class="o">=</span> <span class="n">PinConfig</span><span class="o">::</span><span class="n">debug_uart_rx</span><span class="p">;</span>
+    
+    <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">,</span> <span class="n">SERIAL_8N1</span><span class="p">,</span> <span class="n">uart_rx</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">uart_tx</span><span class="p">.</span><span class="n">pin</span><span class="p">);</span>
+    
+    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"UART initialized on pins TX:"</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">uart_tx</span><span class="p">.</span><span class="n">pin</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">" RX:"</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">uart_rx</span><span class="p">.</span><span class="n">pin</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+<h2 id="advanced-configuration">
+  
+  
+    <a href="#advanced-configuration" class="anchor-heading" aria-labelledby="advanced-configuration"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Advanced Configuration
+  
+  
+</h2>
+    
+<h3 id="custom-hardware-configuration">
+  
+  
+    <a href="#custom-hardware-configuration" class="anchor-heading" aria-labelledby="custom-hardware-configuration"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Custom Hardware Configuration
+  
+  
+</h3>
+    
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+</pre></td><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">"hf_functional_pin_config.hpp"</span><span class="cp">
+</span>
+<span class="c1">// Define a custom configuration for your specific hardware</span>
+<span class="k">struct</span> <span class="nc">MyBoardConfig</span> <span class="p">{</span>
+    <span class="c1">// System pins</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">power_enable</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span><span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="s">"Power Enable"</span><span class="p">};</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">reset_button</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="s">"Reset Button"</span><span class="p">};</span>
+    
+    <span class="c1">// Status indicators</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">status_led_red</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span><span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="s">"Status LED Red"</span><span class="p">};</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">status_led_green</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span><span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="s">"Status LED Green"</span><span class="p">};</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">status_led_blue</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span><span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="s">"Status LED Blue"</span><span class="p">};</span>
+    
+    <span class="c1">// Communication interfaces</span>
+    <span class="k">struct</span> <span class="nc">UART</span> <span class="p">{</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">tx</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span><span class="p">{</span><span class="mi">17</span><span class="p">,</span> <span class="s">"UART0 TX"</span><span class="p">};</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">rx</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span><span class="p">{</span><span class="mi">16</span><span class="p">,</span> <span class="s">"UART0 RX"</span><span class="p">};</span>
+    <span class="p">};</span>
+    
+    <span class="k">struct</span> <span class="nc">SPI</span> <span class="p">{</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">mosi</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span><span class="p">{</span><span class="mi">23</span><span class="p">,</span> <span class="s">"SPI MOSI"</span><span class="p">};</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">miso</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span><span class="p">{</span><span class="mi">19</span><span class="p">,</span> <span class="s">"SPI MISO"</span><span class="p">};</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">sck</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span><span class="p">{</span><span class="mi">18</span><span class="p">,</span> <span class="s">"SPI SCK"</span><span class="p">};</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">cs_sensor</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span><span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="s">"Sensor CS"</span><span class="p">};</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">cs_flash</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span><span class="p">{</span><span class="mi">15</span><span class="p">,</span> <span class="s">"Flash CS"</span><span class="p">};</span>
+    <span class="p">};</span>
+    
+    <span class="k">struct</span> <span class="nc">I2C</span> <span class="p">{</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">sda</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span><span class="p">{</span><span class="mi">21</span><span class="p">,</span> <span class="s">"I2C SDA"</span><span class="p">};</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">scl</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span><span class="p">{</span><span class="mi">22</span><span class="p">,</span> <span class="s">"I2C SCL"</span><span class="p">};</span>
+    <span class="p">};</span>
+    
+    <span class="c1">// Sensor pins</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">temperature_sensor</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span><span class="p">{</span><span class="mi">36</span><span class="p">,</span> <span class="s">"Temperature ADC"</span><span class="p">};</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">voltage_monitor</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span><span class="p">{</span><span class="mi">39</span><span class="p">,</span> <span class="s">"Voltage Monitor ADC"</span><span class="p">};</span>
+    
+    <span class="c1">// Motor control pins</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">motor_pwm_a</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span><span class="p">{</span><span class="mi">25</span><span class="p">,</span> <span class="s">"Motor PWM A"</span><span class="p">};</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">motor_pwm_b</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span><span class="p">{</span><span class="mi">26</span><span class="p">,</span> <span class="s">"Motor PWM B"</span><span class="p">};</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">motor_dir</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span><span class="p">{</span><span class="mi">27</span><span class="p">,</span> <span class="s">"Motor Direction"</span><span class="p">};</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">motor_enable</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span><span class="p">{</span><span class="mi">14</span><span class="p">,</span> <span class="s">"Motor Enable"</span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">using</span> <span class="n">PinConfig</span> <span class="o">=</span> <span class="n">MyBoardConfig</span><span class="p">;</span>
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+<h3 id="rgb-status-led-control">
+  
+  
+    <a href="#rgb-status-led-control" class="anchor-heading" aria-labelledby="rgb-status-led-control"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> RGB Status LED Control
+  
+  
+</h3>
+    
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+</pre></td><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">"hf_functional_pin_config.hpp"</span><span class="cp">
+</span>
+<span class="c1">// Using the custom configuration from above</span>
+<span class="k">using</span> <span class="n">PinConfig</span> <span class="o">=</span> <span class="n">MyBoardConfig</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">StatusLED</span> <span class="p">{</span>
+<span class="nl">private:</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">red_pin</span> <span class="o">=</span> <span class="n">PinConfig</span><span class="o">::</span><span class="n">status_led_red</span><span class="p">;</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">green_pin</span> <span class="o">=</span> <span class="n">PinConfig</span><span class="o">::</span><span class="n">status_led_green</span><span class="p">;</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">blue_pin</span> <span class="o">=</span> <span class="n">PinConfig</span><span class="o">::</span><span class="n">status_led_blue</span><span class="p">;</span>
+    
+<span class="nl">public:</span>
+    <span class="k">enum</span> <span class="n">Color</span> <span class="p">{</span>
+        <span class="n">OFF</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">RED</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">GREEN</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="n">BLUE</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="n">YELLOW</span> <span class="o">=</span> <span class="n">RED</span> <span class="o">|</span> <span class="n">GREEN</span><span class="p">,</span>
+        <span class="n">CYAN</span> <span class="o">=</span> <span class="n">GREEN</span> <span class="o">|</span> <span class="n">BLUE</span><span class="p">,</span>
+        <span class="n">MAGENTA</span> <span class="o">=</span> <span class="n">RED</span> <span class="o">|</span> <span class="n">BLUE</span><span class="p">,</span>
+        <span class="n">WHITE</span> <span class="o">=</span> <span class="n">RED</span> <span class="o">|</span> <span class="n">GREEN</span> <span class="o">|</span> <span class="n">BLUE</span>
+    <span class="p">};</span>
+    
+    <span class="k">static</span> <span class="kt">void</span> <span class="n">initialize</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">pinMode</span><span class="p">(</span><span class="n">red_pin</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+        <span class="n">pinMode</span><span class="p">(</span><span class="n">green_pin</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+        <span class="n">pinMode</span><span class="p">(</span><span class="n">blue_pin</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+        <span class="n">setColor</span><span class="p">(</span><span class="n">OFF</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">static</span> <span class="kt">void</span> <span class="n">setColor</span><span class="p">(</span><span class="n">Color</span> <span class="n">color</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">digitalWrite</span><span class="p">(</span><span class="n">red_pin</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="p">(</span><span class="n">color</span> <span class="o">&amp;</span> <span class="n">RED</span><span class="p">)</span> <span class="o">?</span> <span class="n">HIGH</span> <span class="o">:</span> <span class="n">LOW</span><span class="p">);</span>
+        <span class="n">digitalWrite</span><span class="p">(</span><span class="n">green_pin</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="p">(</span><span class="n">color</span> <span class="o">&amp;</span> <span class="n">GREEN</span><span class="p">)</span> <span class="o">?</span> <span class="n">HIGH</span> <span class="o">:</span> <span class="n">LOW</span><span class="p">);</span>
+        <span class="n">digitalWrite</span><span class="p">(</span><span class="n">blue_pin</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="p">(</span><span class="n">color</span> <span class="o">&amp;</span> <span class="n">BLUE</span><span class="p">)</span> <span class="o">?</span> <span class="n">HIGH</span> <span class="o">:</span> <span class="n">LOW</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">void</span> <span class="n">setup</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">StatusLED</span><span class="o">::</span><span class="n">initialize</span><span class="p">();</span>
+    
+    <span class="c1">// Show initialization sequence</span>
+    <span class="n">StatusLED</span><span class="o">::</span><span class="n">setColor</span><span class="p">(</span><span class="n">StatusLED</span><span class="o">::</span><span class="n">RED</span><span class="p">);</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+    <span class="n">StatusLED</span><span class="o">::</span><span class="n">setColor</span><span class="p">(</span><span class="n">StatusLED</span><span class="o">::</span><span class="n">GREEN</span><span class="p">);</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+    <span class="n">StatusLED</span><span class="o">::</span><span class="n">setColor</span><span class="p">(</span><span class="n">StatusLED</span><span class="o">::</span><span class="n">BLUE</span><span class="p">);</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+    <span class="n">StatusLED</span><span class="o">::</span><span class="n">setColor</span><span class="p">(</span><span class="n">StatusLED</span><span class="o">::</span><span class="n">WHITE</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+<h2 id="platform-integration-examples">
+  
+  
+    <a href="#platform-integration-examples" class="anchor-heading" aria-labelledby="platform-integration-examples"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Platform Integration Examples
+  
+  
+</h2>
+    
+<h3 id="esp32-spi-driver-integration">
+  
+  
+    <a href="#esp32-spi-driver-integration" class="anchor-heading" aria-labelledby="esp32-spi-driver-integration"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> ESP32 SPI Driver Integration
+  
+  
+</h3>
+    
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+</pre></td><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">"hf_functional_pin_config.hpp"</span><span class="cp">
+#include</span> <span class="cpf">"hf_functional_pin_config_vortex_v1.hpp"</span><span class="cp">
+#include</span> <span class="cpf">&lt;SPI.h&gt;</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="n">PinConfig</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">vortex_v1</span><span class="o">::</span><span class="n">DefaultConfig</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">SensorDriver</span> <span class="p">{</span>
+<span class="nl">private:</span>
+    <span class="n">SPIClass</span><span class="o">*</span> <span class="n">spi</span><span class="p">;</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">cs_pin</span> <span class="o">=</span> <span class="n">PinConfig</span><span class="o">::</span><span class="n">SPI</span><span class="o">::</span><span class="n">cs_sensor</span><span class="p">;</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">mosi_pin</span> <span class="o">=</span> <span class="n">PinConfig</span><span class="o">::</span><span class="n">SPI</span><span class="o">::</span><span class="n">mosi</span><span class="p">;</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">miso_pin</span> <span class="o">=</span> <span class="n">PinConfig</span><span class="o">::</span><span class="n">SPI</span><span class="o">::</span><span class="n">miso</span><span class="p">;</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">sck_pin</span> <span class="o">=</span> <span class="n">PinConfig</span><span class="o">::</span><span class="n">SPI</span><span class="o">::</span><span class="n">sck</span><span class="p">;</span>
+    
+<span class="nl">public:</span>
+    <span class="n">SensorDriver</span><span class="p">()</span> <span class="o">:</span> <span class="n">spi</span><span class="p">(</span><span class="o">&amp;</span><span class="n">SPI</span><span class="p">)</span> <span class="p">{}</span>
+    
+    <span class="kt">void</span> <span class="n">initialize</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// Configure CS pin</span>
+        <span class="n">pinMode</span><span class="p">(</span><span class="n">cs_pin</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+        <span class="n">digitalWrite</span><span class="p">(</span><span class="n">cs_pin</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+        
+        <span class="c1">// Initialize SPI with pin configuration</span>
+        <span class="n">spi</span><span class="o">-&gt;</span><span class="n">begin</span><span class="p">(</span><span class="n">sck_pin</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">miso_pin</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">mosi_pin</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">cs_pin</span><span class="p">.</span><span class="n">pin</span><span class="p">);</span>
+        <span class="n">spi</span><span class="o">-&gt;</span><span class="n">setFrequency</span><span class="p">(</span><span class="mi">1000000</span><span class="p">);</span> <span class="c1">// 1MHz</span>
+        <span class="n">spi</span><span class="o">-&gt;</span><span class="n">setDataMode</span><span class="p">(</span><span class="n">SPI_MODE0</span><span class="p">);</span>
+        
+        <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"SPI initialized: MOSI=%d, MISO=%d, SCK=%d, CS=%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+                     <span class="n">mosi_pin</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">miso_pin</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">sck_pin</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">cs_pin</span><span class="p">.</span><span class="n">pin</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="kt">uint16_t</span> <span class="n">readSensor</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">digitalWrite</span><span class="p">(</span><span class="n">cs_pin</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+        <span class="kt">uint16_t</span> <span class="n">result</span> <span class="o">=</span> <span class="n">spi</span><span class="o">-&gt;</span><span class="n">transfer16</span><span class="p">(</span><span class="mh">0x0000</span><span class="p">);</span>
+        <span class="n">digitalWrite</span><span class="p">(</span><span class="n">cs_pin</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+<h3 id="freertos-task-with-pin-configuration">
+  
+  
+    <a href="#freertos-task-with-pin-configuration" class="anchor-heading" aria-labelledby="freertos-task-with-pin-configuration"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> FreeRTOS Task with Pin Configuration
+  
+  
+</h3>
+    
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+</pre></td><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">"hf_functional_pin_config.hpp"</span><span class="cp">
+#include</span> <span class="cpf">"hf_functional_pin_config_vortex_v1.hpp"</span><span class="cp">
+#include</span> <span class="cpf">"freertos/FreeRTOS.h"</span><span class="cp">
+#include</span> <span class="cpf">"freertos/task.h"</span><span class="cp">
+</span>
+<span class="k">using</span> <span class="n">PinConfig</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">vortex_v1</span><span class="o">::</span><span class="n">DefaultConfig</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">monitor_task</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">parameters</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">voltage_pin</span> <span class="o">=</span> <span class="n">PinConfig</span><span class="o">::</span><span class="n">voltage_monitor</span><span class="p">;</span>
+    <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">temp_pin</span> <span class="o">=</span> <span class="n">PinConfig</span><span class="o">::</span><span class="n">temperature_sensor</span><span class="p">;</span>
+    <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">status_led</span> <span class="o">=</span> <span class="n">PinConfig</span><span class="o">::</span><span class="n">status_led</span><span class="p">;</span>
+    
+    <span class="c1">// Configure pins</span>
+    <span class="n">pinMode</span><span class="p">(</span><span class="n">status_led</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+    <span class="c1">// ADC pins are automatically configured</span>
+    
+    <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Read sensor values</span>
+        <span class="kt">int</span> <span class="n">voltage_raw</span> <span class="o">=</span> <span class="n">analogRead</span><span class="p">(</span><span class="n">voltage_pin</span><span class="p">.</span><span class="n">pin</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">temp_raw</span> <span class="o">=</span> <span class="n">analogRead</span><span class="p">(</span><span class="n">temp_pin</span><span class="p">.</span><span class="n">pin</span><span class="p">);</span>
+        
+        <span class="c1">// Convert to meaningful values</span>
+        <span class="kt">float</span> <span class="n">voltage</span> <span class="o">=</span> <span class="p">(</span><span class="n">voltage_raw</span> <span class="o">/</span> <span class="mf">4095.0</span><span class="p">)</span> <span class="o">*</span> <span class="mf">3.3</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// Voltage divider</span>
+        <span class="kt">float</span> <span class="n">temperature</span> <span class="o">=</span> <span class="p">(</span><span class="n">temp_raw</span> <span class="o">/</span> <span class="mf">4095.0</span><span class="p">)</span> <span class="o">*</span> <span class="mf">3.3</span> <span class="o">*</span> <span class="mi">100</span><span class="p">;</span> <span class="c1">// LM35 sensor</span>
+        
+        <span class="c1">// Log readings</span>
+        <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"Voltage: %.2fV, Temperature: %.1f°C</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">voltage</span><span class="p">,</span> <span class="n">temperature</span><span class="p">);</span>
+        
+        <span class="c1">// Status indication</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">voltage</span> <span class="o">&lt;</span> <span class="mf">3.0</span> <span class="o">||</span> <span class="n">temperature</span> <span class="o">&gt;</span> <span class="mf">80.0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Warning condition - fast blink</span>
+            <span class="n">digitalWrite</span><span class="p">(</span><span class="n">status_led</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+            <span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">100</span><span class="p">));</span>
+            <span class="n">digitalWrite</span><span class="p">(</span><span class="n">status_led</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+            <span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">100</span><span class="p">));</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// Normal condition - slow blink</span>
+            <span class="n">digitalWrite</span><span class="p">(</span><span class="n">status_led</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+            <span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">500</span><span class="p">));</span>
+            <span class="n">digitalWrite</span><span class="p">(</span><span class="n">status_led</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+            <span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">1500</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">setup</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+    
+    <span class="c1">// Create monitoring task</span>
+    <span class="n">xTaskCreate</span><span class="p">(</span><span class="n">monitor_task</span><span class="p">,</span> <span class="s">"Monitor"</span><span class="p">,</span> <span class="mi">4096</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+<h2 id="compile-time-validation">
+  
+  
+    <a href="#compile-time-validation" class="anchor-heading" aria-labelledby="compile-time-validation"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Compile-Time Validation
+  
+  
+</h2>
+    
+<h3 id="pin-conflict-detection">
+  
+  
+    <a href="#pin-conflict-detection" class="anchor-heading" aria-labelledby="pin-conflict-detection"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Pin Conflict Detection
+  
+  
+</h3>
+    
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre></td><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">"hf_functional_pin_config.hpp"</span><span class="cp">
+</span>
+<span class="c1">// Example of compile-time validation</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">Config</span><span class="p">&gt;</span>
+<span class="k">constexpr</span> <span class="kt">bool</span> <span class="nf">validate_pin_config</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Check for pin conflicts at compile time</span>
+    <span class="k">static_assert</span><span class="p">(</span><span class="n">Config</span><span class="o">::</span><span class="n">status_led</span><span class="p">.</span><span class="n">pin</span> <span class="o">!=</span> <span class="n">Config</span><span class="o">::</span><span class="n">uart_tx</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> 
+                  <span class="s">"Status LED and UART TX cannot use the same pin"</span><span class="p">);</span>
+    
+    <span class="k">static_assert</span><span class="p">(</span><span class="n">Config</span><span class="o">::</span><span class="n">SPI</span><span class="o">::</span><span class="n">mosi</span><span class="p">.</span><span class="n">pin</span> <span class="o">!=</span> <span class="n">Config</span><span class="o">::</span><span class="n">I2C</span><span class="o">::</span><span class="n">sda</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span>
+                  <span class="s">"SPI MOSI and I2C SDA cannot share pins"</span><span class="p">);</span>
+    
+    <span class="c1">// Validate pin ranges (ESP32 example)</span>
+    <span class="k">static_assert</span><span class="p">(</span><span class="n">Config</span><span class="o">::</span><span class="n">status_led</span><span class="p">.</span><span class="n">pin</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">Config</span><span class="o">::</span><span class="n">status_led</span><span class="p">.</span><span class="n">pin</span> <span class="o">&lt;=</span> <span class="mi">39</span><span class="p">,</span>
+                  <span class="s">"Status LED pin must be in valid GPIO range"</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Apply validation to your configuration</span>
+<span class="k">using</span> <span class="n">PinConfig</span> <span class="o">=</span> <span class="n">MyBoardConfig</span><span class="p">;</span>
+<span class="k">static_assert</span><span class="p">(</span><span class="n">validate_pin_config</span><span class="o">&lt;</span><span class="n">PinConfig</span><span class="o">&gt;</span><span class="p">(),</span> <span class="s">"Pin configuration validation failed"</span><span class="p">);</span>
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+<h3 id="pin-usage-documentation">
+  
+  
+    <a href="#pin-usage-documentation" class="anchor-heading" aria-labelledby="pin-usage-documentation"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Pin Usage Documentation
+  
+  
+</h3>
+    
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">"hf_functional_pin_config.hpp"</span><span class="cp">
+</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">Config</span><span class="p">&gt;</span>
+<span class="kt">void</span> <span class="nf">print_pin_configuration</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"=== Pin Configuration ==="</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"Status LED: GPIO%d (%s)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> 
+                  <span class="n">Config</span><span class="o">::</span><span class="n">status_led</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">Config</span><span class="o">::</span><span class="n">status_led</span><span class="p">.</span><span class="n">description</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"UART TX: GPIO%d (%s)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> 
+                  <span class="n">Config</span><span class="o">::</span><span class="n">UART</span><span class="o">::</span><span class="n">tx</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">Config</span><span class="o">::</span><span class="n">UART</span><span class="o">::</span><span class="n">tx</span><span class="p">.</span><span class="n">description</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"UART RX: GPIO%d (%s)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> 
+                  <span class="n">Config</span><span class="o">::</span><span class="n">UART</span><span class="o">::</span><span class="n">rx</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">Config</span><span class="o">::</span><span class="n">UART</span><span class="o">::</span><span class="n">rx</span><span class="p">.</span><span class="n">description</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"SPI MOSI: GPIO%d (%s)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> 
+                  <span class="n">Config</span><span class="o">::</span><span class="n">SPI</span><span class="o">::</span><span class="n">mosi</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">Config</span><span class="o">::</span><span class="n">SPI</span><span class="o">::</span><span class="n">mosi</span><span class="p">.</span><span class="n">description</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"SPI MISO: GPIO%d (%s)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> 
+                  <span class="n">Config</span><span class="o">::</span><span class="n">SPI</span><span class="o">::</span><span class="n">miso</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">Config</span><span class="o">::</span><span class="n">SPI</span><span class="o">::</span><span class="n">miso</span><span class="p">.</span><span class="n">description</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">printf</span><span class="p">(</span><span class="s">"SPI SCK: GPIO%d (%s)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> 
+                  <span class="n">Config</span><span class="o">::</span><span class="n">SPI</span><span class="o">::</span><span class="n">sck</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">Config</span><span class="o">::</span><span class="n">SPI</span><span class="o">::</span><span class="n">sck</span><span class="p">.</span><span class="n">description</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"========================"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">setup</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+    
+    <span class="k">using</span> <span class="n">PinConfig</span> <span class="o">=</span> <span class="n">MyBoardConfig</span><span class="p">;</span>
+    <span class="n">print_pin_configuration</span><span class="o">&lt;</span><span class="n">PinConfig</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+<h2 id="best-practices">
+  
+  
+    <a href="#best-practices" class="anchor-heading" aria-labelledby="best-practices"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Best Practices
+  
+  
+</h2>
+    
+<h3 id="1-namespace-organization">
+  
+  
+    <a href="#1-namespace-organization" class="anchor-heading" aria-labelledby="1-namespace-organization"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> 1. Namespace Organization
+  
+  
+</h3>
+    
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="rouge-code"><pre><span class="k">namespace</span> <span class="n">my_project</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">hardware</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nc">ProductionConfig</span> <span class="p">{</span>
+        <span class="c1">// Production hardware pin definitions</span>
+    <span class="p">};</span>
+    
+    <span class="k">struct</span> <span class="nc">DevelopmentConfig</span> <span class="p">{</span>
+        <span class="c1">// Development board pin definitions</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Select configuration based on build target</span>
+<span class="cp">#ifdef PRODUCTION_BUILD
+</span><span class="k">using</span> <span class="n">PinConfig</span> <span class="o">=</span> <span class="n">my_project</span><span class="o">::</span><span class="n">hardware</span><span class="o">::</span><span class="n">ProductionConfig</span><span class="p">;</span>
+<span class="cp">#else
+</span><span class="k">using</span> <span class="n">PinConfig</span> <span class="o">=</span> <span class="n">my_project</span><span class="o">::</span><span class="n">hardware</span><span class="o">::</span><span class="n">DevelopmentConfig</span><span class="p">;</span>
+<span class="cp">#endif
+</span></pre></td></tr></tbody></table></div></code></pre></div></div>
+<h3 id="2-component-based-organization">
+  
+  
+    <a href="#2-component-based-organization" class="anchor-heading" aria-labelledby="2-component-based-organization"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> 2. Component-Based Organization
+  
+  
+</h3>
+    
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre><span class="k">struct</span> <span class="nc">SystemConfig</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nc">Power</span> <span class="p">{</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">main_enable</span> <span class="o">=</span> <span class="n">PinDefinition</span><span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="s">"Main Power Enable"</span><span class="p">};</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">battery_monitor</span> <span class="o">=</span> <span class="n">PinDefinition</span><span class="p">{</span><span class="mi">35</span><span class="p">,</span> <span class="s">"Battery Voltage"</span><span class="p">};</span>
+    <span class="p">};</span>
+    
+    <span class="k">struct</span> <span class="nc">Communications</span> <span class="p">{</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">wifi_enable</span> <span class="o">=</span> <span class="n">PinDefinition</span><span class="p">{</span><span class="mi">12</span><span class="p">,</span> <span class="s">"WiFi Module Enable"</span><span class="p">};</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">bluetooth_reset</span> <span class="o">=</span> <span class="n">PinDefinition</span><span class="p">{</span><span class="mi">13</span><span class="p">,</span> <span class="s">"Bluetooth Reset"</span><span class="p">};</span>
+    <span class="p">};</span>
+    
+    <span class="k">struct</span> <span class="nc">Sensors</span> <span class="p">{</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">temperature</span> <span class="o">=</span> <span class="n">PinDefinition</span><span class="p">{</span><span class="mi">36</span><span class="p">,</span> <span class="s">"Temperature Sensor"</span><span class="p">};</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">humidity</span> <span class="o">=</span> <span class="n">PinDefinition</span><span class="p">{</span><span class="mi">37</span><span class="p">,</span> <span class="s">"Humidity Sensor"</span><span class="p">};</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">motion</span> <span class="o">=</span> <span class="n">PinDefinition</span><span class="p">{</span><span class="mi">14</span><span class="p">,</span> <span class="s">"Motion Detector"</span><span class="p">};</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+<h3 id="3-version-management">
+  
+  
+    <a href="#3-version-management" class="anchor-heading" aria-labelledby="3-version-management"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> 3. Version Management
+  
+  
+</h3>
+    
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre></td><td class="rouge-code"><pre><span class="k">namespace</span> <span class="n">hardware_v1</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nc">PinConfig</span> <span class="p">{</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">led_pin</span> <span class="o">=</span> <span class="n">PinDefinition</span><span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="s">"Status LED"</span><span class="p">};</span>
+        <span class="c1">// v1 hardware definitions</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="k">namespace</span> <span class="n">hardware_v2</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nc">PinConfig</span> <span class="p">{</span>
+        <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">led_pin</span> <span class="o">=</span> <span class="n">PinDefinition</span><span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="s">"Status LED"</span><span class="p">};</span>
+        <span class="c1">// v2 hardware definitions with updated pins</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="c1">// Select version at compile time</span>
+<span class="cp">#define HARDWARE_VERSION 2
+</span>
+<span class="cp">#if HARDWARE_VERSION == 1
+</span><span class="k">using</span> <span class="n">PinConfig</span> <span class="o">=</span> <span class="n">hardware_v1</span><span class="o">::</span><span class="n">PinConfig</span><span class="p">;</span>
+<span class="cp">#elif HARDWARE_VERSION == 2
+</span><span class="k">using</span> <span class="n">PinConfig</span> <span class="o">=</span> <span class="n">hardware_v2</span><span class="o">::</span><span class="n">PinConfig</span><span class="p">;</span>
+<span class="cp">#endif
+</span></pre></td></tr></tbody></table></div></code></pre></div></div>
+
+<p>These examples demonstrate the flexibility and power of the HF-PinCfg library for managing embedded system pin configurations in a maintainable, type-safe manner.</p>
+
+          
+
+          
+            
+          
+        </main>
+        
+<hr>
+<footer>
+  
+
+  <p class="text-small mb-0">Built with ❤️ using <a href='https://just-the-docs.github.io/just-the-docs/'>Just the Docs</a> • <a href='https://github.com/hardfoc/hf-pincfg/blob/main/LICENSE'>MIT License</a> • <a href='https://github.com/hardfoc/hf-pincfg'>View on GitHub</a>
+</p>
+
+  <div class="d-md-none mt-4 fs-2">
+    
+    
+      This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+    
+  </div>
+</footer>
+
+      </div>
+    </div>
+    
+      
+<button id="search-button" class="search-button btn-reset" aria-label="Focus on search">
+  <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-search"></use></svg>
+</button>
+
+
+<div class="search-overlay"></div>
+
+    
+  </div>
+
+  
+</body>
+</html>
+

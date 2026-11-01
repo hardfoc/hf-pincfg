@@ -1,0 +1,10 @@
+var searchData=
+[
+  ['i2c_0',['I2C',['../index.html#autotoc_md15',1,'']]],
+  ['implementation_20board_20specific_1',['Layer 2: Physical Implementation (Board Specific)',['../index.html#autotoc_md22',1,'']]],
+  ['is_5finverted_2',['is_inverted',['../structHfGpioMapping.html#a80116988df2765bc0889c3f4e86707e4',1,'HfGpioMapping']]],
+  ['is_5fpush_5fpull_3',['is_push_pull',['../structHfGpioMapping.html#ab94731fdad1d171d2cf9e0d63ca13ae3',1,'HfGpioMapping']]],
+  ['is_5freserved_5fprefix_4',['is_reserved_prefix',['../hf__functional__pin__config__flux__v1_8hpp.html#a22d085180f49fffc5cd1a151b641796d',1,'is_reserved_prefix(std::string_view name) noexcept:&#160;hf_functional_pin_config_flux_v1.hpp'],['../hf__functional__pin__config__vortex__v1_8hpp.html#a22d085180f49fffc5cd1a151b641796d',1,'is_reserved_prefix(std::string_view name) noexcept:&#160;hf_functional_pin_config_vortex_v1.hpp']]],
+  ['isadcchannelavailable_5',['IsAdcChannelAvailable',['../hf__functional__pin__config__flux__v1_8hpp.html#a61f13a1f3e77ef7169c4c17fcb0de764',1,'IsAdcChannelAvailable(HfFunctionalAdcChannel functional_channel):&#160;hf_functional_pin_config_flux_v1.hpp'],['../hf__functional__pin__config__none_8hpp.html#aa87743e74626c37dac4a5522c4ad357e',1,'IsAdcChannelAvailable(HfFunctionalAdcChannel):&#160;hf_functional_pin_config_none.hpp'],['../hf__functional__pin__config__vortex__v1_8hpp.html#a61f13a1f3e77ef7169c4c17fcb0de764',1,'IsAdcChannelAvailable(HfFunctionalAdcChannel functional_channel):&#160;hf_functional_pin_config_vortex_v1.hpp']]],
+  ['isgpiopinavailable_6',['IsGpioPinAvailable',['../hf__functional__pin__config__flux__v1_8hpp.html#a9ad066f047f896111493cd924202bdc9',1,'IsGpioPinAvailable(HfFunctionalGpioPin functional_pin):&#160;hf_functional_pin_config_flux_v1.hpp'],['../hf__functional__pin__config__none_8hpp.html#a508a016dd4e549f3e917bb398fc55578',1,'IsGpioPinAvailable(HfFunctionalGpioPin):&#160;hf_functional_pin_config_none.hpp'],['../hf__functional__pin__config__vortex__v1_8hpp.html#a9ad066f047f896111493cd924202bdc9',1,'IsGpioPinAvailable(HfFunctionalGpioPin functional_pin):&#160;hf_functional_pin_config_vortex_v1.hpp']]]
+];

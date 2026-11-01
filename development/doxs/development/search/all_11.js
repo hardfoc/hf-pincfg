@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['pcal95555_5fexpander_0',['PCAL95555_EXPANDER',['../hf__functional__pin__config__flux__v1_8hpp.html#a8fd1d61e77f25fa26a4afac743b31c52ae8cd16165651689d66b850c7787d3e08',1,'PCAL95555_EXPANDER:&#160;hf_functional_pin_config_flux_v1.hpp'],['../hf__functional__pin__config__none_8hpp.html#a8fd1d61e77f25fa26a4afac743b31c52ae8cd16165651689d66b850c7787d3e08',1,'PCAL95555_EXPANDER:&#160;hf_functional_pin_config_none.hpp'],['../hf__functional__pin__config__pw__controller__v1_8hpp.html#a8fd1d61e77f25fa26a4afac743b31c52ae8cd16165651689d66b850c7787d3e08',1,'PCAL95555_EXPANDER:&#160;hf_functional_pin_config_pw_controller_v1.hpp'],['../hf__functional__pin__config__vortex__v1_8hpp.html#a8fd1d61e77f25fa26a4afac743b31c52ae8cd16165651689d66b850c7787d3e08',1,'PCAL95555_EXPANDER:&#160;hf_functional_pin_config_vortex_v1.hpp']]],
+  ['pcal9555a_5fexpander_1',['PCAL9555A_EXPANDER',['../hf__functional__pin__config__flux__v1_8hpp.html#a8fd1d61e77f25fa26a4afac743b31c52ac572ff3a482f137aca039ee31c52765e',1,'PCAL9555A_EXPANDER:&#160;hf_functional_pin_config_flux_v1.hpp'],['../hf__functional__pin__config__none_8hpp.html#a8fd1d61e77f25fa26a4afac743b31c52ac572ff3a482f137aca039ee31c52765e',1,'PCAL9555A_EXPANDER:&#160;hf_functional_pin_config_none.hpp'],['../hf__functional__pin__config__pw__controller__v1_8hpp.html#a8fd1d61e77f25fa26a4afac743b31c52ac572ff3a482f137aca039ee31c52765e',1,'PCAL9555A_EXPANDER:&#160;hf_functional_pin_config_pw_controller_v1.hpp'],['../hf__functional__pin__config__vortex__v1_8hpp.html#a8fd1d61e77f25fa26a4afac743b31c52ac572ff3a482f137aca039ee31c52765e',1,'PCAL9555A_EXPANDER:&#160;hf_functional_pin_config_vortex_v1.hpp']]],
+  ['peripherals_20vortex_20v1_2',['Connecting External Peripherals (Vortex V1)',['../index.html#autotoc_md24',1,'']]],
+  ['physical_20implementation_20board_20specific_3',['Layer 2: Physical Implementation (Board Specific)',['../index.html#autotoc_md22',1,'']]],
+  ['physical_5fchannel_4',['physical_channel',['../structHfAdcMapping.html#aad192a55ef9b9cb69d611ba14081a208',1,'HfAdcMapping']]],
+  ['physical_5fpin_5',['physical_pin',['../structHfGpioMapping.html#a340c467a0479822779a60556f0de6eab',1,'HfGpioMapping']]],
+  ['pin_20mapping_20vortex_20v1_20board_6',['Pin Mapping (Vortex V1 Board)',['../index.html#autotoc_md11',1,'']]],
+  ['pin_5fcategory_5fcomm_7',['PIN_CATEGORY_COMM',['../hf__functional__pin__config__base_8hpp.html#a932c1320f91bfcda3402c29961130ccba8456a0ddb80bc9a5566d8946c8082914',1,'hf_functional_pin_config_base.hpp']]],
+  ['pin_5fcategory_5fcore_8',['PIN_CATEGORY_CORE',['../hf__functional__pin__config__base_8hpp.html#a932c1320f91bfcda3402c29961130ccbac62735fae2ed7a59f581f119b4447743',1,'hf_functional_pin_config_base.hpp']]],
+  ['pin_5fcategory_5fgpio_9',['PIN_CATEGORY_GPIO',['../hf__functional__pin__config__base_8hpp.html#a932c1320f91bfcda3402c29961130ccbaf7d610d1a1a003c5adb459d32baf030e',1,'hf_functional_pin_config_base.hpp']]],
+  ['pin_5fcategory_5fuser_10',['PIN_CATEGORY_USER',['../hf__functional__pin__config__base_8hpp.html#a932c1320f91bfcda3402c29961130ccba395f834bc62a447894daad3cdbf78e87',1,'hf_functional_pin_config_base.hpp']]],
+  ['pin_5fhas_5fpull_11',['PIN_HAS_PULL',['../hf__functional__pin__config__base_8hpp.html#a404af95439c203322a5fbab1ec8eb539',1,'hf_functional_pin_config_base.hpp']]],
+  ['pin_5flogic_5finverted_12',['PIN_LOGIC_INVERTED',['../hf__functional__pin__config__base_8hpp.html#ab9412144ecb4a853f4688a7692263b94',1,'hf_functional_pin_config_base.hpp']]],
+  ['pin_5flogic_5fnormal_13',['PIN_LOGIC_NORMAL',['../hf__functional__pin__config__base_8hpp.html#ac2c9222c689b7b1887146e6b01ab8389',1,'hf_functional_pin_config_base.hpp']]],
+  ['pin_5fno_5fpull_14',['PIN_NO_PULL',['../hf__functional__pin__config__base_8hpp.html#ab2ae4b3b9189577340cecac2eaebdc82',1,'hf_functional_pin_config_base.hpp']]],
+  ['pin_5fopen_5fdrain_15',['PIN_OPEN_DRAIN',['../hf__functional__pin__config__base_8hpp.html#a65ad9054af7d27eced78bc778efb6645',1,'hf_functional_pin_config_base.hpp']]],
+  ['pin_5fpull_5fdown_16',['PIN_PULL_DOWN',['../hf__functional__pin__config__base_8hpp.html#a084cf9c7771203a975e2a7f11f36899a',1,'hf_functional_pin_config_base.hpp']]],
+  ['pin_5fpull_5fup_17',['PIN_PULL_UP',['../hf__functional__pin__config__base_8hpp.html#a8e246e4c6ccc5441fa9385808d042d42',1,'hf_functional_pin_config_base.hpp']]],
+  ['pin_5fpush_5fpull_18',['PIN_PUSH_PULL',['../hf__functional__pin__config__base_8hpp.html#aaa9eb9a0584a7a534af65943eb0ad611',1,'hf_functional_pin_config_base.hpp']]],
+  ['pincfg_19',['Contributing to HF-PinCfg',['../md_docs_2contributing.html',1,'']]],
+  ['pincfg_20',['HF-PINCFG',['../index.html',1,'']]],
+  ['pincfg_5fversion_2eh_21',['pincfg_version.h',['../pincfg__version_8h.html',1,'']]],
+  ['pull_5fis_5fup_22',['pull_is_up',['../structHfGpioMapping.html#a2ed42cd643de961f09954aa06955c478',1,'HfGpioMapping']]]
+];

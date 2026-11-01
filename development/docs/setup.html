@@ -1,0 +1,685 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  <link rel="stylesheet" href="/hf-pincfg/development/assets/css/just-the-docs-default.css">
+
+  <link rel="stylesheet" href="/hf-pincfg/development/assets/css/just-the-docs-head-nav.css" id="jtd-head-nav-stylesheet">
+
+  <style id="jtd-nav-activation">
+  
+
+    
+    .site-nav > ul.nav-list:first-child > li:not(:nth-child(2)) > a,
+    .site-nav > ul.nav-list:first-child > li > ul > li a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:not(:first-child) a,
+    .site-nav li.external a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:first-child > li:nth-child(2) > a {
+      font-weight: 600;
+      text-decoration: none;
+    }.site-nav > ul.nav-list:first-child > li:nth-child(2) > button svg {
+      transform: rotate(-90deg);
+    }.site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(2) > ul.nav-list {
+      display: block;
+    }
+  </style>
+
+  
+
+  
+    <script src="/hf-pincfg/development/assets/js/vendor/lunr.min.js"></script>
+  
+
+  <script src="/hf-pincfg/development/assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Setup Guide | HardFOC Pin Configuration Library - development</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Setup Guide" />
+<meta name="author" content="HardFOC Team" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Hardware-Agnostic C++ Pin Configuration Library for Embedded Systems - Providing type-safe, compile-time pin mapping and configuration management" />
+<meta property="og:description" content="Hardware-Agnostic C++ Pin Configuration Library for Embedded Systems - Providing type-safe, compile-time pin mapping and configuration management" />
+<link rel="canonical" href="https://hardfoc.github.io/hf-pincfg/development/docs/setup.html" />
+<meta property="og:url" content="https://hardfoc.github.io/hf-pincfg/development/docs/setup.html" />
+<meta property="og:site_name" content="HardFOC Pin Configuration Library - development" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Setup Guide" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"HardFOC Team","url":"https://github.com/hardfoc"},"description":"Hardware-Agnostic C++ Pin Configuration Library for Embedded Systems - Providing type-safe, compile-time pin mapping and configuration management","headline":"Setup Guide","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hardfoc.github.io/hf-pincfg/development/assets/images/logo.png"},"name":"HardFOC Team"},"url":"https://hardfoc.github.io/hf-pincfg/development/docs/setup.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+</head>
+
+<body>
+  <a class="skip-to-main" href="#main-content">Skip to main content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="svg-link" viewBox="0 0 24 24">
+  <title>Link</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+  </svg>
+</symbol>
+
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+  <title>Menu</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+    <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</symbol>
+
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+  <title>Expand</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </svg>
+</symbol>
+
+  <!-- Feather. MIT License: https://github.com/feathericons/feather/blob/master/LICENSE -->
+<symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
+  <title id="svg-external-link-title">(external link)</title>
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+</symbol>
+
+  
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+  <title>Document</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+  </svg>
+</symbol>
+
+    <symbol id="svg-search" viewBox="0 0 24 24">
+  <title>Search</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+    <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+</symbol>
+
+  
+  
+    <!-- Bootstrap Icons. MIT License: https://github.com/twbs/icons/blob/main/LICENSE.md -->
+<symbol id="svg-copy" viewBox="0 0 16 16">
+  <title>Copy</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+  </svg>
+</symbol>
+<symbol id="svg-copied" viewBox="0 0 16 16">
+  <title>Copied</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
+    <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
+  </svg>
+</symbol>
+
+  
+</svg>
+
+  
+    <header class="side-bar">
+  <div class="site-header">
+    <a href="/hf-pincfg/development/" class="site-title lh-tight">
+  <div class="site-logo" role="img" aria-label="HardFOC Pin Configuration Library - development"></div>
+
+</a>
+    <button id="menu-button" class="site-button btn-reset" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg>
+    </button>
+  </div>
+
+  <nav aria-label="Main" id="site-nav" class="site-nav">
+  
+  
+    <ul class="nav-list"><li class="nav-list-item"><a href="/hf-pincfg/development/" class="nav-list-link">Home</a></li><li class="nav-list-item"><a href="/hf-pincfg/development/docs/setup.html" class="nav-list-link">Setup Guide</a></li><li class="nav-list-item"><a href="/hf-pincfg/development/docs/examples.html" class="nav-list-link">Usage Examples</a></li><li class="nav-list-item"><a href="/hf-pincfg/development/docs/api.html" class="nav-list-link">API Reference</a></li><li class="nav-list-item"><a href="/hf-pincfg/development/docs/contributing.html" class="nav-list-link">Contributing</a></li></ul>
+  
+</nav>
+
+
+<div class="d-md-block d-none site-footer">
+  
+  
+    This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+  
+  </div>
+</header>
+
+  
+  <div class="main" id="top">
+    <div id="main-header" class="main-header">
+  
+    
+
+<div class="search" role="search">
+  <div class="search-input-wrap">
+    <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search HardFOC Pin Configuration Library - development" autocomplete="off">
+    <label for="search-input" class="search-label">
+      <span class="sr-only">Search HardFOC Pin Configuration Library - development</span>
+      <svg viewBox="0 0 24 24" class="search-icon" aria-hidden="true"><use xlink:href="#svg-search"></use></svg>
+    </label>
+  </div>
+  <div id="search-results" class="search-results"></div>
+</div>
+
+  
+  
+  
+    <nav aria-label="Auxiliary" class="aux-nav">
+  <ul class="aux-nav-list">
+    
+      <li class="aux-nav-list-item">
+        <a href="/hf-pincfg/development/api/index.html" class="site-button"
+          
+        >
+          📖 API Reference
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://github.com/hardfoc/hf-pincfg" class="site-button"
+          
+        >
+          📚 GitHub Repository
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://github.com/hardfoc/hf-pincfg/issues" class="site-button"
+          
+        >
+          🐛 Report Issues
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://github.com/hardfoc/hf-pincfg/stargazers" class="site-button"
+          
+        >
+          ⭐ Star on GitHub
+        </a>
+      </li>
+    
+  </ul>
+</nav>
+
+  
+</div>
+
+    <div class="main-content-wrap">
+      
+      <div id="main-content" class="main-content">
+        <main>
+          
+            <h1 class="no_toc" id="setup-guide">
+  
+  
+    <a href="#setup-guide" class="anchor-heading" aria-labelledby="setup-guide"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Setup Guide
+  
+  
+</h1>
+    
+
+<p>This guide will help you get started with the HF-PinCfg library in your embedded project.</p>
+<h2 class="no_toc text-delta" id="table-of-contents">
+  
+  
+    <a href="#table-of-contents" class="anchor-heading" aria-labelledby="table-of-contents"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Table of Contents
+  
+  
+</h2>
+    
+
+<ol id="markdown-toc">
+  <li><a href="#prerequisites" id="markdown-toc-prerequisites">Prerequisites</a>    <ol>
+      <li><a href="#compiler-requirements" id="markdown-toc-compiler-requirements">Compiler Requirements</a></li>
+      <li><a href="#platform-requirements" id="markdown-toc-platform-requirements">Platform Requirements</a></li>
+    </ol>
+  </li>
+  <li><a href="#installation" id="markdown-toc-installation">Installation</a>    <ol>
+      <li><a href="#method-1-direct-integration" id="markdown-toc-method-1-direct-integration">Method 1: Direct Integration</a></li>
+      <li><a href="#method-2-git-submodule" id="markdown-toc-method-2-git-submodule">Method 2: Git Submodule</a></li>
+      <li><a href="#method-3-package-manager" id="markdown-toc-method-3-package-manager">Method 3: Package Manager</a></li>
+    </ol>
+  </li>
+  <li><a href="#quick-start" id="markdown-toc-quick-start">Quick Start</a>    <ol>
+      <li><a href="#basic-usage" id="markdown-toc-basic-usage">Basic Usage</a></li>
+      <li><a href="#creating-custom-configurations" id="markdown-toc-creating-custom-configurations">Creating Custom Configurations</a></li>
+    </ol>
+  </li>
+  <li><a href="#verification" id="markdown-toc-verification">Verification</a>    <ol>
+      <li><a href="#compile-test" id="markdown-toc-compile-test">Compile Test</a></li>
+      <li><a href="#build-and-run" id="markdown-toc-build-and-run">Build and Run</a></li>
+    </ol>
+  </li>
+  <li><a href="#next-steps" id="markdown-toc-next-steps">Next Steps</a></li>
+  <li><a href="#troubleshooting" id="markdown-toc-troubleshooting">Troubleshooting</a>    <ol>
+      <li><a href="#common-issues" id="markdown-toc-common-issues">Common Issues</a></li>
+      <li><a href="#getting-help" id="markdown-toc-getting-help">Getting Help</a></li>
+    </ol>
+  </li>
+</ol><hr />
+<h2 id="prerequisites">
+  
+  
+    <a href="#prerequisites" class="anchor-heading" aria-labelledby="prerequisites"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Prerequisites
+  
+  
+</h2>
+    
+
+<p>Before using HF-PinCfg, ensure your development environment meets these requirements:</p>
+<h3 id="compiler-requirements">
+  
+  
+    <a href="#compiler-requirements" class="anchor-heading" aria-labelledby="compiler-requirements"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Compiler Requirements
+  
+  
+</h3>
+    
+
+<ul>
+  <li><strong>C++17 or later</strong>: The library uses modern C++ features including <code class="language-plaintext highlighter-rouge">constexpr</code> and template metaprogramming</li>
+  <li><strong>Supported Compilers</strong>:
+    <ul>
+      <li>GCC 7.0+</li>
+      <li>Clang 6.0+</li>
+      <li>MSVC 19.14+ (Visual Studio 2017 15.7+)</li>
+    </ul>
+  </li>
+</ul>
+<h3 id="platform-requirements">
+  
+  
+    <a href="#platform-requirements" class="anchor-heading" aria-labelledby="platform-requirements"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Platform Requirements
+  
+  
+</h3>
+    
+
+<ul>
+  <li><strong>Embedded Systems</strong>: Any microcontroller platform with C++17 compiler support</li>
+  <li><strong>Development Boards</strong>: Tested on ESP32, STM32, Arduino platforms</li>
+  <li><strong>Operating Systems</strong>: Works on bare metal, FreeRTOS, and other embedded RTOS</li>
+</ul>
+<h2 id="installation">
+  
+  
+    <a href="#installation" class="anchor-heading" aria-labelledby="installation"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Installation
+  
+  
+</h2>
+    
+<h3 id="method-1-direct-integration">
+  
+  
+    <a href="#method-1-direct-integration" class="anchor-heading" aria-labelledby="method-1-direct-integration"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Method 1: Direct Integration
+  
+  
+</h3>
+    
+
+<ol>
+  <li><strong>Download the Library</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>git clone https://github.com/hardfoc/hf-pincfg.git
+</pre></td></tr></tbody></table></div></code></pre></div>    </div>
+  </li>
+  <li><strong>Copy Headers to Your Project</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">cp </span>hf-pincfg/src/<span class="k">*</span>.hpp your-project/include/
+</pre></td></tr></tbody></table></div></code></pre></div>    </div>
+  </li>
+  <li><strong>Include in Your Code</strong>
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">"hf_functional_pin_config.hpp"</span><span class="cp">
+#include</span> <span class="cpf">"hf_functional_pin_config_vortex_v1.hpp"</span><span class="c1">  // Or your platform</span><span class="cp">
+</span></pre></td></tr></tbody></table></div></code></pre></div>    </div>
+  </li>
+</ol>
+<h3 id="method-2-git-submodule">
+  
+  
+    <a href="#method-2-git-submodule" class="anchor-heading" aria-labelledby="method-2-git-submodule"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Method 2: Git Submodule
+  
+  
+</h3>
+    
+
+<ol>
+  <li><strong>Add as Submodule</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>git submodule add https://github.com/hardfoc/hf-pincfg.git third-party/hf-pincfg
+</pre></td></tr></tbody></table></div></code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>Update Your Build System</strong></p>
+
+    <p><strong>CMake Example:</strong></p>
+    <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="c1"># Add include directory</span>
+<span class="nb">target_include_directories</span><span class="p">(</span>your-target PRIVATE 
+    third-party/hf-pincfg/src
+<span class="p">)</span>
+</pre></td></tr></tbody></table></div></code></pre></div>    </div>
+
+    <p><strong>Arduino Example:</strong></p>
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="c1">// In your Arduino sketch folder, create a symlink:</span>
+<span class="c1">// ln -s ../third-party/hf-pincfg/src hf-pincfg</span>
+<span class="cp">#include</span> <span class="cpf">"hf-pincfg/hf_functional_pin_config.hpp"</span><span class="cp">
+</span></pre></td></tr></tbody></table></div></code></pre></div>    </div>
+  </li>
+</ol>
+<h3 id="method-3-package-manager">
+  
+  
+    <a href="#method-3-package-manager" class="anchor-heading" aria-labelledby="method-3-package-manager"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Method 3: Package Manager
+  
+  
+</h3>
+    
+
+<p>Support for popular C++ package managers is planned:</p>
+
+<ul>
+  <li><strong>vcpkg</strong>: Coming soon</li>
+  <li><strong>Conan</strong>: Coming soon</li>
+  <li><strong>PlatformIO Library</strong>: Coming soon</li>
+</ul>
+<h2 id="quick-start">
+  
+  
+    <a href="#quick-start" class="anchor-heading" aria-labelledby="quick-start"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Quick Start
+  
+  
+</h2>
+    
+<h3 id="basic-usage">
+  
+  
+    <a href="#basic-usage" class="anchor-heading" aria-labelledby="basic-usage"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Basic Usage
+  
+  
+</h3>
+    
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">"hf_functional_pin_config.hpp"</span><span class="cp">
+#include</span> <span class="cpf">"hf_functional_pin_config_vortex_v1.hpp"</span><span class="cp">
+</span>
+<span class="c1">// Use the default Vortex V1 configuration</span>
+<span class="k">using</span> <span class="n">PinConfig</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">vortex_v1</span><span class="o">::</span><span class="n">DefaultConfig</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Access pin definitions</span>
+    <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">status_led</span> <span class="o">=</span> <span class="n">PinConfig</span><span class="o">::</span><span class="n">status_led</span><span class="p">;</span>
+    <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">uart_pin</span> <span class="o">=</span> <span class="n">PinConfig</span><span class="o">::</span><span class="n">debug_uart_tx</span><span class="p">;</span>
+    
+    <span class="c1">// Initialize hardware using the pin definitions</span>
+    <span class="n">pinMode</span><span class="p">(</span><span class="n">status_led</span><span class="p">.</span><span class="n">pin</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">,</span> <span class="n">SERIAL_8N1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">uart_pin</span><span class="p">.</span><span class="n">pin</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+<h3 id="creating-custom-configurations">
+  
+  
+    <a href="#creating-custom-configurations" class="anchor-heading" aria-labelledby="creating-custom-configurations"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Creating Custom Configurations
+  
+  
+</h3>
+    
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">"hf_functional_pin_config.hpp"</span><span class="cp">
+</span>
+<span class="c1">// Define your custom pin configuration</span>
+<span class="k">struct</span> <span class="nc">MyCustomConfig</span> <span class="p">{</span>
+    <span class="c1">// Status indicators</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span> <span class="n">status_led</span><span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="s">"Status LED"</span><span class="p">};</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span> <span class="n">error_led</span><span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="s">"Error LED"</span><span class="p">};</span>
+    
+    <span class="c1">// Communication pins</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span> <span class="n">uart_tx</span><span class="p">{</span><span class="mi">17</span><span class="p">,</span> <span class="s">"UART TX"</span><span class="p">};</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span> <span class="n">uart_rx</span><span class="p">{</span><span class="mi">16</span><span class="p">,</span> <span class="s">"UART RX"</span><span class="p">};</span>
+    
+    <span class="c1">// SPI pins</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span> <span class="n">spi_mosi</span><span class="p">{</span><span class="mi">23</span><span class="p">,</span> <span class="s">"SPI MOSI"</span><span class="p">};</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span> <span class="n">spi_miso</span><span class="p">{</span><span class="mi">19</span><span class="p">,</span> <span class="s">"SPI MISO"</span><span class="p">};</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span> <span class="n">spi_sck</span><span class="p">{</span><span class="mi">18</span><span class="p">,</span> <span class="s">"SPI SCK"</span><span class="p">};</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">PinDefinition</span> <span class="n">spi_cs</span><span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="s">"SPI CS"</span><span class="p">};</span>
+<span class="p">};</span>
+
+<span class="c1">// Use your custom configuration</span>
+<span class="k">using</span> <span class="n">PinConfig</span> <span class="o">=</span> <span class="n">MyCustomConfig</span><span class="p">;</span>
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+<h2 id="verification">
+  
+  
+    <a href="#verification" class="anchor-heading" aria-labelledby="verification"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Verification
+  
+  
+</h2>
+    
+<h3 id="compile-test">
+  
+  
+    <a href="#compile-test" class="anchor-heading" aria-labelledby="compile-test"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Compile Test
+  
+  
+</h3>
+    
+
+<p>Create a simple test file to verify your setup:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">"hf_functional_pin_config.hpp"</span><span class="cp">
+#include</span> <span class="cpf">"hf_functional_pin_config_vortex_v1.hpp"</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">using</span> <span class="n">Config</span> <span class="o">=</span> <span class="n">hf</span><span class="o">::</span><span class="n">functional_pin_config</span><span class="o">::</span><span class="n">vortex_v1</span><span class="o">::</span><span class="n">DefaultConfig</span><span class="p">;</span>
+    
+    <span class="c1">// This should compile without errors</span>
+    <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">led_pin</span> <span class="o">=</span> <span class="n">Config</span><span class="o">::</span><span class="n">status_led</span><span class="p">;</span>
+    <span class="k">static_assert</span><span class="p">(</span><span class="n">led_pin</span><span class="p">.</span><span class="n">pin</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="s">"Pin number should be valid"</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+<h3 id="build-and-run">
+  
+  
+    <a href="#build-and-run" class="anchor-heading" aria-labelledby="build-and-run"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Build and Run
+  
+  
+</h3>
+    
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><div class="table-wrapper"><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>g++ <span class="nt">-std</span><span class="o">=</span>c++17 <span class="nt">-I</span>/path/to/hf-pincfg/src test.cpp <span class="nt">-o</span> <span class="nb">test</span>
+./test
+</pre></td></tr></tbody></table></div></code></pre></div></div>
+
+<p>If it compiles and runs without errors, your setup is correct!</p>
+<h2 id="next-steps">
+  
+  
+    <a href="#next-steps" class="anchor-heading" aria-labelledby="next-steps"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Next Steps
+  
+  
+</h2>
+    
+
+<ul>
+  <li><strong>Explore Examples</strong>: Check out the <a href="/hf-pincfg/development/docs/examples.html">Usage Examples</a> page</li>
+  <li><strong>Learn the API</strong>: Read the <a href="/hf-pincfg/development/docs/api.html">API Reference</a></li>
+  <li><strong>Contribute</strong>: Help improve the library with <a href="/hf-pincfg/development/docs/contributing.html">Contributing Guide</a></li>
+</ul>
+<h2 id="troubleshooting">
+  
+  
+    <a href="#troubleshooting" class="anchor-heading" aria-labelledby="troubleshooting"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Troubleshooting
+  
+  
+</h2>
+    
+<h3 id="common-issues">
+  
+  
+    <a href="#common-issues" class="anchor-heading" aria-labelledby="common-issues"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Common Issues
+  
+  
+</h3>
+    
+
+<p><strong>Compiler Errors About C++17 Features</strong></p>
+<ul>
+  <li>Ensure your compiler supports C++17 and the <code class="language-plaintext highlighter-rouge">-std=c++17</code> flag is set</li>
+</ul>
+
+<p><strong>Missing Header Files</strong></p>
+<ul>
+  <li>Verify the header files are in your include path</li>
+  <li>Check that file permissions allow reading</li>
+</ul>
+
+<p><strong>Pin Conflicts</strong></p>
+<ul>
+  <li>Review your pin assignments for conflicts</li>
+  <li>Use the built-in validation features to catch issues early</li>
+</ul>
+
+<p><strong>Platform-Specific Issues</strong></p>
+<ul>
+  <li>Ensure you’re using the correct platform configuration</li>
+  <li>Check hardware documentation for pin availability</li>
+</ul>
+<h3 id="getting-help">
+  
+  
+    <a href="#getting-help" class="anchor-heading" aria-labelledby="getting-help"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Getting Help
+  
+  
+</h3>
+    
+
+<p>If you encounter issues not covered here:</p>
+
+<ol>
+  <li>Check the <a href="https://github.com/hardfoc/hf-pincfg/issues">GitHub Issues</a> for similar problems</li>
+  <li>Create a new issue with detailed information about your setup</li>
+</ol>
+
+          
+
+          
+            
+          
+        </main>
+        
+<hr>
+<footer>
+  
+
+  <p class="text-small mb-0">Built with ❤️ using <a href='https://just-the-docs.github.io/just-the-docs/'>Just the Docs</a> • <a href='https://github.com/hardfoc/hf-pincfg/blob/main/LICENSE'>MIT License</a> • <a href='https://github.com/hardfoc/hf-pincfg'>View on GitHub</a>
+</p>
+
+  <div class="d-md-none mt-4 fs-2">
+    
+    
+      This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+    
+  </div>
+</footer>
+
+      </div>
+    </div>
+    
+      
+<button id="search-button" class="search-button btn-reset" aria-label="Focus on search">
+  <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-search"></use></svg>
+</button>
+
+
+<div class="search-overlay"></div>
+
+    
+  </div>
+
+  
+</body>
+</html>
+
