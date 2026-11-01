@@ -9,7 +9,7 @@
 # -----------------------------------------------------------------------------
 title: "HardFOC Pin Configuration Library"
 description: >
-  Hardware-Agnostic C++ Pin Configuration Library for Embedded Systems - 
+  Hardware-Agnostic C++ Pin Configuration Library for Embedded Systems -
   Providing type-safe, compile-time pin mapping and configuration management
 
 baseurl: "/hf-pincfg"
