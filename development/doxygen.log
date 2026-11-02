@@ -1,7 +1,7 @@
-warning: ignoring unsupported tag 'INPUT_FILE_FILTER' at line 97, file /tmp/doxyfile.I6Pqsx
-warning: Tag 'HTML_TIMESTAMP' at line 186 of file '/tmp/doxyfile.I6Pqsx' has become obsolete.
+warning: ignoring unsupported tag 'INPUT_FILE_FILTER' at line 97, file /tmp/doxyfile.uVStGX
+warning: Tag 'HTML_TIMESTAMP' at line 186 of file '/tmp/doxyfile.uVStGX' has become obsolete.
          To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
-warning: Tag 'FORMULA_TRANSPARENT' at line 222 of file '/tmp/doxyfile.I6Pqsx' has become obsolete.
+warning: Tag 'FORMULA_TRANSPARENT' at line 222 of file '/tmp/doxyfile.uVStGX' has become obsolete.
          To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
 warning: argument 'AUTO' for option HTML_COLORSTYLE is not a valid enum value
 Using the default: AUTO_LIGHT!
@@ -20,6 +20,7 @@ Searching for files in directory /home/runner/work/hf-pincfg/hf-pincfg/.git/logs
 Searching for files in directory /home/runner/work/hf-pincfg/hf-pincfg/.git/logs/refs/remotes
 Searching for files in directory /home/runner/work/hf-pincfg/hf-pincfg/.git/logs/refs/remotes/origin
 Searching for files in directory /home/runner/work/hf-pincfg/hf-pincfg/.git/logs/refs/remotes/origin/fix
+Searching for files in directory /home/runner/work/hf-pincfg/hf-pincfg/.git/logs/refs/remotes/origin/ci
 Searching for files in directory /home/runner/work/hf-pincfg/hf-pincfg/.git/info
 Searching for files in directory /home/runner/work/hf-pincfg/hf-pincfg/.git/hooks
 Searching for files in directory /home/runner/work/hf-pincfg/hf-pincfg/.git/refs
@@ -28,6 +29,7 @@ Searching for files in directory /home/runner/work/hf-pincfg/hf-pincfg/.git/refs
 Searching for files in directory /home/runner/work/hf-pincfg/hf-pincfg/.git/refs/remotes
 Searching for files in directory /home/runner/work/hf-pincfg/hf-pincfg/.git/refs/remotes/origin
 Searching for files in directory /home/runner/work/hf-pincfg/hf-pincfg/.git/refs/remotes/origin/fix
+Searching for files in directory /home/runner/work/hf-pincfg/hf-pincfg/.git/refs/remotes/origin/ci
 Searching for files in directory /home/runner/work/hf-pincfg/hf-pincfg/.git/objects
 Searching for files in directory /home/runner/work/hf-pincfg/hf-pincfg/.git/objects/info
 Searching for files in directory /home/runner/work/hf-pincfg/hf-pincfg/.git/objects/pack
