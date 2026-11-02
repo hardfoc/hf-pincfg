@@ -12,7 +12,7 @@ PROJECT_NAME           = "HF-PinCfg Library"
 PROJECT_NUMBER         = "v1.0.0"
 PROJECT_BRIEF          = "Functional Pin Abstraction Layer - Defines WHAT pins do on HardFOC boards, not WHERE they are"
 PROJECT_LOGO           =
-OUTPUT_DIRECTORY       = docs
+OUTPUT_DIRECTORY       = build/doxygen
 CREATE_SUBDIRS         = NO
 ALLOW_UNICODE_NAMES    = NO
 OUTPUT_LANGUAGE        = English
@@ -164,27 +164,10 @@ IGNORE_PREFIX          = HF_ \
 GENERATE_HTML          = YES
 HTML_OUTPUT            = html
 HTML_FILE_EXTENSION    = .html
-HTML_HEADER            = _config/doxygen-extensions/header.html
-HTML_FOOTER            = _config/doxygen-extensions/footer.html
-HTML_STYLESHEET        =
-HTML_EXTRA_STYLESHEET  = _config/doxygen-extensions/doxygen-awesome-css/doxygen-awesome.css \
-                        _config/doxygen-extensions/doxygen-awesome-css/doxygen-awesome-sidebar-only.css \
-                        _config/doxygen-extensions/custom-styles.css
-HTML_EXTRA_FILES       = _config/doxygen-extensions/doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js \
-                         _config/doxygen-extensions/doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js \
-                         _config/doxygen-extensions/doxygen-awesome-css/doxygen-awesome-paragraph-link.js \
-                         _config/doxygen-extensions/doxygen-awesome-css/doxygen-awesome-interactive-toc.js \
-                         _config/doxygen-extensions/doxygen-awesome-css/doxygen-awesome-tabs.js
 
 # Disable built-in copy to clipboard (required for doxygen-awesome fragment copy button)
-HTML_COPY_CLIPBOARD    = NO
 
-HTML_COLORSTYLE        = AUTO
-HTML_COLORSTYLE_HUE    = 220
-HTML_COLORSTYLE_SAT    = 100
-HTML_COLORSTYLE_GAMMA  = 80
 HTML_TIMESTAMP         = NO
-HTML_DYNAMIC_MENUS     = YES
 HTML_DYNAMIC_SECTIONS  = NO
 HTML_INDEX_NUM_ENTRIES = 100
 GENERATE_DOCSET        = NO
@@ -210,9 +193,6 @@ QHP_SECT_FILTER_ATTRS  =
 QHG_LOCATION           =
 GENERATE_ECLIPSEHELP   = NO
 ECLIPSE_DOC_ID         = org.doxygen.Project
-DISABLE_INDEX          = NO
-GENERATE_TREEVIEW      = NO
-FULL_SIDEBAR           = NO
 ENUM_VALUES_PER_LINE   = 4
 TREEVIEW_WIDTH         = 250
 EXT_LINKS_IN_WINDOW    = NO
@@ -319,7 +299,6 @@ SKIP_FUNCTION_MACROS   = YES
 #---------------------------------------------------------------------------
 
 TAGFILES               =
-GENERATE_TAGFILE       =
 ALLEXTERNALS           = NO
 EXTERNAL_GROUPS        = YES
 EXTERNAL_PAGES         = YES

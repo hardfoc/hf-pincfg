@@ -1,11 +1,3 @@
----
-layout: default
-title: Home
-nav_order: 1
-description: "Hardware Agnostic C++ Pin Configuration Library for Embedded Systems"
-permalink: /
----
-
 # HF-PinCfg Library
 {: .fs-9 }
 

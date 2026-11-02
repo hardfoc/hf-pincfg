@@ -1,9 +1,3 @@
----
-layout: default
-title: Contributing
-nav_order: 5
----
-
 # Contributing to HF-PinCfg
 {: .no_toc }
 

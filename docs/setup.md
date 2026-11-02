@@ -1,9 +1,3 @@
----
-layout: default
-title: Setup Guide
-nav_order: 2
----
-
 # Setup Guide
 {: .no_toc }
 

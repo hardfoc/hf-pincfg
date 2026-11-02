@@ -1,9 +1,3 @@
----
-layout: default
-title: Usage Examples
-nav_order: 3
----
-
 # Usage Examples
 {: .no_toc }
 

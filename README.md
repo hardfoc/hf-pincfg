@@ -76,7 +76,7 @@ HF-PinCfg provides **functional abstraction** through a two-layer system:
 - Provides semantic identifiers like `MOTOR_DRIVER_SPI_CS`, `ENCODER_SPI_MISO`
 - Board selection logic chooses appropriate implementation
 
-### Layer 2: Physical Implementation (Board Specific)  
+### Layer 2: Physical Implementation (Board Specific)
 - **`hf_functional_pin_config_vortex_v1.hpp`** - Maps functional pins to physical GPIO pins on Vortex V1
 - **Future implementations** - Each HardFOC board variant maps the same functional pins to its hardware
 
