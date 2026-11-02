@@ -1,0 +1,19 @@
+---
+# Site navigation (mkdocs-awesome-nav): the core-library page set (DOCS-STYLE-GUIDE.md in hf-general-ci-tools).
+nav:
+  - Home: index.md
+  - Get started:
+      - Quickstart: quickstart.md
+      - Integration: integration.md
+  - Concepts:
+      - Pin model: concepts.md
+  - Guides:
+      - API guide: api-guide.md
+      - Adding a board: adding-a-board.md
+  - Reference:
+      - Vortex V1 pin map: vortex-v1.md
+      - Flux V1 pin map: flux-v1.md
+      - API reference: api-reference.md
+      - Testing and CI: testing.md
+      - Figures: diagrams/index.md
+      - Changelog: changelog.md
