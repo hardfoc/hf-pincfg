@@ -20,7 +20,7 @@ concurrency:
 jobs:
   test-cpp-lint:
     name: Test C++ Linting Tools
-    uses: hardfoc/hf-general-ci-tools/.github/workflows/ru-cpp-lint.yml@main
+    uses: hardfoc/hf-general-ci-tools/.github/workflows/ru-cpp-lint.yml@v1
     with:
       # =============================================================================
       # Clang Configuration
@@ -46,3 +46,14 @@ jobs:
       # Quality Checks
       # =============================================================================
       tidy_checks: ""
+
+  # ✅ Single required check: passes only if every job above passed
+  ci-gate:
+    name: CI gate
+    needs: [test-cpp-lint]
+    if: always()
+    uses: hardfoc/hf-general-ci-tools/.github/workflows/ru-ci-gate.yml@v1
+    permissions:
+      contents: read
+    with:
+      needs_json: ${{ toJSON(needs) }}
