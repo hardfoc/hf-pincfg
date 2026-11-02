@@ -11,4 +11,4 @@ permissions:
 jobs:
   release:
     name: Create Release
-    uses: hardfoc/hf-general-ci-tools/.github/workflows/ru-release.yml@main
+    uses: hardfoc/hf-general-ci-tools/.github/workflows/ru-release.yml@v1
