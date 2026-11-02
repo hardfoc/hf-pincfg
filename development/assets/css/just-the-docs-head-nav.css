@@ -34,21 +34,21 @@
 
 
   <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>HardFOC Pin Configuration Library - development | Hardware-Agnostic C++ Pin Configuration Library for Embedded Systems - Providing type-safe, compile-time pin mapping and configuration management</title>
+<title>HardFOC Pin Configuration Library | Hardware-Agnostic C++ Pin Configuration Library for Embedded Systems - Providing type-safe, compile-time pin mapping and configuration management</title>
 <meta name="generator" content="Jekyll v3.10.0" />
-<meta property="og:title" content="HardFOC Pin Configuration Library - development" />
+<meta property="og:title" content="HardFOC Pin Configuration Library" />
 <meta name="author" content="HardFOC Team" />
 <meta property="og:locale" content="en" />
 <meta name="description" content="Hardware-Agnostic C++ Pin Configuration Library for Embedded Systems - Providing type-safe, compile-time pin mapping and configuration management" />
 <meta property="og:description" content="Hardware-Agnostic C++ Pin Configuration Library for Embedded Systems - Providing type-safe, compile-time pin mapping and configuration management" />
 <link rel="canonical" href="https://hardfoc.github.io/hf-pincfg/development/assets/css/just-the-docs-head-nav.css" />
 <meta property="og:url" content="https://hardfoc.github.io/hf-pincfg/development/assets/css/just-the-docs-head-nav.css" />
-<meta property="og:site_name" content="HardFOC Pin Configuration Library - development" />
+<meta property="og:site_name" content="HardFOC Pin Configuration Library" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="HardFOC Pin Configuration Library - development" />
+<meta property="twitter:title" content="HardFOC Pin Configuration Library" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"HardFOC Team","url":"https://github.com/hardfoc"},"description":"Hardware-Agnostic C++ Pin Configuration Library for Embedded Systems - Providing type-safe, compile-time pin mapping and configuration management","headline":"HardFOC Pin Configuration Library - development","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hardfoc.github.io/hf-pincfg/development/assets/images/logo.png"},"name":"HardFOC Team"},"url":"https://hardfoc.github.io/hf-pincfg/development/assets/css/just-the-docs-head-nav.css"}</script>
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"HardFOC Team","url":"https://github.com/hardfoc"},"description":"Hardware-Agnostic C++ Pin Configuration Library for Embedded Systems - Providing type-safe, compile-time pin mapping and configuration management","headline":"HardFOC Pin Configuration Library","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hardfoc.github.io/hf-pincfg/development/assets/images/logo.png"},"name":"HardFOC Team"},"url":"https://hardfoc.github.io/hf-pincfg/development/assets/css/just-the-docs-head-nav.css"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -126,7 +126,7 @@
     <header class="side-bar">
   <div class="site-header">
     <a href="/hf-pincfg/development/" class="site-title lh-tight">
-  <div class="site-logo" role="img" aria-label="HardFOC Pin Configuration Library - development"></div>
+  <div class="site-logo" role="img" aria-label="HardFOC Pin Configuration Library"></div>
 
 </a>
     <button id="menu-button" class="site-button btn-reset" aria-label="Menu" aria-expanded="false">
@@ -158,9 +158,9 @@
 
 <div class="search" role="search">
   <div class="search-input-wrap">
-    <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search HardFOC Pin Configuration Library - development" autocomplete="off">
+    <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search HardFOC Pin Configuration Library" autocomplete="off">
     <label for="search-input" class="search-label">
-      <span class="sr-only">Search HardFOC Pin Configuration Library - development</span>
+      <span class="sr-only">Search HardFOC Pin Configuration Library</span>
       <svg viewBox="0 0 24 24" class="search-icon" aria-hidden="true"><use xlink:href="#svg-search"></use></svg>
     </label>
   </div>
