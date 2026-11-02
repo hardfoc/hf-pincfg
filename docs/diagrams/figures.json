@@ -1,0 +1,14 @@
+{
+  "pin-model": {
+    "title": "One row per pin, every table generated",
+    "alt": "Flow diagram: the HAL build defines one HARDFOC_BOARD macro, the selector header includes that board's header, whose X-macro lists expand into the pin enums, name and category tables and mapping arrays, which the board HAL's GPIO and ADC managers read.",
+    "description": "From top to bottom. The HAL's build defines one HARDFOC_BOARD_* macro; the selector header (src/hf_functional_pin_config.hpp) includes that board's header. The board header holds two X-macro lists, one row per GPIO function and one per ADC channel. Expanding the lists produces the enums, name and category tables and the mapping arrays (names read from the Vortex V1 header). The board HAL's managers iterate the mapping arrays and look pins up by enum; no other code writes a pin number.",
+    "profile": "overview",
+    "width": 1200,
+    "source": "docs/diagrams/figures/pin-model.py",
+    "sources": [
+      "src/hf_functional_pin_config.hpp:board selector",
+      "src/hf_functional_pin_config_vortex_v1.hpp:X-macro lists and generated tables"
+    ]
+  }
+}

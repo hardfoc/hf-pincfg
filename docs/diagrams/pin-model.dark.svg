@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="768" viewBox="0 0 1200 768" role="img" aria-labelledby="pin-model-title pin-model-desc" font-family="Inter, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">
+<title id="pin-model-title">One row per pin, every table generated</title>
+<desc id="pin-model-desc">Flow diagram: the HAL build defines one HARDFOC_BOARD macro, the selector header includes that board's header, whose X-macro lists expand into the pin enums, name and category tables and mapping arrays, which the board HAL's GPIO and ADC managers read.</desc>
+<defs><marker id="fk-arrow-rail" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6C7889"/></marker></defs>
+<rect x="0.5" y="0.5" width="1199" height="767" rx="16" fill="#0E131A" stroke="#283241"/>
+<text x="32" y="46.8" font-size="16" font-weight="700" letter-spacing="1.2" fill="#C7CBFF">CONCEPTS</text>
+<text x="32" y="85.6" font-size="32" font-weight="700" fill="#E8EDF3">One row per pin, every table generated</text>
+<text x="32" y="115.4" font-size="18" fill="#9AA6B5">Change a pin in one row; the enums, names and mapping arrays follow at compile time.</text>
+<rect x="32" y="131.4" width="1136" height="1" fill="#252F3C"/>
+<rect x="32" y="428.4" width="1136" height="123" rx="16" fill="#1C1F3D" stroke="#3B4080" stroke-width="1.2"/>
+<path d="M600 241.4 L600 273.4" fill="none" stroke="#6C7889" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#fk-arrow-rail)"/>
+<path d="M600 392.4 L600 424.4" fill="none" stroke="#6C7889" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#fk-arrow-rail)"/>
+<path d="M600 555.4 L600 587.4" fill="none" stroke="#6C7889" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#fk-arrow-rail)"/>
+<rect x="32" y="149.4" width="1136" height="88" rx="12" fill="#151C26" stroke="#3A4657" stroke-width="1"/>
+<rect x="32" y="157.4" width="4" height="72" rx="2" fill="#94A3B8"/>
+<rect x="32" y="277.4" width="1136" height="111" rx="12" fill="#1C1F3D" stroke="#8C93FF" stroke-width="1.4"/>
+<rect x="32" y="285.4" width="4" height="95" rx="2" fill="#8C93FF"/>
+<rect x="32" y="591.4" width="1136" height="114" rx="12" fill="#0F2A28" stroke="#2DD4BF" stroke-width="1.4"/>
+<rect x="32" y="599.4" width="4" height="98" rx="2" fill="#2DD4BF"/>
+<text x="56" y="184.4" font-size="20" font-weight="700" fill="#E8EDF3">Board selection (HAL build)</text>
+<text x="56" y="213.6" font-size="16" font-family="'JetBrains Mono', 'SFMono-Regular', Menlo, Consolas, monospace" fill="#D2DAE4">HARDFOC_BOARD_FLUX_V1  HARDFOC_BOARD_VORTEX_V1  HARDFOC_BOARD_NONE</text>
+<text x="56" y="312.4" font-size="20" font-weight="700" fill="#C7CBFF">Board header: X-macro lists</text>
+<text x="56" y="341.6" font-size="16" font-family="'JetBrains Mono', 'SFMono-Regular', Menlo, Consolas, monospace" fill="#D2DAE4">HF_FUNCTIONAL_GPIO_PIN_LIST  HF_FUNCTIONAL_ADC_CHANNEL_LIST</text>
+<text x="56" y="364.8" font-size="16" font-family="'JetBrains Mono', 'SFMono-Regular', Menlo, Consolas, monospace" fill="#D2DAE4">X(SPI2_CS_TMC9660, "COMM_SPI2_CS_TMC9660", COMM, ESP32_INTERNAL, 0, 0, 18, INVERTED, ...)</text>
+<rect x="48" y="473.4" width="187.2" height="26" rx="13" fill="#1C1F3D" stroke="#3B4080" stroke-width="1"/>
+<text x="56" y="491.5" font-size="16" font-weight="700" fill="#C7CBFF">HfFunctionalGpioPin</text>
+<rect x="243.2" y="473.4" width="224.8" height="26" rx="13" fill="#1C1F3D" stroke="#3B4080" stroke-width="1"/>
+<text x="251.2" y="491.5" font-size="16" font-weight="700" fill="#C7CBFF">HfFunctionalAdcChannel</text>
+<rect x="476" y="473.4" width="245.1" height="26" rx="13" fill="#1C1F3D" stroke="#3B4080" stroke-width="1"/>
+<text x="484" y="491.5" font-size="16" font-weight="700" fill="#C7CBFF">HfFunctionalGpioPinNames</text>
+<rect x="729.1" y="473.4" width="278.2" height="26" rx="13" fill="#1C1F3D" stroke="#3B4080" stroke-width="1"/>
+<text x="737.1" y="491.5" font-size="16" font-weight="700" fill="#C7CBFF">HfFunctionalGpioPinCategories</text>
+<rect x="48" y="507.4" width="177.2" height="26" rx="13" fill="#1C1F3D" stroke="#3B4080" stroke-width="1"/>
+<text x="56" y="525.5" font-size="16" font-weight="700" fill="#C7CBFF">HF_GPIO_MAPPING</text>
+<rect x="233.2" y="507.4" width="282.6" height="26" rx="13" fill="#1C1F3D" stroke="#3B4080" stroke-width="1"/>
+<text x="241.2" y="525.5" font-size="16" font-weight="700" fill="#C7CBFF">HfFunctionalAdcChannelNames</text>
+<rect x="523.8" y="507.4" width="173.1" height="26" rx="13" fill="#1C1F3D" stroke="#3B4080" stroke-width="1"/>
+<text x="531.8" y="525.5" font-size="16" font-weight="700" fill="#C7CBFF">HF_ADC_MAPPING</text>
+<text x="48" y="457.4" font-size="17" font-weight="700" fill="#C7CBFF">GENERATED AT COMPILE TIME</text>
+<text x="335.4" y="457.4" font-size="16" fill="#C7CBFF">constexpr arrays, no heap, no init code</text>
+<text x="56" y="626.4" font-size="20" font-weight="700" fill="#A7F3E6">Board HAL managers</text>
+<text x="56" y="657" font-size="17" fill="#D2DAE4">GpioManager registers each gpio / user row on its chip; AdcManager each ADC row;</text>
+<text x="56" y="681.7" font-size="17" fill="#D2DAE4">everything else looks pins up by HfFunctionalGpioPin</text>
+<rect x="32" y="717.8" width="14" height="14" rx="4" fill="#1C1F3D" stroke="#8C93FF" stroke-width="1.4"/>
+<text x="54" y="732.4" font-size="16" fill="#9AA6B5">this library</text>
+<rect x="161.8" y="717.8" width="14" height="14" rx="4" fill="#0F2A28" stroke="#2DD4BF" stroke-width="1.4"/>
+<text x="183.8" y="732.4" font-size="16" fill="#9AA6B5">the board HAL</text>
+<rect x="323.6" y="717.8" width="14" height="14" rx="4" fill="#1B232E" stroke="#94A3B8" stroke-width="1.4"/>
+<text x="345.6" y="732.4" font-size="16" fill="#9AA6B5">build input</text>
+</svg>

@@ -1,0 +1,24 @@
+{
+  "boards": [
+    "HARDFOC_BOARD_FLUX_V1",
+    "HARDFOC_BOARD_VORTEX_V1",
+    "HARDFOC_BOARD_NONE"
+  ],
+  "lists": [
+    "HF_FUNCTIONAL_GPIO_PIN_LIST",
+    "HF_FUNCTIONAL_ADC_CHANNEL_LIST"
+  ],
+  "generated": [
+    "HfFunctionalGpioPin",
+    "HfFunctionalAdcChannel",
+    "HfFunctionalGpioPinNames",
+    "HfFunctionalGpioPinCategories",
+    "HF_GPIO_MAPPING",
+    "HfFunctionalAdcChannelNames",
+    "HF_ADC_MAPPING"
+  ],
+  "sources": [
+    "src/hf_functional_pin_config.hpp:board selector",
+    "src/hf_functional_pin_config_vortex_v1.hpp:X-macro lists and generated tables"
+  ]
+}
