@@ -8,9 +8,9 @@
 #---------------------------------------------------------------------------
 
 DOXYFILE_ENCODING      = UTF-8
-PROJECT_NAME           = "HF-PinCfg Library"
-PROJECT_NUMBER         = "v1.0.0"
-PROJECT_BRIEF          = "Functional Pin Abstraction Layer - Defines WHAT pins do on HardFOC boards, not WHERE they are"
+PROJECT_NAME           = "Functional Pin Configuration"
+PROJECT_NUMBER         = 
+PROJECT_BRIEF          = "API reference"
 PROJECT_LOGO           =
 OUTPUT_DIRECTORY       = build/doxygen
 CREATE_SUBDIRS         = NO
@@ -45,7 +45,7 @@ HIDE_UNDOC_CLASSES     = NO
 HIDE_FRIEND_COMPOUNDS  = NO
 HIDE_IN_BODY_DOCS      = NO
 INTERNAL_DOCS          = NO
-CASE_SENSE_NAMES       = YES
+CASE_SENSE_NAMES       = NO
 HIDE_SCOPE_NAMES       = NO
 HIDE_COMPOUND_REFERENCE= NO
 SHOW_HEADERFILE        = YES
@@ -90,9 +90,7 @@ WARN_LOGFILE           =
 # Configuration options related to the input files
 #---------------------------------------------------------------------------
 
-INPUT                  = src \
-                         docs \
-                         README.md
+INPUT                  = src docs/_doxygen/mainpage.md
 INPUT_ENCODING         = UTF-8
 INPUT_FILE_FILTER      =
 FILE_PATTERNS          = *.c \
@@ -125,11 +123,10 @@ EXAMPLE_PATTERNS       = *
 EXAMPLE_RECURSIVE      = NO
 IMAGE_PATH             =
 INPUT_FILTER           =
-# Remove YAML front-matter from .md files
-FILTER_PATTERNS        = *.md="sed -e '/^---$/,/^---$/d'"
+FILTER_PATTERNS        =
 FILTER_SOURCE_FILES    = NO
 FILTER_SOURCE_PATTERNS =
-USE_MDFILE_AS_MAINPAGE = README.md
+USE_MDFILE_AS_MAINPAGE = docs/_doxygen/mainpage.md
 
 #---------------------------------------------------------------------------
 # Configuration options related to source browsing
